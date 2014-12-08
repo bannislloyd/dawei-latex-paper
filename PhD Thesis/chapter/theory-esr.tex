@@ -1,0 +1,300 @@
+﻿
+\chapter{电子顺磁共振原理}
+\label{chap:esr-theory}
+本章绍电子顺磁共振基本原理。我们从静态自旋哈密顿量出发，讨论每一项的意义。
+
+    \section{静态自旋哈密顿量}
+
+    通常，考虑一个有效自旋为$S$顺磁粒子和$m$个核自旋$I$组成的体系处在外磁场$B_0$中，哈密顿量可$\mathcal{H}_0$以写成如下形式\cite{static-spin-H}：
+        \begin{equation}
+            \begin{split}
+            \label{H0}
+            \mathcal{H}_0   &= \mathcal{H}_{EZ} + \mathcal{H}_{ZFS} + H_{HF} + \mathcal{H}_{NZ} +　\mathcal{H}_{NQ} + \mathcal{H}_{NN}\\
+                            &= \beta_e B_0 g S/\hbar + S D S + \sum\limits_{k=1}^m S A_k I_k - \beta_n \sum\limits_{k = 1}^m g_{n,k} B_0 I_k/\hbar + \sum\limits_{I_k > 1/2} I_k P_k I_k
+                                + \sum\limits_{i\neq k}I_i d^{i,k}I_k
+            \end{split}
+        \end{equation}
+    其中$\mathcal{H}_{EZ}$是电子自旋塞曼项，表示了电子自旋与外磁场的耦合； $\mathcal{H}_{ZFS}$表示零场分裂；$\mathcal{H}_{HF}$表示超精细耦合项，是电子自旋与周围核自旋相互作用；
+    $\mathcal{H}_{NZ}$是核自旋塞曼项，表示核自旋与外磁场的相互作用；$\mathcal{H}_{NQ}$是核电四极矩项；
+    $\mathcal{H}_{NN}$是核自旋与核自旋之间的相互作用项。每一项典型的能量值在图\ref{energy_levels}表示出来\cite{Schweiger_principles}。
+
+        \begin{figure}[htbp]
+            \begin{center}
+              \includegraphics[width= 1\columnwidth]{figures/energy_levels.eps}
+              \caption{电子自旋与核自旋相互作用强度典型值
+              }
+              \label{energy_levels}
+        \end{center}
+        \end{figure}
+
+
+    \subsection{电子自旋塞曼相互作用}
+    电子自旋处于外磁场$B_0$中，自旋与磁场的相互作用可以用塞曼相互作用
+        \begin{equation}
+        \label{E-Zeeman}
+        \mathcal{H}_{EZ} = \beta_e B_0 g S/\hbar
+        \end{equation}
+    来表示。对于电子自旋$S = 1/2$，电子自旋塞曼项是最主要的相互作用项。电子自旋处在复杂的环境中，$g$因子可以写成张量形式，其三个主轴分量写成$g_x$、$g_y$和$g_z$。
+    当电子自旋周围的环境是各项同性，譬如满足立方对称性（立方晶系），那么$g_x=g_y=gz$；
+    如果降低对称性，例如具有某种轴对称（譬如正方晶系），那么可以有$g_x=g_y=g_{}\perp$和$g_z=g_{\parallel}$；
+    如果是正交晶系，那么$g_x\neq g_y\neq g_z$。$g$因子反映了电子自旋所处的环境，从而被认为是电子自旋共振实验谱中最重要的信息之一，或者说是“指纹”信息。
+    通常的电子自旋共振实验采用的样品是由大量的分子组成，被放置在磁场中间，由于实际的磁场并不理想，所有磁场空间分布不均匀。因此，不同位置的电子自旋感受的外场会有一定的不同，共振频率因此具有细微的不同，这个效应将对谱线的不均匀展宽有贡献。
+    在脉冲电子顺磁共振实验中，例如自由感应衰减实验，对退相干时间$T_2^*$也有贡献。
+    \subsection{核自旋塞曼相互作用}
+    核自旋塞曼相互作用
+        \begin{equation}
+        \label{N-Zeeman}
+        \mathcal{H}_{NZ} = \beta_n B_0 g_n S/\hbar
+        \end{equation}
+    同样表示了核自旋与外磁场的耦合。通常的电子自旋共振实验中，核自旋的塞曼项不会具有显著的贡献。
+
+
+    \subsection{超精细耦合}
+    电子自旋与核自旋之间的耦合作用被称为超精细耦合。通常被表示为$A$并且有：
+        \begin{equation}
+        \label{hyperfine interaction}
+        H_{HF} =  S A I，
+        \end{equation}
+    大部分电子顺磁共振实验考察的样品中，这类相互作用起到重要的作用。$A$通常能够给出电子自旋周围丰富的结构信息。如同$g$因子， $A$也可以写成张量形式。
+    超精细耦合相互作用对电子自旋退相干有着重要的贡献。由于系综中电子自旋周围的核自旋的状态不尽相同，因此核自旋热库中核自旋对电子自旋施加的有效场也不同，这种现象也会贡献为连续波谱线的不均匀增宽，是电子自旋相干的衰减的重要原因。
+
+    \subsection{零场分裂}
+    当电子自旋$S>1/2$时，就会存在零场分裂项
+        \begin{equation}
+        \label{zero-field-splitting}
+        \mathcal{H}_{ZFS} = S D S
+        \end{equation}。
+    这是因为在$S>1/2$的时候，电子的偶极-偶极相互作用会去除基态$2S+1$简并。这种相互作用是与外加磁场无关，因此被称为零场分裂。
+    以金刚石色心为例，该色心有一个氮原子和近邻的一个空穴组成。该空穴中有六个电子，其中两个为未成对电子，表现为一个$S=1$的电子自旋，它的零场分裂项$D$是两个未成对电子自旋的偶极相互作用造成，在主轴坐标系下也可以写成
+    $\H_D = D[S_z^2-\frac{1}{3}S(S+1)]+E(S_x^2-S_y^2)$。$D$的大小通常是$2.87~$GHz, $E$在纳米颗粒金刚石中通常不为零。
+
+    \subsection{核电四极矩}
+    当核自旋$I>1$的时候，也会有核自旋四极矩项
+        \begin{equation}
+        \label{NQ}
+        \mathcal{H}_{NQ} = I P I。
+        \end{equation}
+    在掺杂氮原子的富勒烯样品中，我们可以观察到这个核四极矩\cite{Revisited-endor}。如图\ref{nuclear-Quadrupole}（摘自\cite{Revisited-endor}）所示，氮自旋$I=1$，因此具有非零的核电四极矩，图中蓝色实线的分裂就来源于此。
+        \begin{figure}[htbp]
+            \begin{center}
+              \includegraphics[width= 0.8\columnwidth]{nuclear-Quadrupole.eps}
+              \caption{利用电子-核双共振观测到核四极矩
+              }
+              \label{nuclear-Quadrupole}
+            \end{center}
+        \end{figure}
+
+    \subsection{核自旋与核自旋相互作用}
+    核自旋与核自旋之间的相互作用
+        \begin{equation}
+        \mathcal{H}_{NN} = I d I
+        \end{equation}
+    通常在电子自旋共振实验中解析不出来。在核磁共振实验谱学中，这是一个重要相互作用项，能够给出丰富的结构信息。
+
+    \section{电子自旋$1/2$的量子力学描述}
+    这里我们用一个电子自旋$S=1/2$的量子力学描述为一个例子，结合其在量子计算中的应用，介绍脉冲式电子顺磁共振实验的基本理论。我们首先介绍如何将一个$S=1/2$的自旋编码成量子比特，如何描述这个量子比特的动力学演化；
+    接着我们介绍旋转坐标系的应用；最后我们介绍平均哈密顿量理论。
+
+        \subsection{量子比特-Qubit}
+        $S=1/2$的电子自旋被放置于静磁场中，由于塞曼分裂，会具有自旋向上$|\uparrow\rangle$和$|\downarrow\rangle$两个本征态。我们可以将这个电子自旋编码成一个量子比特（Qubit）。$|\uparrow\rangle$（$|\downarrow\rangle$）
+        被编码成$|0\rangle$（$|1\rangle$）。这个电子自旋也可以被看成一个布洛赫矢量（Bloch vector），那么通过操纵这个电子自旋，矢量处在一个布洛赫球面上任意一点\ref{bloch-sphere}，这可以被表达为
+            \begin{equation}
+            \label{bloch-vector}
+            |\psi\rangle = \cos (\theta/2)|0\rangle + e^{i\phi}\sin (\theta/2)|1\rangle 。
+            \end{equation}
+        图表示一个矢量处于布洛赫球上， 这通常被用于描述一个两能级系统。
+            \begin{figure}[htbp]
+            \begin{center}
+              \includegraphics[width= 0.35\columnwidth]{Bloch.eps}
+              \caption{量子比特
+              }
+              \label{bloch-sphere}
+            \end{center}
+            \end{figure}
+        对于一个电子自旋的态$|\psi\rangle$，我们也可以用密度矩阵$\rho$来描述。$\rho$可以被写成自旋泡利矩阵和单位矩阵的线性组合。自旋泡利矩阵可以写成：
+            \begin{equation}
+            \label{Pauli-matrix}
+                \sigma_x = \left(
+                             \begin{array}{cc}
+                               0 & 1/2 \\
+                               1/2 & 0 \\
+                             \end{array}
+                           \right)~~
+                \sigma_y = \left(
+                             \begin{array}{cc}
+                               0 & -i/2 \\
+                               i/2  & 0 \\
+                             \end{array}
+                           \right)~~
+                \sigma_z = \left(
+                             \begin{array}{cc}
+                               1/2 & 0 \\
+                               0 & -1/2 \\
+                             \end{array}
+                           \right)。
+            \end{equation}
+        当我们观测电子自旋的时候，如果观测算符为$A$，那么测量期望值$\langle A\rangle$为：
+            \begin{equation}
+            \label{detection}
+            \langle D\rangle_\rho = Tr(D\rho)
+            \end{equation}
+        当体系在含时哈密顿量$H$支配下进行演化时，我们可以用薛定谔方程对其进行描述：
+            \begin{equation}
+                \left\{ \begin{aligned}
+                            \frac{d}{dt}|\psi\rangle = - i H(t)|\psi\rangle\\
+                            \frac{d}{dt}\langle\psi| =  i H(t)\langle\psi|
+                        \end{aligned}
+                \right.
+            \end{equation}
+        我们可以把密度算符写成
+            \begin{equation}
+            \rho(t)= \sum p_k|\psi_k \rangle \langle \psi_k|，
+            \end{equation}
+        因此可以得到 Liouville-von Neumann 方程\ref{Liouville-Neumann-eqn}。
+            \begin{equation}
+            \label{Liouville-Neumann-eqn}
+                \begin{split}
+                    \frac{d\rho(t)}{dt} & = -i\sum p_k H(t)|\psi_k \rangle\langle\psi_k| + i\sum p_k |\psi_k \rangle\langle\psi_k| H(t)\\
+                                        & = -i[H(t)\rho(t) -\rho(t) H(t)]\\
+                                        & = -i[H(t),\rho(t)]
+                \end{split}
+            \end{equation}
+        当哈密顿量$H$不含时的时候，我们可以得到
+            \begin{equation}
+            \rho(t)=\exp(-iHt)\rho(0)\exp(iHt)，
+            \end{equation}
+        其中的指数项通常也可以写成
+            \begin{equation}
+            \label{U-operation}
+            U(t)=exp(-iHt)。
+            \end{equation}
+        $U(t)$被称为传播子或者被称为酉演化，在磁共振量子计算中，我们可以通过脉冲来实现我们所需要的转播子形式\cite{NMR-review}，这种传播子被用于实现各种逻辑门操作，成为量子计算的基础操作。
+
+        \subsection{旋转坐标系}
+        $S = 1/2$的自旋处于外磁场$B_0$中，假设$B_0$方向沿着$z$轴，式子\ref{E-Zeeman}也可以可以写成
+            \begin{equation}
+            H_{sys} = \omega_e \sigma_z；
+            \end{equation}其中$\omega_e = g \beta_e B_0 $。
+        自由演化时的传播子为
+            \begin{equation}
+            U(t)=exp(-iHt)=\exp(-i\omega_e\sigma_z t)。
+            \end{equation}
+        这意味着自旋以$z$为转轴，以频率$w_e$旋转。在脉冲式电子顺磁共振实验中，我们施加的方波脉冲可以用$H_p$来描述，$H_p$可以表达为：
+            \begin{equation}
+            \label{pulse-H}
+                \begin{split}
+                H_p &= \cos(\omega t+\phi )\gamma_e B_1\sigma_x \\
+                    &= \left(
+                              \begin{array}{cc}
+                               0 & \cos(\omega t+\phi )\gamma_e B_1 \\
+                               \cos(\omega t+\phi )\gamma_e B_1 & 0 \\
+                              \end{array}
+                              \right)
+                ；
+                \end{split}
+            \end{equation}
+        这里$\omega$是脉冲的频率，$\phi$是脉冲的相位，$B_1$是脉冲强度。此时描述该体系的哈密顿量$H_{tot} = H_{sys}+H_p$
+        我们可以通过一个$\^{U}=\exp(-i\omega\sigma_z t)$变换将实验室坐标系转换到一个绕着$z$轴旋转的坐标系，新坐标系中的哈密顿量$H$可以被写成
+            \begin{equation}
+            \label{H-rotation1}
+            H_{tot}^{\rho} = \left( \begin{array}{cc}
+                               (\omega_e-\omega)/2 & \cos(\omega t+\phi )\gamma_e B_1 \exp(-i\omega t) \\
+                               \cos(\omega t+\phi )\gamma_e B_1\exp(i\omega t) & -(\omega_e-\omega)/2 \\
+                              \end{array}
+                    \right)
+            \end{equation}
+        考虑到$\cos(\omega t + \phi) = (\exp(i(\omega t + \phi))+\exp(-i(\omega t + \phi)))$， 我们可以忽略掉快速的振荡项，有效哈密顿量可以被写成
+            \begin{equation}
+            \label{H-rotation2}
+            H_{tot}^{\rho} =  \left( \begin{array}{cc}
+                               \delta  &  \gamma_e B_1 \exp(i\phi) \\
+                                \gamma_e B_1\exp(-i\phi) & -\delta \\
+                              \end{array}
+                    \right)/2，
+            \end{equation}
+        偏移量$\delta = (\omega_e-\omega)$。
+
+        \subsection{平均哈密顿量理论}
+        当高分辨率核磁共振实验技术发展起来的时候，平均哈密顿量理论被发展成为一种有力的分析工具\cite{AHT}。在核磁共振，电子顺磁共振技术被应用于量子计算时，平均哈密顿量理论被用于设计和构造高精度的逻辑门操作\cite{GRAPE-ESR,GRAPE-NMR}，或者用于构造想要的哈密顿量。
+        这里我们讨论到修正到二阶的平均哈密顿量$H_{eff}$，这在应用中已经有足够的精度。
+            \begin{equation}
+            H_{eff} = \overline{H}^{(0)} + \overline{H}^{(1)} + \overline{H}^{(2)}
+            \end{equation}
+            $\overline{H}^{(i)}$（$i=0,1,2$）代表不同阶修正量\cite{Schweiger_principles}。
+            \begin{equation}
+                \begin{split}
+                   \overline{H}^{(0)}  &= \frac{1}{t}\int_0^t H(t)dt \\
+                   \overline{H}^{(1)}  &= \frac{-i}{2t}\int_0^t dt_1 \int_0^{t_1} dt_2 [H(t_1),H(t_2)]\\
+                   \overline{H}^{(2)}  &= \frac{-1}{6t}\int_0^t dt_3 \int_0^{t_3} dt_2 \int_0^{t_2} dt_1 {[H(t_3),[H(t_2),H(t_1)]]+[H(t_1),[H(t_2),H(t_3)]]}
+                \end{split}
+            \end{equation}
+        为了不失一般性，我们接下来讨论磁共振实验中的哈密顿量的一般表达式$H(t) = H_0 + H_{ext}(t)$， $H_0$是样品在磁场中的哈密顿量，它并不含时，$H_{ext}(t)$是外加驱动场的表达式，
+            \begin{equation}
+                \begin{split}
+                    H_{ext}(t)  & = B_1(t)[\cos(\omega t + \phi (t))\sigma_x + \sin(\omega t + \phi(t))\sigma_y] \\
+                                & = A(t)\sigma_x + B(t)\sigma_y
+                \end{split}
+            \end{equation}
+        其中 $A(t) = B_1(t)\cos(\omega t + \phi(t))$和$B(t) = B_1(t)\sin(\omega t + \phi(t))$。$A(t)$和$B(t)$可以理解成为沿着正交的两个方向输出的脉冲。通过计算，我们可以得到
+            \begin{equation}
+            \label{zero-AH}
+                \overline{H}^{(0)} = H_0 + \sigma_x\frac{1}{t}\int_0^t A(t)dt + \sigma_y\frac{1}{t}\int_0^t B(t)dt
+            \end{equation}
+        液体核磁共振实验中常用的成形脉冲一般仅用到零阶平均哈密度量。更高阶的修正（公式\ref{first-AH}和\ref{second-AH}）有助于提高成形脉冲搭建的逻辑门操作的保证度。
+            \begin{equation}
+            \label{first-AH}
+                \begin{split}
+                    \overline{H}^{(1)}=&-\{  \frac{i}{2t} [\sigma_x, H_0]\int_0^t dt_1 \int_0^{t_1} dt_2 (A(t_1) - A(t_2))\\
+                                            &+\frac{i}{2t} [\sigma_y, H_0]\int_0^t dt_1 \int_0^{t_1} dt_2 (B(t_1) - B(t_2))\\
+                                            &+\frac{i}{2t} \sigma_z \int_0^t dt_1 \int_0^{t_1} dt_2 (A(t_1)B(t_2) - A(t_2)B(t_1))
+                                        \}
+                \end{split}
+            \end{equation}
+            \begin{equation}
+            \label{second-AH}
+                \begin{split}
+                    \overline{H}^{(2)} &=\frac{-1}{6t} \{
+                                                         [H_0,[\sigma_x,H_0]]\int_0^t dt_3 \int_0^{t_3} dt_2 \int_0^{t_2} dt_1 (2A(t_2)-A(t_1)-A(t_3))\\
+                                                        &+[H_0,[\sigma_y,H_0]]\int_0^t dt_3 \int_0^{t_3} dt_2 \int_0^{t_2} dt_1 (2B(t_2)-B(t_1)-B(t_3))\\
+                                                        &+[\sigma_z,H_0]\int_0^t dt_3 \int_0^{t_3} dt_2 \int_0^{t_2} dt_1(A(t_2)B(t_1)-A(t_1)B(t_2)+A(t_2)B(t_3)-A(t_3)B(t_2))\\
+                                                        &+[\sigma_x,[\sigma_y,H_0]]\int_0^t dt_3 \int_0^{t_3} dt_2 \int_0^{t_2} dt_1(A(t_3)(B(t_2)-B(t_1))+ A(t_1)(B(t_2)-B(t_3)))\\
+                                                        &+[\sigma_y,[\sigma_x,H_0]]\int_0^t dt_3 \int_0^{t_3} dt_2 \int_0^{t_2} dt_1(B(t_3)(A(t_2)-A(t_1))+ B(t_1)(A(t_2)-A(t_3)))\\
+                                                        &+\sigma_x \int_0^t dt_3 \int_0^{t_3} dt_2 \int_0^{t_2} dt_1 (B(t_3)(A(t_2)B(t_1)-A(t_1)B(t_2))+B(t_1)(A(t_2)B(t_3)-A(t_3)B(t_2)))\\
+                                                        &+\sigma_y \int_0^t dt_3 \int_0^{t_3} dt_2 \int_0^{t_2} dt_1 (A(t_3)(A(t_1)B(t_2)-A(t_2)B(t_1))+A(t_1)(A(t_3)B(t_2)-A(t_2)B(t_3)))
+                                                        \}
+                \end{split}
+            \end{equation}
+        真实体系中，方波脉冲并不完美，会受到硬件的限制而产生形变\cite{Schweiger_principles}，这时候我们可以用修正到二阶的平均哈密顿量给出有效哈密顿量。我们描述一个沿着$x$轴施加的真实方波脉冲
+        $H_{ext}=B_1(t)\sigma_x$为\cite{Hornak1986501}
+            \begin{equation}
+            \label{real-pulase-shape}
+            B_1(t)=\left\{
+                     \begin{array}{ll}
+                      B_{max}(1-\exp(-t/\tau)),(0<t\leq tp) \\
+                      B(tp)\exp(-(t-tp)/\tau), (t>tp)
+                     \end{array}
+                   \right.
+            \end{equation}
+        此方程用于描述脉冲的幅度随时间的变化，$B_{max}$是脉冲的最大幅度值，$tp$是理想的方波脉冲长度，$\tau = Q/(\pi \nu_{MW})$是在一定的微波频率$\nu_{MW}$时，由共振腔的品质因子决定，
+        可以描述方波脉冲的形变程度，这里我们假定$t\geq tp$。根据上面的讨论，我们可以得出
+            \begin{equation}
+            \label{real-pulse-AH}
+                \begin{split}
+                   \overline{H}^{(0)}   =& H_0 + \frac{1}{t}\sigma_x B_{max}(tp+(1-e^{-\frac{t-tp}{\tau}})\tau) \\
+                   \overline{H}^{(1)}   =& -\frac{iB_{max}}{2tp}[\sigma_x,H_0]e^{-\frac{t}{\tau}}[e^{\frac{t}{\tau}}tp(t-tp-2\tau)-\tau(t+2\tau)+e^{\frac{tp}{t}}\tau(t+2\tau)]\\
+                   \overline{H}^{(2)}   =& \frac{B_{max}}{12t}[H_0,[\sigma_x,H_0]]e^{\frac{-t}{\tau}}(\tau(t^2+6t\tau+12\tau^2)(1-e^{-\frac{tp}{\tau}})\\
+                                         & +e^{\frac{t}{\tau}}tp(t^2-3t(tp+2\tau)+2(tp^2+3tp\tau+6\tau^2)))
+                \end{split}
+            \end{equation}
+        当$\tau$接近$0$，也就是脉冲几乎没有形变的时候，上面的式子就简化成为
+            \begin{equation}
+                \begin{split}
+                   \overline{H}^{(0)}   =& H_0 + \frac{tp}{t}\sigma_x B_{max} \\
+                   \overline{H}^{(1)}   =& -\frac{iB_{max}}{2}(t-tp)[\sigma_x, H_0]\\
+                   \overline{H}^{(2)}   =& \frac{B_{max}}{12t}tp(t-tp)(t-2tp)[H_0,[\sigma_x,H_0]]
+                \end{split}
+            \end{equation}
+        当$t$接近$tp$的时候，那就简化成为理想的方波脉冲的情况。
+
+
+

@@ -1,0 +1,90 @@
+﻿
+\begin{abstract}
+量子信息及量子计算是以量子力学为基础，与数学，计算机学，材料学等众多学科相结合而产生的一门新兴交叉学科。量子计算研究的
+根本目标是建造一台基于量子力学原理，能够充分展示新奇的，独一无二的，同时大大超越经典计算能力的量子特性的新型计算机。
+例如，分解一个512位的整数，用每秒处理百万次运算的经典计算机我们需要8400年，但用量子计算机我们只需要3.5个小时！虽然
+这个目标看上去很诱人，但由于在实际的物理实现中，我们要对脆弱的量子体系进行精确的相干控制，以目前的技术手段要真正做到这点是
+极其困难的。以现在的眼光来看，最切实际的任务是实验验证一个能真正超越经典计算机极限的量子计算实例。量子模拟已经被证明，大概30到100个量子比特
+我们就可以完成这个目标，而要体现出量子算法的优越性则大概需要成百上千个量子比特。因此，量子模拟是目前国际上最热门的研究方向之一，也是本
+论文主要关注的领域。
+
+另一方面，在所有潜在的量子计算机的物理实现中，核磁共振毫无疑问是进展最迅速的一个。迄今为止拥有最复杂的逻辑门操作的量子计算实验－12量子比特
+相干调控就是在该平台完成的。同时，大量的量子算法和量子模拟任务也已在核磁共振量子信息处理器上得到了演示，而在核磁共振上发展出的许多精确控制技术也被移植到了
+诸如离子阱、超导等其他平台上。虽然核磁共振有着可扩展性等其他方面的问题存在，但它依然是最接近实现超越经典计算机的量子计算实验
+的平台。本论文中的实验工作正是在该平台完成的，虽然它们还没有达到超越经典的目标，但已经朝这个目标迈出了关键一步。
+
+本论文围绕利用核磁共振实现量子模拟任务这个目标，循序渐进的介绍了本人在攻读博士学位期间取得的一系列实验成果。具体内容如下：
+\begin{enumerate}
+ % \item
+%     前三章主要是背景介绍。首先，我们回顾了量子计算的前世今生，并简要描述了量子计算机的工作模式，以求在大脑中先建立起量子世界的图像；
+%     在第二章，我们着墨于量子计算的两大分支领域之一－量子模拟（另一个为量子算法），从它的历史讲起，涉及其原理，分类，以及应用，同时还
+%     叙述了目前量子模拟的理论和实验进展。第三章则围绕着核磁共振技术，用量子计算的语言来重新阐释这一发展成熟了数十年的学科。在本章的最后，我们
+%     还描述了强耦合体系进行量子计算实验的方法，相对于传统的弱耦合核磁共振体系这部分内容是相对新颖的。
+%  \item
+%    第四章主要介绍实验上如何利用量子随机行走算法实现数据库搜索问题的指数加速。虽然它的加速和著名的Grover算法一样都是二次加速，但它的实用范围    更加广泛，而该工作也是2003年自从量子随机行走搜索算法提出以来的首次实验验证。我们选择了三比特强耦合液晶体系，成功解决了从哈密顿量确定，初态制备，
+%    幺正演化到测量读出等众多的实验难题，高精度的证明了量子随机行走搜索算法的优越性、
+%  \item
+%   第五章集中于我们如何在实验上分解当今世界上分解的最大的数－143。我们首先回顾了分解15和21的实验，接着引出利用改进的绝热量子分解算法，我们
+%   在四比特强耦合液晶体系上分解了这个肉眼很难直接看出质因子的三位数－143。虽然距离攻破各大政府、军队、银行的安保系统还差很远，但我们一直在朝这
+%   方面努力。
+%  \item
+%   第六章是关于利用核磁共振量子计算模拟量子化学问题的工作。从静态的问题开始，我们首先模拟了自然界最简单的分子－氢分子的基态能级；进而我们把模拟对象
+%   延展到了动态，成功模拟了一维势场的化学反应；最后我们把相位估计算法进行了拓展，实验证明了如何得到一个海森堡哈密顿量模型的本征值和本征态。在本章的
+%   最后，我们介绍了一些近期关于量子化学模拟的理论方案，并给出了实验上的预期。
+%%   \item
+%%   最后
+
+    \item
+     前两章是背景介绍。首先，我们回顾了量子计算的前世今生，并简要描述了量子计算机的工作模式，以求在大脑中先建立起量子世界的图像；
+     第二章我们着墨于量子计算的两大分支领域之一－量子模拟（另一个为量子算法），从它的历史讲起，涉及其原理，分类，以及应用，同时还
+     叙述了目前量子模拟的理论和实验进展。
+    \item
+     第三章则围绕着核磁共振技术，用量子计算的语言来重新阐释这一发展成熟了数十年的学科。在本章的最后，我们
+     还描述了强耦合体系进行量子计算实验的方法，相对于传统的弱耦合核磁共振体系这部分内容是相对新颖的。同时，我们利用四比特强耦合液晶体系上分解了当今世界上量子算法分解的最大的数143。
+     虽然距离攻破各大政府、军队、银行的安保系统还差很远，但我们一直在朝这方面努力。
+     \item
+    第四章主要介绍实验上如何利用量子随机行走算法实现数据库搜索问题的指数加速。虽然它的加速和著名的Grover算法一样都是二次加速，但它的实用范围    更加广泛，而该工作也是自2003年量子随机行走搜索算法提出以来的首次实验验证。我们选择了三比特强耦合液晶体系，成功解决了从哈密顿量确定，初态制备，
+    幺正演化到测量读出等众多的实验难题，证明了量子随机行走搜索算法的优越性。
+      \item
+   第五章是关于利用核磁共振量子计算模拟量子化学问题的工作。从静态的问题开始，我们首先模拟了自然界最简单的分子－氢分子的基态能级；进而我们把模拟对象
+   延展到动态，成功模拟了一维势场的化学反应。另一方面，我们把相位估计算法进行了拓展，实验证明了如何得到一个海森堡哈密顿量模型的本征值和本征态。在本章的
+   最后，我们介绍了一些近期关于量子化学模拟的理论方案，并给出了实验上的预期。
+      \item
+   最后一章我们给出了总结和展望。
+\end{enumerate}
+总之，我们完成了很多验证量子计算优越性的实验，朝量子计算机的真正物理实现迈出了坚实的一步。或许这些实验依然只是演示性的，并不能
+确切给出量子计算机确实超越经典的证据，但我们期望这些实验中用到的技术、技巧及方法可以扩展到其他的实验，甚至其他的物理体系中，为人们
+在量子计算研究的道路上坚定地走下去提供思路及信心。
+
+
+
+\keywords{ 量子信息处理，量子计算, 量子模拟，量子算法，核磁共振}
+\end{abstract}
+
+
+\begin{englishabstract}
+Quantum information and quantum computation is a new developing subject, which is based on quantum mechanical theories, and combined with mathematics, computing science and material science etc. The ultimate goal of quantum computation is to establish a new version of computer, which relies on quantum theories, and can exhibit novel, unique and fast quantum properties. For instance, to factor a 512-bit integer, we need 8400 years if we use a MIPS (Million Instructions Per Second) classical computer. However, by utilizing quantum computer it only requires 3.5 hours! It seems very attractive, but the physical realization, which requires us to control the fragile quantum systems very precisely, is very difficult at current technique. The most feasible task at present is to find and demonstrate an example in experiment, which can really surpass the capacity of classical  computers. It has been proved to be possible to perform useful quantum simulation with quantum computers that incorporates as few as 30 - 100 qubits, while algorithms require quantum computers with at least a few thousand qubits. Therefore, quantum simulation is one of  the hot fields in quantum computation, and also the main object in this thesis.
+
+In all potential physical systems which might be used to build quantum computers, NMR (nuclear magnetic resonance) is supposed to be the most rapid one in progress. Till now, the most complicated experiment which consists of hundred of logical gates on a 12-qubit system has been implemented in NMR. In the meanwhile, numerous proposals of quantum algorithms and quantum simulation have been demonstrated in NMR platform, and many control techniques developed in NMR have been extended to other systems, such as ion traps and superconducting circuits. Although there are some limitations like the scalable problem, NMR is still one of the most promising systems to perform the first experiment to outperform classical computers. All the experiments in this thesis are implemented in NMR, and expected to be a key step towards the goal of surpassing the capacity of classical computers.
+
+The goal of this thesis is to implement quantum simulation tasks using NMR systems, and to introduce the experimental achievements obtained during my PhD period. The concepts are as follows:
+\begin{enumerate}
+ % \item Introduction of background from Chapter 1 to Chapter 3. First, we reviewed the history of quantum computation, and described the basic principles of quantum computers. We tried to establish the picture of quantum world in the beginning. In Chapter 2, we introduced one major application of quantum computation-quantum simulation (the other one is quantum alogorithms), including the theories, categories, applications and recent progress. In Chapter 3, we reproduced the NMR techniques using the language of quantum computation. In the end of this chapter, we described the methods of implementing experiments with the strong coupling system, which is relatively novel compared to the traditional weak coupling systems.
+%  \item Chapter 4 is mainly focused on the experiment of solving the database searching problem by quantum random walk searching algorithm. Although the speedup is similar to the famous Grover searching algorithm, the quantum random walk searching algorithm is more widely used. This is the first experiment since this algorithm was proposed in 2003. We chose a 3-qubit strong coupling liquid crystal NMR sample, and solved the problems including the Hamiltonian fitting, initial state preparation, unitary evolution and measurement.
+%  \item Chapter 5 is about how to factor the largest number in the world in experiment. After reviewing the experiments about factoring 15 and 21,
+% \item Chapter 6 is simulating quantum chemistry using NMR quantum simulators. Starting from the static case, we simulated the ground state energy of the hydrogen molecule, which is the simplest molecule in nature. Then we succeeded in simulating the dynamical problem, which is a one-dimensional chemical reaction. Finally we extended the phase estimation algorithm, and obtained the eigenvalues and eigenvectors of a Heisenberg model in experiment. In the last section of this chapter, we introduced some further proposals of simulating quantum chemistry, and gave the experimental expectations.
+% \item    Chapter 7
+
+  \item Introduction of the theoretical background from Chapter 1 to Chapter 2. First, we reviewed the history of quantum computation, and described the basic principles of quantum computers. We tried to establish the picture of quantum world in the beginning. In Chapter 2, we introduced one major application of quantum computation, namely, quantum simulation (the other one is quantum alogorithms), including the theories, categories, applications and recent progress.
+   \item
+      In Chapter 3, we introduced the NMR techniques using the language of quantum computation. In the end of this chapter, we described the methods of implementing experiments with the strong coupling system, which is relatively novel compared to the traditional weak coupling systems. We proposed a new adiabatic factoring algorithm and factored 143 in 4-qubit strong coupling liquid crystal system. Despite of the long distance from hacking the security system of governments, militaries and banks, we are always working hard towards this target.
+   \item Chapter 4 is mainly focused on the experiment of solving the database searching problem by quantum random walk searching algorithm. Although the speedup is similar to the famous Grover searching algorithm, the quantum random walk searching algorithm is more widely used. This is the first experiment since this algorithm was proposed in 2003. We chose a 3-qubit strong coupling liquid crystal NMR sample, and solved the problems including the Hamiltonian fitting, initial state preparation, unitary evolution and measurement.
+    \item Chapter 5 is simulating quantum chemistry using NMR quantum simulators. Starting from the static case, we simulated the ground state energy of the hydrogen molecule, which is the simplest molecule in nature. Then we succeeded in simulating the dynamical problem, which is a one-dimensional chemical reaction. Then we extended the phase estimation algorithm, and obtained the eigenvalues and eigenvectors of a Heisenberg Hamiltonian model in experiment. In the last section of this chapter, we introduced some further proposals of simulating quantum chemistry, and gave the experimental expectations.
+
+         \item    Chapter 6 is our conclusion and perspective.
+\end{enumerate}
+
+In summary, we have completed many experiments of demonstrating the superiority of quantum computation. Although these experiments are proof-of-principle, we expect that some techniques and methods used in these experiments can be expanded to other systems, and provide some confidences in the way towards real quantum computers.
+
+\englishkeywords{Quantum Information Processing, Quantum Computation, Quantum Simulation, Quantum Algorithm, Nuclear Magnetic Resonance }
+\end{englishabstract}

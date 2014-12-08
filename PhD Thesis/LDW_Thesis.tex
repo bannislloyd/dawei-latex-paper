@@ -1,0 +1,110 @@
+﻿
+
+\documentclass[twoside]{USTCthesis}
+\usepackage{txfonts}
+\usepackage{amssymb}% twoside 双面打印
+
+% 设置图形文件的搜索路径
+\graphicspath{{figures/}}
+
+% 取消链接的颜色（黑白打印时）
+\hypersetup{colorlinks=true}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  % 中文封面内容
+  \title{利用核磁共振量子计算实验实现量子模拟}
+  \author{鲁\ 大\ 为}
+  \depart{微尺度国家实验室}
+  \major{量子信息物理学}
+  \advisor{杜江峰\ 教授}
+  \submitdate{二$\bigcirc$一二年四月二十五日}
+
+
+
+  % 英文封面内容
+  \englishtitle{Implementing Quantum Simulation Tasks Using Nuclear Magnetic Resonance}
+  \englishauthor{Dawei Lu}
+  \englishmajor{Quantum Information Physics}
+  \englishadvisor{Prof. Dr. Jiangfeng Du}
+  \englishdate{April 25th, 2012}
+
+
+
+  % 封面
+  \maketitle
+  \makeenglishtitle
+  \makebookspine
+
+  % 授权页
+  \makeauthorization
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 前言部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
+  % 摘要
+  \include{chapter/abstract}
+
+  % 目录
+  \tableofcontents
+  % 表格目录
+  %\listoftables
+ % \addcontentsline{toc}{chapter}{表\hspace{1em}格}%加入目录
+
+  % 插图目录
+  \listoffigures
+  \addcontentsline{toc}{chapter}{图表目录}%加入目录
+
+  %\include{chapter/denotation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 正文部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+  \include{chapter/chap-intro}
+   \include{chapter/simulation}
+  \include{chapter/nmr}
+\include{chapter/randomwalk}
+\include{chapter/chemistry}
+\include{chapter/summary}
+
+  %\include{chapter/esr-hardware}
+  %\include{chapter/S-bandODMR}
+  %\include{chapter/X-bandESR}
+  %\include{chapter/Ku-bandESR}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 附件部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+
+  % 参考文献
+  % 使用 BibTeX
+  \bibliography{bib/tex}
+  \nocite{*} % for every item
+  % 不使用 BibTeX
+  % \include{chapter/bib}
+
+  % 附录
+  \begin{appendix}
+    \include{chapter/appendix}
+  \end{appendix}
+
+  % 致谢
+  \include{chapter/acknowledgement}
+
+  % 发表文章目录
+ \include{chapter/pub}
+
+\end{document}

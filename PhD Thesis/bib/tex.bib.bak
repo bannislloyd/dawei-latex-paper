@@ -1,0 +1,555 @@
+﻿@book{Weil1,
+	author={J.A. Weil and J. R. Bolton},
+	title={Electron Paramagnetic Resoance: Elementary theory and pratical applications},
+	publisher={Wiley-interscience},
+	year={2007},
+	edition={2nd}
+}
+
+@article{Zavoisky1,
+   Author = {E. Zacoisky},
+   Journal = {ibid.},
+   Volume = {10},
+   Number = {170},
+   Year = {1944} }
+
+@article{Zavoisky2,
+   Author = {E. Zacoisky},
+   Journal = {J. Phys. U.S.S.R.},
+   Volume = {9},
+   Pages = {211, 245},
+   Year = {1945}}
+
+@article{Cummerow,
+   Author = {R. L. Cummerow and D. Halliday},
+   Journal = {Phys. Rev.},
+   Volume = {70},
+   Number= {433},
+   Year = {1946}}
+
+@article{Bagguley,
+   Author = {D.M. Bagguley and J.H.E. Griffiths},
+   Journal = {Nature (London, U. K.)},
+   Volume = {160},
+   Number= {532},
+   Year = {1947}}
+
+@article{Ramsey,
+   Author = {N.F. Ramsey},
+   Journal = {Bull. Magn. Reson.},
+   Volume = {7},
+   Number= {94},
+   Year = {1985}}
+
+@article{Bruker1,
+   Author = {K. Holczer and D. Shmalbein},
+   Journal = {Bruker Report},
+   Volume = {1},
+   Number= {22},
+   Year = {1987}}
+
+@article{High_field_ESR_1,
+   Author = {T.F. Prisner},
+   Journal = {Adv. Magn. Opt. Reson.},
+   Volume = {20},
+   Number= {245},
+   Year = {1997}}
+
+@article{High_field_ESR_2,
+   Author = {Earle, K. A. and Budil, D. E. and Freed, J. H.},
+   Journal = {Adv. Magn. Opt. Reson.},
+   Volume = {19},
+   Number= {253},
+   Year = {1996}}
+
+@article{High_field_ESR_3,
+   Author = {K. M\"{o}bius},
+   Journal = {Chem. Soc.Rev.},
+   Volume = {29},
+   Number= {129},
+   Year = {2000}}
+
+@book{Schweiger_principles,
+	author={A. Schweiger and G. Jeschke},
+	title={Principles of Pulse Electron Paramagnetic Resonance},
+	publisher={Oxford University Press},
+    Address = {New York},
+	year={2000},
+}
+
+@article{150GHz_Grinberg,
+   Author = {Grinberg, O. Ya. and Dubinskii, A. A. and Lebedev, Ya. S.},
+   title = {Electron Paraamagnetic Resonance of Free Radicals in the Two–millimetre Wavelength Range},
+   Journal = {Russ. Chem. Rev.},
+   Volume = {52},
+   Pages= {850},
+   Year = {1983}}
+
+
+
+@article{3mm_ESR,
+   Author = { Burghaus, O. and Rohrer, M. and G\"{o}tzinger, T. and M\"{o}bius, K.},
+   title = {A novel high–field/high–frequency EPR and ENDOR spectrometer operating at 3 mm wavelength},
+   Journal = {Meas. Sci. Technol.},
+   Volume = {3},
+   Pages= {765-744},
+   Year = {1992}}
+
+@article{1mm_ESR,
+   Author = {Lynch, W. B. and Earle, K. A. and Freed, J. H.},
+   title = {1–mm wave ESR spectrometer},
+   Journal = {Rev. Sci. Instrum.},
+   Volume = {59},
+   Number = {8},
+   Pages= {1345–1351},
+   Year = {1988}}
+
+@article{GRAPE-ESR,
+   Author = { Hodges, J. S. and Yang, J. C. and Ramanathan, C. and Cory, D. G.},
+   title = {Universal control of nuclear spins via anisotropic hyperfine interactions},
+   Journal = {Phys. Rev. A},
+   Volume = {78},
+   Number = {010303(R)},
+   Year = {2008}}
+
+@article{Hybrid-solid-state-qubits,
+   Author = { John J. L. Morton, Brendon W. Lovett},
+   title = {Hybrid solid state qubits: the powerful role of electron spins},
+   Journal = {Annual Review of Condensed Matter Physics},
+   Volume = {2},
+   Pages = {189-212},
+   Year = {2011}}
+
+@article{Quantum_Memory,
+   Author = {Morton, J. J. L. and Tyryshkin, A. M. and Brown, R. M. and Shankar, S. and Lovett, B. W. and Ardavan, A. and Schenkel, T. and Haller, E. E. and Ager, J. W. and Lyon, S. A.},
+   Title = {Solid-state quantum memory using the P-31 nuclear spin},
+   Journal = {Nature},
+   Volume = {455},
+   Number = {7216},
+   Pages = {1085-1088},
+   Year = {2008} }
+
+@article{Ultrafast_gate,
+   Author = {Greilich, A. and Economou, S. E. and Spatzek, S. and Yakovlev, D. R. and Reuter, D. and Wieck, A. D. and Reinecke, T. L. and Bayer, M.},
+   Title = {Ultrafast optical rotations of electron spins in quantum dots},
+   Journal = {Nature Physics},
+   Volume = {5},
+   Number = {4},
+   Pages = {262-266},
+   Year = {2009} }
+
+@article{Repetitive_Readout,
+   Author = {Jiang, L. and Hodges, J. S. and Maze, J. R. and Maurer, P. and Taylor, J. M. and Cory, D. G. and Hemmer, P. R. and Walsworth, R. L. and Yacoby, A. and Zibrov, A. S. and Lukin, M. D.},
+   Title = {Repetitive Readout of a Single Electronic Spin via Quantum Logic with Nuclear Spin Ancillae},
+   Journal = {Science},
+   Volume = {326},
+   Number = {5950},
+   Pages = {267-272},
+   Year = {2009} }
+
+
+@article{Jiang2,
+   Author = {Jiang, L. and Dutt, M. V. G. and Togan, E. and Childress, L. and Cappellaro, P. and Taylor, J. M. and Lukin, M. D.},
+   Title = {Coherence of an optically illuminated single nuclear spin qubit},
+   Journal = {Physical Review Letters},
+   Volume = {100},
+   Pages = {073001},
+   Year = {2008} }
+
+@article{Single-Shot-Readout,
+   Author = {Neumann, P. and Beck, J. and Steiner, M. and Rempp, F. and Fedder, H. and Hemmer, P. R. and Wrachtrup, J. and Jelezko, F.},
+   Title = {Single-Shot Readout of a Single Nuclear Spin},
+   Journal = {Science},
+   Volume = {329},
+   Number = {5991},
+   Pages = {542-544},
+   Year = {2010} }
+
+@article{Electron-photon,
+   Author = {Benjamin, S. C. and Lovett, B. W. and Smith, J. M.},
+   Title = {Prospects for measurement-based quantum computing with solid state spins},
+   Journal = {Laser and Photonics Reviews},
+   Volume = {3},
+   Number = {6},
+   Pages = {556-574},
+   Year = {2009} }
+
+@article{Kane98,
+   Author = {Kane, B. E.},
+   Title = {A silicon-based nuclear spin quantum computer},
+   Journal = {Nature},
+   Volume = {393},
+   Number = {6681},
+   Pages = {133-137},
+   Year = {1998} }
+
+@article{MortonPSi,
+   Author = {Morton, J. J. L.},
+   Journal = {arxiv.org},
+   Number = {0905},
+   Pages = {4008},
+   Year = {2010} }
+
+@article{Ruess,
+   Author = {Ruess, Frank J. and Oberbeck, Lars and Simmons, Michelle Y. and Goh, Kuan Eng J. and Hamilton, Alex R. and Hallam, Toby and Schofield, Steven R. and Curson, Neil J. and Clark, Robert G.},
+   Title = {Toward Atomic-Scale Device Fabrication in Silicon Using Scanning Probe Microscopy},
+   Journal = {Nano Letters},
+   Volume = {4},
+   Number = {10},
+   Pages = {1969-1973},
+   Year = {2004} }
+
+@article{bismuth1,
+   Author = {George, R. E. and Witzel, W. and Riemann, H. and Abrosimov, N. V. and Notzel, N. and Thewalt, M. L. W. and Morton, J. J. L.},
+   Title = {Electron Spin Coherence and Electron Nuclear Double Resonance of Bi Donors in Natural Si},
+   Journal = {Physical Review Letters},
+   Volume = {105},
+   Number = {6},
+   Year = {2010} }
+
+@article{bismuth2,
+   Author = {Morley, G. W. and Warner, M. and Stoneham, A. M. and Greenland, P. T. and van Tol, J. and Kay, C. W. M. and Aeppli, G.},
+   Title = {The initialization and manipulation of quantum information stored in silicon by bismuth dopants},
+   Journal = {Nature Materials},
+   Volume = {9},
+   Number = {9},
+   Pages = {725-729},
+   Year = {2010} }
+
+@article{Schuster,
+   Author = { Schuster, D. I. and Sears, A. P. and Ginossar, E. and DiCarlo, L. and Frunzio, L. and Morton, J. J. L. and Wu, H. and Briggs, G. A. D.  and Schoelkopf， R. J. },
+   Journal = {arxiv.org},
+   Number = {1006},
+   Pages = {0242},
+   Year = {2010} }
+
+@article{NV-review2006,
+   Author = {Jelezko, F. and Wrachtrup, J.},
+   Title = {Single defect centres in diamond: A review},
+   Journal = {Physica Status Solidi a-Applications and Materials Science},
+   Volume = {203},
+   Number = {13},
+   Pages = {3207-3225},
+   Year = {2006} }
+
+
+@article{Quantum-register-NV,
+   Author = {Dutt, M. V. G. and Childress, L. and Jiang, L. and Togan, E. and Maze, J. and Jelezko, F. and Zibrov, A. S. and Hemmer, P. R. and Lukin, M. D.},
+   Title = {Quantum register based on individual electronic and nuclear spin qubits in diamond},
+   Journal = {Science},
+   Volume = {316},
+   Number = {5829},
+   Pages = {1312-1316},
+   Year = {2007} }
+
+@article{NV-entanglement,
+   Author = {Neumann, P. and Mizuochi, N. and Rempp, F. and Hemmer, P. and Watanabe, H. and Yamasaki, S. and Jacques, V. and Gaebel, T. and Jelezko, F. and Wrachtrup, J.},
+   Title = {Multipartite entanglement among single spins in diamond},
+   Journal = {Science},
+   Volume = {320},
+   Number = {5881},
+   Pages = {1326-1329},
+   Year = {2008} }
+
+@article{coherent-dynamcics,
+   Author = {Hanson, R. and Dobrovitski, V. V. and Feiguin, A. E. and Gywat, O. and Awschalom, D. D.},
+   Title = {Coherent dynamics of a single spin interacting with an adjustable spin bath},
+   Journal = {Science},
+   Volume = {320},
+   Number = {5874},
+   Pages = {352-355},
+   Year = {2008} }
+
+
+
+@article{GHz-gate,
+   Author = {Fuchs, G. D. and Dobrovitski, V. V. and Toyli, D. M. and Heremans, F. J. and Awschalom, D. D.},
+   Title = {Gigahertz Dynamics of a Strongly Driven Single Quantum Spin},
+   Journal = {Science},
+   Volume = {326},
+   Number = {5959},
+   Pages = {1520-1522},
+   Year = {2009} }
+
+
+
+@article{entanglement-with-photon,
+   Author = {Togan, E. and Chu, Y. and Trifonov, A. S. and Jiang, L. and Maze, J. and Childress, L. and Dutt, M. V. G. and Sorensen, A. S. and Hemmer, P. R. and Zibrov, A. S. and Lukin, M. D.},
+   Title = {Quantum entanglement between an optical photon and a solid-state spin qubit},
+   Journal = {Nature},
+   Volume = {466},
+   Number = {7307},
+   Pages = {730-U4},
+   Year = {2010} }
+
+@article{UDD-NV,
+   Author = {de Lange, G. and Wang, Z. H. and Riste, D. and Dobrovitski, V. V. and Hanson, R.},
+   Title = {Universal Dynamical Decoupling of a Single Solid-State Spin from a Spin Bath},
+   Journal = {Science},
+   Volume = {330},
+   Number = {6000},
+   Pages = {60-63},
+   Year = {2010} }
+
+
+@article{Gruber97,
+   Author = {Gruber, A. and Drabenstedt, A. and Tietz, C. and Fleury, L. and Wrachtrup, J. and vonBorczyskowski, C.},
+   Title = {Scanning confocal optical microscopy and magnetic resonance on single defect centers},
+   Journal = {Science},
+   Volume = {276},
+   Number = {5321},
+   Pages = {2012-2014},
+   Year = {1997} }
+
+@article{Nanoscale-Magnetic-Sensing,
+   Author = {Maze, J. R. and Stanwix, P. L. and Hodges, J. S. and Hong, S. and Taylor, J. M. and Cappellaro, P. and Jiang, L. and Dutt, M. V. G. and Togan, E. and Zibrov, A. S. and Yacoby, A. and Walsworth, R. L. and Lukin, M. D.},
+   Title = {Nanoscale magnetic sensing with an individual electronic spin in diamond},
+   Journal = {Nature},
+   Volume = {455},
+   Number = {7213},
+   Pages = {644-U41},
+   Year = {2008} }
+
+@article{High-sensitivity-diamond-magnetometer,
+   Author = {Taylor, J. M. and Cappellaro, P. and Childress, L. and Jiang, L. and Budker, D. and Hemmer, P. R. and Yacoby, A. and Walsworth, R. and Lukin, M. D.},
+   Title = {High-sensitivity diamond magnetometer with nanoscale resolution},
+   Journal = {Nature Physics},
+   Volume = {4},
+   Number = {10},
+   Pages = {810-816},
+   Year = {2008} }
+
+@article{Multipulse-Sensing,
+   Author = {de Lange, G. and Rist and egrave and D. and Dobrovitski, V. V. and Hanson, R.},
+   Title = {Single-Spin Magnetometry with Multipulse Sensing Sequences},
+   Journal = {Physical Review Letters},
+   Volume = {106},
+   Number = {8},
+   Pages = {080802},
+   Year = {2011} }
+
+@article{nanoscale-imaging1,
+   Author = {Balasubramanian, G. and Chan, I. Y. and Kolesov, R. and Al-Hmoud, M. and Tisler, J. and Shin, C. and Kim, C. and Wojcik, A. and Hemmer, P. R. and Krueger, A. and Hanke, T. and Leitenstorfer, A. and Bratschitsch, R. and Jelezko, F. and Wrachtrup, J.},
+   Title = {Nanoscale imaging magnetometry with diamond spins under ambient conditions},
+   Journal = {Nature},
+   Volume = {455},
+   Number = {7213},
+   Pages = {648-U46},
+   Year = {2008} }
+
+@article{nanoscale-imaging2,
+   Author = {Grinolds, M. S. and Maletinsky, P. and Hong, S. and Lukin, M. D. and Walsworth, R. L and Yacoby, A.},
+   Title = {Quantum control of proximal spins using nanoscale magnetic resonance imaging}
+   Journal = {arxiv.org},
+   Number = {1006},
+   Pages = {0242},
+   Year = {2011} }
+
+@article{biology-imaging,
+   Author = {Chang, Y. R. and Lee, H. Y. and Chen, K. and Chang, C. C. and Tsai, D. S. and Fu, C. C. and Lim, T. S. and Tzeng, Y. K. and Fang, C. Y. and Han, C. C. and Chang, H. C. and Fann, W.},
+   Title = {Mass production and dynamic imaging of fluorescent nanodiamonds},
+   Journal = {Nature Nanotechnology},
+   Volume = {3},
+   Number = {5},
+   Pages = {284-288},
+   Year = {2008} }
+
+
+@book{Slichter,
+	author={C. P. Slichter},
+	title={Principles of Magnetic Resonance},
+	publisher={Springer-Verlag},
+    address = {New York}
+	year={1992},
+	edition={3nd}
+}
+
+@article{DD1,
+   Author = {Viola, Lorenza and Knill, Emanuel and Lloyd, Seth},
+   Title = {Dynamical Decoupling of Open Quantum Systems},
+   Journal = {Physical Review Letters},
+   Volume = {82},
+   Number = {12},
+   Pages = {2417},
+   Year = {1999} }
+
+@article{DD2,
+   Author = {Viola, L. and Knill, E.},
+   Title = {Robust dynamical decoupling of quantum systems with bounded controls},
+   Journal = {Physical Review Letters},
+   Volume = {90},
+   Number = {3},
+   Year = {2003} }
+
+
+@article{DD3,
+   Author = {Kern, O. and Alber, G.},
+   Title = {Controlling Quantum Systems by Embedded Dynamical Decoupling Schemes},
+   Journal = {Physical Review Letters},
+   Volume = {95},
+   Number = {25},
+   Pages = {250501},
+   Year = {2005} }
+
+@article{DD4,
+   Author = {Khodjasteh, K. and Lidar, D. A.},
+   Title = {Fault-Tolerant Quantum Dynamical Decoupling},
+   Journal = {Physical Review Letters},
+   Volume = {95},
+   Number = {18},
+   Pages = {180501},
+   Year = {2005} }
+
+@article{DD5,
+   Author = {Santos, Lea F. and Viola, Lorenza},
+   Title = {Enhanced Convergence and Robust Performance of Randomized Dynamical Decoupling},
+   Journal = {Physical Review Letters},
+   Volume = {97},
+   Number = {15},
+   Pages = {150501},
+   Year = {2006} }
+
+@article{DD6,
+   Author = {Yao, W. and Liu, R. B. and Sham, L. J.},
+   Title = {Restoring coherence lost to a slow interacting mesoscopic spin bath},
+   Journal = {Physical Review Letters},
+   Volume = {98},
+   Number = {7},
+   Year = {2007} }
+
+@article{DD7,
+   Author = {Witzel, W. M. and Das Sarma, S.},
+   Title = {Concatenated dynamical decoupling in a solid-state spin bath},
+   Journal = {Physical Review B},
+   Volume = {76},
+   Number = {24},
+   Year = {2007} }
+
+@article{UDD,
+   Author = {Uhrig, G. S.},
+   Title = {Concatenated Control Sequences Based on Optimized Dynamic Decoupling},
+   Journal = {Physical Review Letters},
+   Volume = {102},
+   Number = {12},
+   Year = {2009} }
+
+
+@article{Hahn-Echo,
+   Author = {Hahn, E.},
+   Title = {Spin echoes},
+   Journal = {Phys. Rev},
+   Volume = {80},
+   Pages = {580},
+   Year = {1950} }
+
+@article{Du-UDD,
+   Author = {Du, J. F. and Rong, X. and Zhao, N. and Wang, Y. and Yang, J. H. and Liu, R. B.},
+   Title = {Preserving electron spin coherence in solids by optimal dynamical decoupling},
+   Journal = {Nature},
+   Volume = {461},
+   Number = {7268},
+   Pages = {1265-1268},
+   Year = {2009} }
+
+@article{Biercuk-UDD,
+   Author = {Biercuk, M. J. and Uys, H. and VanDevender, A. P. and Shiga, N. and Itano, W. M. and Bollinger, J. J.},
+   Title = {Optimized dynamical decoupling in a model quantum memory},
+   Journal = {Nature},
+   Volume = {458},
+   Number = {7241},
+   Pages = {996-1000},
+   Year = {2009} }
+
+@article{NV-UDD1,
+   Author = {de Lange, G. and Wang, Z. H. and Riste, D. and Dobrovitski, V. V. and Hanson, R.},
+   Title = {Universal Dynamical Decoupling of a Single Solid-State Spin from a Spin Bath},
+   Journal = {Science},
+   Volume = {330},
+   Number = {6000},
+   Pages = {60-63},
+   Year = {2010} }
+
+@article{DD-Entanglement,
+   Author = {Wang, Y. and Rong, X. and Feng, P. B. and Xu, W. J. and Chong, B. and Su, J. H. and Gong, J. B. and Du, J. F.},
+   Title = {Preservation of Bipartite Pseudoentanglement in Solids Using Dynamical Decoupling},
+   Journal = {Physical Review Letters},
+   Volume = {106},
+   Number = {4},
+   Year = {2011} }
+
+@article{NV-DD2,
+   Author = {Naydenov, B. and Dolde, F. and Hall, L. T. and Shin, C. and Fedder, H. and Hollenberg, L. C. L. and Jelezko, F. and Wrachtrup, J.},
+   Title = {Dynamical decoupling of a single-electron spin at room temperature},
+   Journal = {Physical Review B},
+   Volume = {83},
+   Number = {8},
+   Year = {2011} }
+
+@article{DD-QD,
+   Author = {Bluhm, H. and Foletti, S. and Neder, I. and Rudner, M. and Mahalu, D. and Umansky, V. and Yacoby, A.},
+   Title = {Dephasing time of GaAs electron-spin qubits coupled to a nuclear bath exceeding 200 mu s},
+   Journal = {Nature Physics},
+   Volume = {7},
+   Number = {2},
+   Pages = {109-113},
+   Year = {2011} }
+
+@article{NV-DD3,
+   Author = {Ryan, C. A. and Hodges, J. S. and Cory, D. G.},
+   Title = {Robust Decoupling Techniques to Extend Quantum Coherence in Diamond},
+   Journal = {Physical Review Letters},
+   Volume = {105},
+   Number = {20},
+   Year = {2010} }
+
+@article{static-spin-H,
+   Author = {Abragam, A. and Pryce, M. H. L.},
+   Journal = {Proc. Roy. Soc. London A},
+   Volume = {206},
+   Number = {135},
+   Year = {1951} }
+
+@article{Chidress-1,
+   Author = {Childress, L. and Dutt, M. V. G. and Taylor, J. M. and Zibrov, A. S. and Jelezko, F. and Wrachtrup, J. and Hemmer, P. R. and Lukin, M. D.},
+   Title = {Coherent dynamics of coupled electron and nuclear spin qubits in diamond},
+   Journal = {Science},
+   Volume = {314},
+   Number = {5797},
+   Pages = {281-285},
+   Year = {2006} }
+
+@article{Revisited-endor,
+   Author = {Tyryshkin, A. M. and Morton, J. J. L. and Ardavan, A. and Lyon, S. A.},
+   Title = {Davies electron-nuclear double resonance revisited: Enhanced sensitivity and nuclear spin relaxation},
+   Journal = {Journal of Chemical Physics},
+   Volume = {124},
+   Number = {23},
+   Year = {2006} }
+
+@article{AHT,
+   Author = {Maricq, M. M.},
+   Title = {Application of average Hamiltonian theory to the NMR of solids},
+   Journal = {Phys. Rev. B},
+   Volume = {25},
+   Pages = {6622-6632},
+   Year = {1982} }
+
+@article{GRAPE-NMR,
+   Author = {Khaneja, N. and Reiss, T. and Kehlet, C. and Schulte-Herbruggen, T. and Glaser, S. J.},
+   Title = {Optimal control of coupled spin dynamics: design of NMR pulse sequences by gradient ascent algorithms},
+   Journal = {Journal of Magnetic Resonance},
+   Volume = {172},
+   Number = {2},
+   Pages = {296-305},
+   Year = {2005} }
+
+
+@article{Hornak1986501,
+title = {Spectral rotation in pulsed ESR spectroscopy},
+journal = {Journal of Magnetic Resonance (1969)},
+volume = {67},
+number = {3},
+pages = {501 - 518},
+year = {1986},
+author = {Hornak, J. P. and Freed, J. H.}
+}
