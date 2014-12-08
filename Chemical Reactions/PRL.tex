@@ -1,0 +1,431 @@
+
+
+% Use only LaTeX2e, calling the article.cls class and 12-point type.
+
+\documentclass[twocolumn,showpacs,twoside,10pt,prl]{revtex4}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epsf}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multirow}
+
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\Fig}[1]{Fig.\,\ref{#1}}
+\newcommand{\Eq}[1]{Eq.\,(\ref{#1})}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\nl}{\nonumber \\}
+\usepackage[usenames]{color}
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+% Include your paper's title here
+\title{Simulation of Chemical Reaction Dynamics on an NMR Quantum Computer}
+\author{Dawei Lu$^{1}$}
+\author{Nanyang Xu$^{1}$}
+\author{Ruixue Xu$^{1}$}
+\author{Hongwei Chen$^{1}$}
+\author{Jiangbin Gong$^{2,3}$}
+\author{Xinhua Peng$^{1}$}
+\author{Jiangfeng Du$^{1}$}
+\email{djf@ustc.edu.cn}
+
+
+\affiliation{$^{1}$Hefei National Laboratory for Physical Sciences at
+Microscale and Department of Modern Physics, University of Science
+and Technology of China, Hefei, Anhui, 230026, China}
+\affiliation{$^{2}$Department of Physics and Centre for
+Computational Science and Engineering, National
+University of Singapore, 117542, Republic of
+Singapore}
+\affiliation{$^{3}$NUS Graduate School for Integrative
+Sciences and Engineering, 117597,
+Republic of Singapore}
+
+
+\begin{abstract}
+
+
+
+
+Quantum simulation can beat current classical computers with minimally a few tens of qubits and will likely
+become the first practical use of a quantum computer. One promising application of quantum simulation is to attack
+challenging quantum chemistry problems.  Here we report an experimental demonstration that a small
+nuclear-magnetic-resonance (NMR) quantum computer is already able to
+simulate the dynamics of a prototype chemical reaction.
+%Specifically, 8 grid points are used
+%to model a potential energy curve along the reaction coordinate, and the associated laser-driven reaction dynamics is simulated by applying shaped %radio-frequency (RF) pulses to an interacting 3-spin system.
+The experimental results agree well with classical simulations.
+We conclude that the quantum simulation of chemical reaction dynamics not computable on current classical computers is feasible in the near future.
+
+
+
+
+
+
+
+\end{abstract}
+\pacs{03.67.Lx, 07.57.Pt, 42.50.Dv, 76.60.-k}
+
+\maketitle
+
+
+
+\paragraph*{Introduction.}
+
+In addition to offering general-purpose quantum algorithms with substantial speed-ups over classical algorithms \cite{Nielsen}
+[e.g., Shor's quantum factorizing algorithm \cite{Shor}], a quantum computer can be used to simulate
+specific quantum systems with high efficiency \cite{Buluta}.
+This quantum simulation idea was first conceived by Feynman \cite{Feynman}.
+Lloyd proved that with quantum computation architecture,
+the required resource for quantum simulation scales polynomially
+with the size of the simulated system \cite{Lloyd}, as compared with the exponential scaling on  classical computers.
+During the past years several quantum simulation algorithms designed for individual problems were
+proposed \cite{Zalka,Abrams,Wu,Smirnov,Lidar} and a part of them have been realized
+using physical systems such as NMR \cite{Peng,Somaroo,Negrevergne} or trapped-ions \cite{Friedenauer}.
+For quantum chemistry problems, Aspuru-Guzik {\it et al.} and Kassal {\it et al.} proposed quantum simulation algorithms
+to calculate stationary molecular properties \cite{static} as well as chemical reaction rates \cite{dynamical}, with the quantum simulation
+of the former experimentally implemented on both
+NMR \cite{static_exp2} and photonic quantum computers \cite{static_exp1}.
+In this work we aim at the quantum simulation of the more challenging side of quantum chemistry problems -- chemical reaction dynamics,
+presenting an experimental NMR implementation for the first time.
+
+Theoretical calculations of chemical reaction dynamics
+play an important role in understanding reaction mechanisms and in guiding
+the control of chemical reactions \cite{rabitz,rice-brumer}. On classical computers
+the computational cost for propagating the Schr\"{o}dinger equation
+increases exponentially with the system size.
+Indeed, standard methods in studies of chemical reaction dynamics
+so far have dealt with up to 9 degrees of freedom (DOF) \cite{ninedegree}.
+Some highly sophisticated approaches,
+such as the multi-configurational time-dependent Hartree (MCTDH) method \cite{mctdh},
+can treat dozens of DOF but various approximations are necessary.
+So generally speaking, classical computers are unable to perform dynamical simulations for large molecules.
+For example, for a 10--DOF system
+and if only 8 grid points are needed for the coordinate representation of each DOF,
+classical computation will have to store and operate $8^{10}$ data points,
+already a formidable task for current classical computers.
+By contrast, such a system size is manageable by a quantum computer with
+only 30 qubits. Furthermore, the whole set of data can be processed in parallel
+in quantum simulation.
+
+In this report we demonstrate that the quantum dynamics
+of a laser-driven hydrogen transfer model reaction can be captured by
+a small NMR quantum simulator.
+%The reactant-to-product quantum evolution is divided into 25 discrete time steps and
+%the probabilities of the reactant and the product states are measured at the end of each time step.
+Given the limited number of qubits, the potential energy curve is modeled by 8 grid points.
+The continuous reactant-to-product transformation observed in our quantum simulator is in remarkable agreement
+with a classical computation based also upon an 8-dimensional Hilbert space.
+To our knowledge, this is the first explicit implementation
+of the quantum simulation of a chemical reaction process.  Theoretical methods and general experimental techniques described in this work should motivate
+next-generation simulations of chemical reaction dynamics with a larger number of qubits.
+
+
+\paragraph*{Theory.}
+
+Previously we were able to simulate the ground-state energy of Hydrogen molecule \cite{static_exp2}.
+Here, to simulate chemical reaction dynamics, we consider a one-dimensional model of a laser-driven chemical reaction \cite{hsubway}, namely,
+the isomerization reaction of nonsymmetric substituted malonaldehydes, depicted in Fig. \ref{fig1}(a).
+The system Hamiltonian in the presence of
+an external laser field is given by
+\be\label{totH}
+  H(t)=  T+  V+  E(t) { \quad   \rm  with   \quad    }
+                            E(t)=- \mu\varepsilon(t).
+\ee
+In Eq. (1),  $E(t)$ is the laser-molecule interaction Hamiltonian,
+$ \mu=e  q$ is the dipole moment operator,
+$\varepsilon(t)$ represents the driving electric field,
+$ {T}={  p}^2/2m$ is the kinetic energy operator, and
+\be\label{potential}
+ {V}=\frac{\Delta}{2q_0}(  q-q_0)+\frac{V^\ddag-\Delta/2}{q_0^4}(  q-q_0)^2(  q+q_0)^2
+\ee
+is a double-well potential of the system along the reaction coordinate. In Eq. (2)
+$V^\ddag$ is the barrier height, $\Delta$ gives the asymmetry of the two wells, and $\pm q_0$ give the locations of the potential well minima.
+See the figure caption of Fig. \ref{fig1}(b) for more details of this model.
+
+We first employ the split-operator method \cite{Feit,Zhangbook} to obtain the
+propagator $ {U}(t+\delta t,t)$ associated with the time interval from $t$ to $t+\delta t$.  We then have
+\begin{align}\label{propagator}
+ {U}(t+\delta t,t)\approx &\,
+ e^{-\frac{i}{\hbar} {V} \delta t/2} e^{-\frac{i}{\hbar} {E} (t+\delta t/2)  \delta t/2}
+ e^{-\frac{i}{\hbar} {T} \delta t}   \nl & \times e^{-\frac{i}{\hbar} {E} (t+\delta t/2)           \delta t/2}
+ e^{-\frac{i}{\hbar} {V} \delta t/2} .
+\end{align}
+The unitary operator $e^{-i {T}\delta t/\hbar}$ in Eq. (3) is diagonal in the momentum representation whereas all the other operators
+are unitary and diagonal in the coordinate representation. Such $ {U}(t+\delta t,t)$ can be simulated in a rather simple fashion
+if we work with both representations and make transformations between them by quantum Fourier transform (QFT) operations.
+%\iffalse
+%\begin{equation}\label{qft}
+% {U}(t+\delta t)=QFTe^{-i {T}\delta t}
+%             QFT^{\dag}e^{-i {V}\delta t}
+%                       e^{-i {E}(t)\delta t}+O(\delta t^2).
+%\end{equation}
+%\fi
+To take snapshots of the dynamics we divide
+the reaction process into 25 small time steps,
+with $\delta t=1.5\,$fs and the total duration $t_f=37.5\,$fs.
+The electric field of an ultrashort strong laser pulse is chosen as
+\be
+  \varepsilon(t)=\left\{
+    \begin{array}{cc}
+       \varepsilon_0\sin^2(\frac{\pi t}     {2s_1})         ;&\qquad   0\leq t\leq s_1\\
+       \varepsilon_0                                        ;&\qquad   s_1<t<s_2\\
+       \varepsilon_0\sin^2[\frac{\pi(t_f-t)}{2(t_f-s_2)}]   ;&\qquad   s_2\leq t\leq t_f
+    \end{array}
+  \right.
+\ee
+with $s_1=5\,$fs and $s_2=32.5\,$fs.
+More details, including an error analysis of the split-operator technique, are given in the supplementary material.
+The reactant state at $t=0$ is assumed to be
+the ground-state $\left\vert \phi_{0} \right\rangle$ of the bare Hamiltonian $T+V$, which is mainly localized in the left potential well.
+The wavefunction of the reacting system at later times is denoted by $\left\vert \psi({t}) \right\rangle$.
+The product state of the reaction is taken as the first excited state $\left\vert \phi_{1} \right\rangle$ of $T+V$,
+which is mainly localized in the right potential well.
+% of the potential energy $ {V}$, which represents the reactant of the reaction.
+
+With the system Hamiltonian, the initial reactant state, the product state, and the propagation method outlined above, the next step is
+to encode the time-evolving wavefunction $\left\vert \psi({t}) \right\rangle$ and the $T$, $V$, $E(t)$ operators by \emph{n} qubits. To that end
+we first obtain the expressions of these operators in representation of a set of $N=2^n$ discretized position basis states.
+The evolving state can then be encoded as
+\begin{align}\label{wave}
+\left\vert \psi(t) \right\rangle=&\sum_{q=0}^{2^n-1}m_q(t)\left\vert q \right\rangle
+\nl =&m_0(t)\left\vert 0\cdots00 \right\rangle+...+m_{2^n-1}(t)\left\vert 1\cdots11 \right\rangle,
+\end{align}
+and as a result the system operators become
+\begin{eqnarray}\label{qft}
+ {T}&\!\!=&\!\!\sum_{k_1,\cdots ,k_n=z,i}\alpha_{k_1\cdots k_n}\sigma_{k_1}^1\sigma_{k_2}^2 \cdots \sigma_{k_n}^n,\\
+ {V}&\!\!=&\!\!\sum_{k_1,\cdots ,k_n=z,i}\beta_{k_1\cdots k_n}\sigma_{k_1}^1\sigma_{k_2}^2 \cdots \sigma_{k_n}^n, \\
+ q &\!=&\! \sum_{j=1}^n\gamma_j\sigma_z^j,
+\end{eqnarray}
+where $\sigma_z^j$ $(j=1,2,\cdots,n)$ is the Pauli matrix and $\sigma_i^j$ is the \emph{N}-dimensional identity matrix.
+Because our current quantum computing platform can only offer a limited number of qubits
+and the focus of this work is on an
+implementation of the necessary gate operations under the above encoding, we have employed
+a rather aggressive 8-point discretization using $n=3$ qubits.  The associated diagonal forms of the
+$T$, $V$, and $q$ matrices are
+given in the supplementary material. In particular,
+the end grid points are at $q=\pm 0.8$ \AA\, and the locations of other 6 grid points are shown in Fig. \ref{fig1}(b).
+%To ensure a rapid decay of the wavefunction amplitudes,
+%the values of $V$
+%is increased.
+The eigenvalues of the ground and first excited states of the bare Hamiltonian
+treated in the 8-dimensional encoding Hilbert space are close to the exact answers. The
+associated eigenfunctions are somewhat deformed from exact calculations using, e.g., 64 grid points.
+Nonetheless, their unbalanced probability distribution in the two potential wells is maintained.
+For example, the probability for the first excited state being found in the right potential well is about $80\%$.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width= 0.9\columnwidth]{fig1.eps}
+\end{center}
+\caption{(a) Isomerization reaction of nonsymmetric substituted malonaldehydes.
+(b) Upper panel: Potential energy curve, together with the eigenfunctions of
+    the ground (red) and the first excited (blue) states.
+    The main system parameters [(Eq. 2)] are taken from Ref.\ \cite{hsubway}, with
+    $V^\ddag=0.00625\ E_{\rm h}$, $\Delta=0.000257\ E_{\rm h}$, and $q_0=1\ a_0$.
+    %In numerical simulation, the potential is discretized for $q\in[-0.8,0.8]$ angstrom with 64 points (left panels)
+    %or 8 points (right panels), respectively.
+    As a modification, the potential values for $q$ approaching the left and right ends
+are increased sharply to ensure rapid decay
+    of the wavefunction amplitudes. In particular, this procedure increases
+    the $V$ value at $q=\pm 0.8$ \AA\ by a factor of 30.
+    The six discrete squares shown on the potential curve and the two end points at $q=\pm 0.8$ \AA
+    \ constitute the 8 grid points for our 3-qubit encoding.
+    Lower panel: Numerically exact time-dependence of populations of the ground state (reactant state, denoted P$_0$) and the first excited state
+    (product state, denoted P$_1$).}\label{fig1}
+\end{figure}
+
+%by the 8--point
+%simulation, in comparison to the accurate 64--point results, for the present case of study.
+
+
+% and the parameters a, b are defined as XXXX.
+
+%Through the propagation, the system evolves to reach $\left\vert\psi_{1}\right\rangle$,
+%the first excited state mostly located on the resultant side, with a ratio of $77\%$,
+%as seen in (Fig. 1B) and also later in our experiment by quantum computation, cf.\ (Fig. 4C).
+
+\paragraph*{Experiment.}
+
+In our experiment qubits 1,2, and 3 are realized by the $^{19}$F, $^{13}$C, and $^1$H nuclear spins of Diethyl-fluoromalonate.  The structure of Diethyl-fluoromalonate is shown in Fig. \ref{structure}(a), where the three nuclei used as qubits are marked by oval. The internal Hamiltonian of this system is given by
+\begin{eqnarray}\label{Hamiltonian}
+\mathcal{H}_{int}=&&\sum\limits_{j=1}^3 {2\pi \nu _j } I_z^j  + \sum\limits_{j < k,=1}^3 {2\pi} J_{jk} I_z^j I_z^k,
+\end{eqnarray}
+where $\nu_j$ is the resonance frequency of the \emph{j}th spin and
+$\emph{J}_{jk}$ is the scalar coupling strength between spins \emph{j} and
+\emph{k}, with $\emph{J}_{12}=-194.4$ Hz, $\emph{J}_{13}=47.6$ Hz, and $\emph{J}_{23}=160.7$ Hz.
+The relaxation time $T_1$ and dephasing time $T_2$ for each of the three nuclear spins are tabulated in Fig. \ref{structure}(b).  The experiment is conducted on a Bruker Avance 400 MHz spectrometer at room temperature.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width= 0.9\columnwidth]{structure.eps}
+\end{center}
+\caption{(a) Molecular structure of Diethyl-fluoromalonate.
+The $^1$H, $^{13}$C and $^{19}$F nuclear spins marked by oval are used as three qubits.
+(b) System parameters and important time scales of Diethyl-fluoromalonate.  Diagonal elements are the Larmor frequencies (Hz) and
+off-diagonal elements are scalar coupling strength (Hz) between two nuclear spins.
+Relaxation and dephasing time scales (second) $T_1$ and $T_2$ for each nuclear spin are listed on the right.
+(c) The GRAPE pulse that realizes the initial state $\left\vert \phi_{0} \right\rangle$ from the PPS $\left\vert 000 \right\rangle$, with a pulse width 10 ms and a fidelity over 0.995. The (blue)
+solid line represents the pulse power in $x$-direction, and the (red)
+dotted line represents the pulse power in $y$-direction. The three panels from top to bottom represent the RF features at three central frequencies
+associated with
+the $^{19}$F,  $^{13}$C and $^1$H spins, respectively.}\label{structure}
+\end{figure}
+
+
+The experiment consists of three parts: (A) Initial state preparation. In this part we prepare the ground state $\left\vert \phi_{0} \right\rangle$ of the bare Hamiltonian $T+V$ as the reactant state; (B) Dynamical evolution, that is, the explicit implementation of the system evolution such that the continuous chemical reaction dynamics can be simulated; (C) Measurement. In this third part the probabilities of the reactant and product states associated with each of the 25 snapshots of the dynamical evolution are recorded.  For the $j$th snapshot at $t_j\equiv j\delta t$, we measure the overlaps $C(\left\vert \psi(t_j) \right\rangle,\left\vert \phi_{0} \right\rangle)=| \la\phi_0|\psi(t_j)\ra |^2$ and $C(\left\vert \psi(t_j) \right\rangle,\left\vert \phi_{1} \right\rangle)=
+|\la\phi_1|\psi(t_j)\ra |^2$, through which the continuous reactant-to-product transformation can be displayed. The main experimental details are as follows. Readers may again refer to the supplementary material for more technical explanations.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width= 0.9\columnwidth]{circuit.eps}
+\end{center}
+\caption{Upper panel: The network of quantum operations to simulate the chemical reaction dynamics, with the reactant state $\left\vert \phi_{0} \right\rangle$.
+The whole process is divided into 25 loops. The operators $T_{\delta t}$, $V_{\delta t}$ and $E_{\delta t/2}$ are assumed to be in their
+diagonal representations.  Lower panel:
+H is the Hadamard gate and S, T are phase gates as specified on the right. Vertical lines ending with a solid dot represent controlled phase gates and the
+vertical line between two crosses represents a SWAP gate.}\label{circuit}
+\end{figure}
+
+(A) $\emph{Initial State Preparation}$. Starting from the thermal equilibrium state, firstly we create the pseudo-pure state (PPS) $\rho_{000}=(1-\epsilon)\mathbb{{I}}/8+\epsilon \left\vert 000 \right\rangle \left\langle000\right\vert$ using the spatial average technique \cite{spatial}, where $\epsilon \approx 10^{-5}$ represents the polarization of the system and ${\mathbb{{I}}}$ is the $8\times 8$ identity matrix.
+The initial state $\left\vert \phi_{0} \right\rangle$ was prepared from $\rho_{000}$ by applying one shaped radio-frequency
+(RF) pulse characterized by 1000 frequency
+segments and determined by the GRadient Ascent Pulse Engineering (GRAPE) algorithm \cite{grape1,grape2,grape3}. The preparation pulse thus obtained
+is shown in Fig. \ref{structure}(c) with the pulse width chosen as 10 ms and a theoretical fidelity 0.995.  Because the central resonance frequencies of the nuclear spins are different, Fig. \ref{structure}(c) shows the RF field amplitudes vs time in three panels.
+To confirm the successful preparation of the state $\vert\phi_0\rangle$,   we carry out
+ a full state tomography and examine the fidelity between the target density matrix $\rho_0=|\phi_0\rangle\langle\phi_0|$ and the experimental one $\rho_{exp}(0)$.  Using the
+ fidelity definition $F(\rho_{1}, \rho_{2})\equiv \texttt{Tr}(\rho_1{\rho_2})/\sqrt{(\texttt{Tr}(\rho_1^2)\texttt{Tr}(\rho_2^2)}$,
+ we obtain $F[\rho_0, \rho_{exp}(0)]=0.950$. Indeed, their real parts shown in Fig. \ref{tomo}(a) are seen to be in agreement.
+% $F\equiv \texttt{Tr}(\rho_{target}\rho_{expt})/\sqrt{(\texttt{Tr}(\rho_{target}^2)\texttt{Tr}(\rho_{expt}^2))}=0.950$. That is, the fidelity between the %target density matrix $\rho_{target}$ and the experimental density matrix $\rho_{expt}$,
+
+(B) $\emph{Dynamical Evolution}$. The reaction process was divided into $M=25$ discrete time intervals of the same duration $\delta t$.
+Associated with the $m$th time interval, the unitary evolution operator is given by
+\begin{equation}
+U_m\approx V_{\delta t/2}{E}_{\delta t/2}(t_m)U_{QFT}T_{\delta t}U_{QFT}^{\dagger}{E}_{\delta t/2}(t_{m}){V}_{\delta t/2},
+\end{equation}
+where $U_{QFT}$ represents a QFT operation, and other operators are defined by ${V}_{\delta t/2}\equiv e^{-\frac{i}{\hbar}{V}\frac{\delta t}{2}}$, ${T}_{\delta t} \equiv e^{-\frac{i}{\hbar}{T}\delta t}$, and ${E}_{\delta t/2}(t_m)\equiv e^{\frac{i}{\hbar}\varepsilon(t_{m-1}+\delta t/2) e q\frac{\delta t}{2}}$, with $V$, $T$, and $q$ all in their diagonal representations.  Such a loop of operations is $m$-dependent because the simulated system is subject to a time-dependent laser field.  The numerical values of the diagonal operators $T_{\delta t}$, $V_{\delta t/2}$ and $E_{\delta t/2}$ are
+elaborated in the supplementary material.  A circuit to realize $U_{QFT}$ and a computational network to realize the $U_m$ operator
+are shown in Fig. \ref{circuit}.
+
+Each individual operation in the $U_m$ loop  can be implemented by a particular RF pulse sequence applied to our system. However, in the experiment such a direct decomposition of $U_m$ requires a very long gate operation time and highly complicated RF pulse sequences. This bottom-up approach hence accumulates considerable experimental errors and
+also invites serious decoherence effects. To circumvent this technical problem we find a better experimental approach, which further
+exploits the GRAPE technique to synthesize $U_m$ or their products with one single engineered RF pulse only. That is, the quantum evolution operator $U(t_j, 0)$, which is simulated by $\prod_{m=1}^{j}U_m$, is implemented by one GRAPE coherent control pulse altogether, with a preset fidelity and a typical pulse length ranging from 10 ms to 15 ms.  For the 25 snapshots of the dynamics, totally 25 GRAPE pulses are worked out, with their fidelities always set to be larger than 0.99.  As a result, the technical complexity of the experiment decreases dramatically but the fidelity is maintained at a high level.  The task of finding a GRAPE pulse itself may be fulfilled via feedback learning control \cite{rabitz} that can exploit the quantum evolution of our NMR system itself.  However, this quantum procedure is not essential or necessary in our experiment because here the GRAPE pulses on a 3-qubit system can be found rather easily.
+
+(C) $\emph{Measurement}$. To take the snapshots of the reaction process at $t_j=j\delta t$ we need to measure the overlaps of C($\left\vert \psi(t_j) \right\rangle$,$\left\vert \phi_{0} \right\rangle$) and C($\left\vert \psi({t_j}) \right\rangle$,$\left\vert \phi_{1} \right\rangle$). A full state tomography at $t_j$ will do, but this will produce much more information than needed. Indeed, assisted by a simple diagonalization technique, sole population measurements already suffice to observe the reactant-to-product transformation.
+
+Specifically, in order to obtain $C(\left\vert \psi({t_j}) \right\rangle,\left\vert \phi_{0} \right\rangle)=\texttt{Tr}[\rho(t_j) \rho_0]$ with $\rho(t_j)=\left\vert \psi({t_j}) \right\rangle\left\langle \psi(t_j) \right\vert$, we first find a transformation matrix \emph{R} to diagonalize $\rho_0$, that is, $\rho_0'=R \rho_0R^{\dagger}$, where $\rho_0'$ is a diagonal density matrix. Letting $\rho'(t_j) = R \rho(t_j) R^{\dagger}$ and using the identity $\texttt{Tr}[\rho(t_j) \rho_0]=\texttt{Tr}[\rho'(t_j) \rho_0']$, it becomes clear
+that only the diagonal elements or the populations of $\rho'(t_j)$ are required to measure $\texttt{Tr}[\rho'(t_j) \rho_0']$, namely, the overlap $C(\left\vert \psi(t_j) \right\rangle,\left\vert \phi_{0} \right\rangle)$.  To obtain $\rho'(t_j)$ from $\rho(t_j)$, we simply add the extra $R$ operation to the quantum gate network. The actual implementation of the $R$ operation can be again mingled with all other gate operations using one GRAPE pulse. A similar procedure is used to measure C($\left\vert \psi(t_j) \right\rangle$,$\left\vert \phi_{1} \right\rangle$).
+
+The populations of $\rho{'}(t_j)$ can be measured by applying $[\pi/2]_y$ pulses to the three qubits and then read the ensuing free induction decay signal. In our sample of natural abundance, only $\sim 1\%$ of all the molecules contain a ${}^{13}$C nuclear spin.  The signals from the ${}^{1}$H and ${}^{19}$F nuclear spins are hence dominated by those molecules with the ${}^{12}$C isotope. To overcome this problem we apply SWAP gates to transmit the information of the ${}^{1}$H and ${}^{19}$F channels to the ${}^{13}$C channel and then measure the ${}^{13}$C qubit.  %More more details %procedure of dealing with the NMR spectra, see the \emph{Measurement} Section in the supplementary material.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width= 0.9\columnwidth]{tomo.eps}
+\end{center}
+\caption{Experimental tomography results and the reaction dynamics obtained both theoretically and experimentally.
+(a)-(b) Real part of the density matrix of the initial and final states of the simulated reaction.
+Upper panels show the theoretical results based on an 8-dimensional Hilbert space, and lower panels show the experimental results.
+(c) The measured probabilities of the reactant and product states to give 25 snapshots of the reaction dynamics.   The (red) plus symbols represent measured results of C($\left\vert \psi(t_j)\right\rangle$,$\left\vert \phi_{0} \right\rangle$) and the (blue) circles represent measured results of C($\left\vert \psi(t_j) \right\rangle$,$\left\vert \phi_{1} \right\rangle$), both in agreement with the theoretical smooth curves.  Results here also agree qualitatively
+with the numerically exact dynamics shown in Fig. \ref{fig1}(b).}\label{tomo}
+\end{figure}
+
+ To assess the difference between theory and experiment,  we carry out one full state tomography for the final state density matrix  at $t=t_f$.
+ Because the GRAPE pulse is made to reach a fidelity larger than 0.995, the experimental density matrix $\rho_{exp}(t_f)$
+ is indeed very close to the  theoretical density matrix $\rho_{theory}(t_f)$ obtained in an 8-dimensional Hilbert space, with a fidelity $F[\rho_{theory}(t_f),\rho_{exp}(t_f)]=0.957$. The experimental density matrix elements of the final state shown in Fig. \ref{tomo}(b) match the theoretical results to a high degree. With confidence in the experimental results on the full density matrix level, we can now examine the simulated reaction dynamics, reporting only the probabilities of the reactant and product states.
+ Fig. \ref{tomo}(c) shows the time-dependence of the probabilities of both the reactant and product states obtained from our quantum simulator.
+ It is seen that the product-to-reactant ratio
+  increases continuously with time, with the probability of the product state reaching 77\% at the end of the simulated reaction. At all times,
+  the experimental observations of the reaction process are in impressive agreement with the smooth curves calculated theoretically on a classical computer. Further, the experimental results are also in qualitative agreement
+   with the exact classical calculation using 64 grid points (see Fig. \ref{fig1}(b)).
+    A prototype laser-driven reaction is thus successfully simulated by our 3-qubit system.
+    We emphasize that due to the use of GRAPE pulses in synthesizing the gate operations, our simulation experiment lasts about 30 ms only, which is much shorter than the spin decoherence time of our system.
+  The slight difference between theory and experiment can be attributed to imperfect GRAPE pulses, as well as inhomogeneity in RF pulses and in the static magnetic field.
+
+\paragraph*{Conclusion.}
+
+ Quantum simulation with only tens of qubits can already exceed the capacity of a classical computer.  Before realizing general-purpose quantum algorithms that typically require thousands of qubits, a quantum simulator attacking problems not solvable on current classical computers will be one conceivable milestone in the very near future. The realization of quantum simulations will tremendously change the way we explore quantum chemistry in both stationary and dynamical problems \cite{static,dynamical}.   %the earlier work on static properties \cite{static_exp2},
+Our work reported here establishes the first experimental study of the quantum simulation of a prototype laser-driven chemical reaction. The feasibility of simulating chemical reaction processes on a rather small quantum computer is hence demonstrated.  Our proof-of-principle experiment also realizes a promising map from laser-driven chemical reactions to the dynamics of interacting spin systems under shaped RF fields. This map itself is of significance because it bridges up two research subjects whose characteristic time scales differ by many orders of magnitude.
+
+
+
+
+\paragraph*{Acknowledgement.}
+
+Helpful discussions with J. L. Yang are gratefully acknowledged.
+This work was supported by National Nature Science Foundation of China, the CAS, and the National Fundamental Research Program 2007CB925200.
+
+\begin{thebibliography}{99}
+\bibitem{Nielsen} M. A. Nielson and I. L. Chuang, {\it Quantum Computation and Quantum Information} (Cambrige Univ. Press, Cambridge, U. K., 2000).
+\bibitem{Shor} P. Shor, in {\it Proceddings of the 35th Annual Symposium on Foundations of Computer Science} (IEEE Computer Society Press, New York, Santa Fe, NM, 1994), p. 124.
+\bibitem{Buluta} I. Buluta and F. Nori, {\it Science} \textbf{326}, 108 (2009).
+\bibitem{Feynman} R. P. Feynman, {\it Int. J. Theor. Phys.} \textbf{21}, 467 (1982).
+\bibitem{Lloyd} S. Lloyd, {\it Science} \textbf{273}, 1073 (1996).
+\bibitem{Zalka} C. Zalka, in {\it ITP Conference on Quantum Coherence and
+Decoherence} (Royal Soc. London, Santa Barbara, California, 1996), pp. 313-322.
+\bibitem{Abrams} D. S. Abrams and S. Lloyd, Phys. Rev. Lett. \textbf{79}, 2586
+(1997).
+\bibitem{Wu} L. A. Wu, M. S. Byrd, and D. A. Lidar, {\it Phys. Rev. Lett.} \textbf{89},
+057904 (2002).
+\bibitem{Smirnov} A. Y. Smirnov, S. Savel¡¯ev, L. G. Mourokh, and F. Nori,
+{\it Europhys. Lett.} \textbf{80}, 67008 (2007).
+\bibitem{Lidar} D. A. Lidar and H. Wang, {\it Phys. Rev. E} \textbf{59}, 2429 (1999).
+\bibitem{Peng} X. H. Peng, J. F. Du, and D. Suter, {\it Phys. Rev. A} \textbf{71},
+012307 (2005).
+\bibitem{Somaroo} S. Somaroo, C. H. Tseng, T. F. Havel, R. Laflamme, and
+D. G. Cory, {\it Phys. Rev. Lett.} \textbf{82}, 5381 (1999).
+\bibitem{Negrevergne} C. Negrevergne, R. Somma, G. Ortiz, E. Knill, and R.
+Laflamme, {\it Phys. Rev. A} \textbf{71}, 032344 (2005).
+\bibitem{Friedenauer} A. Friedenauer, H. Schmitz, J. T. Glueckert, D. Porras, and
+T. Schaetz, {\it Nature Phys.} \textbf{4}, 757 (2008).
+\bibitem{static} A. Aspuru-Guzik, A. D. Dutoi, P. J. Love, and M. Head-Gordon, {\it Science} \textbf{309}, 1704 (2005).
+\bibitem{dynamical} I. Kassal, S. P. Jordan, P. J. Love,  M. Mohseni, and A. Aspuru-Guzik,  {\it Proc. Natl. Acad. Sci. USA} \textbf{105}, 18681-18686 (2008).
+\bibitem{static_exp2} J. F. Du, N. Y. Xu, X. H. Peng, P. F. Wang, S. F. Wu, and D. W. Lu, {\it Phys. Rev. Lett.} \textbf{104}, 030502 (2010).
+\bibitem{static_exp1} B. P. Lanyon, J. D. Whitfield, G. G. Gillett, M. E. Goggin, M. P. Almeida, I. Kassal, J. D. Biamonte, M. Mohseni, B. J. Powell, M. Barbieri, A. Aspuru-Guzik, and A. G.  White, {\it Nature Chem.} \textbf{2}, 106 (2010).
+\bibitem{rabitz} H. Rabitz, R. de Vivie-Riedle, M. Motzkus, and K. Kompa, {\it Science} \textbf{288}, 824 (2000);
+W. S. Warren, H. Rabitz, and M. Dahleh, {\it Science} \textbf{ 259}, 1581 (1993).
+\bibitem{rice-brumer} S. A. Rice and M. Zhao, {\it Optical Control of Molecular Dynamics}
+(John Wiley, New York, 2000); M. Shapiro and P. Brumer, {\it Principles of the Quantum
+Control of Molecular Processes} (John Wiley, New York, 2003).
+\bibitem{ninedegree} D. Wang, {\it J. Chem. Phys.} \textbf{124}, 201105 (2006).
+\bibitem{mctdh} H. -D. Meyer and G. A. Worth,
+{\it Theor. Chem. Acc.} \textbf{109}, 251 (2003).
+
+
+\bibitem{hsubway}
+N. {Do\v{s}li\'{c}}, O. {K\"{u}hn}, J. Manz, and K. Sundermann,
+{\it J. Phys. Chem. A} \textbf{102}, 9645 (1998).
+
+%\bibitem{Kosloff} C. Leforestier, R. H. Bisseling, C. Cerjan, M. D. Feit, R. Friesner, A. Guldberg, A. Hammerich, G. Jolicard, W. Karrlein, H. -D. Meyer, %N. Lipkin, O. Roncero, and R. Kosloff, {\it J. Comput. Phys.} \textbf{94}, 59 (1991).
+\bibitem{Feit} M. D. Feit, J. A. Fleck, and A. Steiger, {\it J. Comput. Phys.} \textbf{47}, 412 (1982).
+\bibitem{Zhangbook} J. Z. H. Zhang, {\it Theory and Application of Quantum Molecular Dynamics}
+ (World Scientific, Singapore, 1999).
+\bibitem{spatial} D. G. Cory, A. F. Fahmy, and T. F. Havel, {\it Proc. Natl. Acad. Sci. USA.} \textbf{94}, 1634 (1997).
+\bibitem{grape1} N. Khaneja, T. Reiss, C. Kehlet, T. S. Herbr$\ddot{u}$ggen, and S. J. Glaser, {\it J. Magn. Reson.} \textbf{172}, 296 (2005).
+\bibitem{grape2} J. Baugh, J. Chamilliard, C. M. Chandrashekar, M. Ditty, A. Hubbard, R. Laflamme, M. Laforest, D. Maslov, O. Moussa, C. Negrevergne, M. Silva, S. Simmons, C. A. Ryan, D. G. Cory, J. S. Hodges, and C. Ramanathan, {\it Phys. in Can.} \textbf{63}, No.4
+(2007).
+\bibitem{grape3} C. A. Ryan, C. Negrevergne, M. Laforest, E. Knill, and
+R. Laflamme, {\it Phys. Rev. A} \textbf{78}, 012328 (2008).
+\end{thebibliography}
+
+
+\end{document}

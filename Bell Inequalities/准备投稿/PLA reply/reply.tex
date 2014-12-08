@@ -1,0 +1,255 @@
+
+\documentclass[a4paper,12pt]{article}
+
+
+%++++++++++++++++++++++Packages++++++++++++++++++++++
+\usepackage{ccmap}
+%\usepackage{times}
+%\usepackage{palatino}
+\usepackage{newcent}
+%\usepackage{bookman}
+\usepackage{dingbat}
+\usepackage{pifont}
+\usepackage{dsfont}
+\usepackage{bbding}
+\usepackage{bbm}
+\usepackage{bm}
+\usepackage{mathbbold}
+\usepackage{mathrsfs}
+\usepackage[tbtags]{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancybox}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{colorlinks=true,breaklinks=true,pdfstartview=FitH,linkcolor=blue}
+\usepackage{indentfirst}
+
+%+++++++++++++页面格式++++++++++++++++++++
+
+
+\renewcommand{\baselinestretch}{1.66}
+\renewcommand{\arraystretch}{1.5}
+%\linespread{1.5}
+\voffset   -2cm%
+\addtolength{\textheight}{3cm}%
+\addtolength{\hoffset}{-1.5cm}%
+\addtolength{\textwidth}{4cm}
+%\footskip=30pt
+%\hoffset  -1.25cm
+
+
+
+%++++++++++++++++++++++++++++++++++++++++
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.65}
+\renewcommand{\floatpagefraction}{0.60}
+
+
+
+
+%---------------------------------------------------------------------------------
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\zuo}{\langle}
+\newcommand{\you}{\rangle}
+\newcommand{\kai}{\CJKfamily{kai}}
+\newcommand{\hei}{\CJKfamily{hei}}
+\newcommand{\fs}{\CJKfamily{fs}}
+
+%---------------------------------------------------------------------------------
+
+\makeatletter
+\def\equalsfill{$\m@th\mathord=\mkern-7mu
+\cleaders\hbox{$\!\mathord=\!$}\hfill \mkern-7mu\mathord=$}
+\makeatother
+
+\makeatletter
+\def\@makefnmark{\hbox{\textsuperscript{\textcolor[rgb]{1.00,0.00,0.00}{(\hspace{2pt}\@thefnmark{}\hspace{1pt})}}}} \makeatother
+%========================================================================================
+
+\begin{document}
+
+\noindent We are very grateful to the referees for his/her pertinent
+comments and useful suggestions which indeed help us to improve the
+quality of our paper. According to referees' suggestions, we have
+revised our manuscript.
+
+\section{ \textit{Reply to Referee}}
+\subsection{\textit{Reply to Reviewer 1}}
+We thank referee for his/her helpful remarks.
+
+
+\emph{\textbf{Question:}}  The Authors' use of the term
+"experimental" seems misleading; as far as I could see, they merely
+performed "computer experiments." There are also many typos.
+
+\emph{\textbf{Our reply:}}
+ Our work is real NMR experiments similar to [ \emph{New. J. Phys. \textbf{10}, 033020 (2008)} ], but not
+  ``computer experiments". In [ \emph{New. J. Phys. \textbf{10}, 033020 (2008)}], Souza \emph{et
+al} implemented an experiment to simulate the violation of CHSH
+inequality in a 2-qubit NMR system. And we implemented such a
+simulation in 3-qubit NMR system. The difference is Souza \emph{et
+al} only implemented on 2-qubit Bell state, but we carried out the
+simulation of two different Bell-type inequalities for nonmaximal
+entangled states (3-qubit entangled states). Our experimental data
+were shown by the blue squares in Fig.3 and Fig.4 in the text.
+
+
+As to typos, we apologized to make you misread caused by them. We
+have tried our best to revise the typos of our manuscript and make
+it more easily read. Furthermore, we also found a native English
+speaker to check our manuscript.
+
+\subsection{\textit{Reply to Reviewer 2}}
+
+We thank referee considered that our work is certainly worthwhile
+and appears to have been successful. Furthermore, We also appreciate
+referee for his/her helpful remarks which make us avoid some
+confusion. We give the explanations about referee's questions.
+
+[1]. \emph{\textbf{Question:}} The main confusion for me arises from
+the usage of "simulation" both in the title and content of the
+paper. Is the inequality violated or not? Is it only a simulation?
+Or is this word used because the state is highly mixed? Or is it
+used because there can be no violation of Local Realism in the
+experiment?
+
+
+\emph{\textbf{Our reply:}} Our work is real NMR experiments to
+simulate the violation of Bell-type inequalities similar to [
+\emph{New. J. Phys. \textbf{10}, 033020 (2008)}]. As mentioned in [
+\emph{New. J. Phys. \textbf{10}, 033020 (2008)}], the reason that we
+used the word ``simulation" is that these experiments were carried
+out in NMR system. The initial state in NMR is prepared from the
+thermal equilibrium into a highly mixed state called pseudo-pure
+state (PPS)[\emph{\emph{Proc. R. Soc. Lond. A} 454, 447 (1998)}]
+\begin{equation}\label{PPS}
+\rho_{pps}=\frac{(1-\varepsilon)}{2^n}I_{2^n}+\varepsilon\left\vert
+\psi\right\rangle\left\langle\psi\right\vert,
+\end{equation}
+where $\varepsilon\approx10^{-5}$ is the polarization at room
+temperature. Braunstein \emph{et al} [ \emph{Phys. Rev. Lett. \textbf{83},
+ 1054 (1999)}] pointed out that any state
+of the form \eqref{PPS} is not entangled whenever $\varepsilon\leq
+\frac{1}{(1+2^{2n-1})}$. However, with respect to scale-independent
+NMR observations and unitary evolution, a pseudopure state is
+equivalent to the corresponding pure state [quant-ph/0207172 (2002)
+]. NMR is only sensible for the deviation part of \eqref{PPS}, which
+behaves like a ``pure entangled state". Hence, NMR experiment can
+still exhibit quantum properties. Although NMR system is local, it
+really implement a simulation of the violation of Bell-type can
+inequalities, Souza \emph{et al} have simulated the violation of
+2-qubit CHSH inequality on NMR [ \emph{New. J. Phys. \textbf{10},
+033020 (2008)}]. At the same time, as to distinguish from the true
+experiment of exhibiting non-local effects, such as in quantum
+optics \emph{et al}, we use the word "simulation".
+
+[2]. \emph{\textbf{Question:}}  These latter two questions also seem
+to be intermixed in the conclusions; it is unclear, to say the
+least. The mixed part has in principle nothing to do with the
+question of local realism, it is quite a different issue. Many of
+the conclusions at the end are questionable and not supported by
+theory or experiment in the rest of the paper.
+
+\emph{\textbf{Our reply:}}  The referee's view,``The mixed part has
+in principle nothing to do with the question of local realism", is
+correct. We realized our conclusion, `` That is to say, our results
+are also consistent with the classical theory, depending on whether
+we have considered the mixed part $I_{2^n}$", is not strict. In
+order to avoid misunderstanding and make the conclusion clear, we
+delete this sentence .
+
+
+[3]. \emph{\textbf{Question:}}  The inequalities need to be better
+specified: what does the comma stand for in E(A1,B2,C2) (equation
+(2) and others)? Multiplication? Usually these entities are
+expectation values of a product of experimental outcomes, but this
+is completely unclear in the present paper.
+
+\emph{\textbf{Our reply:}}  Following the referee's suggestion, we
+give a clear specified about inequalities in the revised text.
+
+[4]. \emph{\textbf{Question:}}  There are other things that are
+unclear, like what "several sets of observers" signify just below
+equation (7). Or what "sorts of unexpected properties" have been
+found recently at the start of section III. There are also lots of
+language errors of different kinds.
+
+\emph{\textbf{Our reply:}} We have tried our best to revise the
+language errors of our manuscript and make it more easily read. Such
+as, we replaced the sentence below Eq.(8) `` We took several sets of
+observers to do..." as `` We took the observers mentioned above
+($\bm{\sigma_{n_{1}}}$, $\bm{\sigma_{n_{2}}}$) to do... ". Another
+example, the sentence `` Recently, sorts of unexpected properties
+about non-maximal entangled states have been shown " has been
+replaced as `` Recently, much work about non-maximal entangled
+states has been done ".
+
+We have also changed many sentences and words to conform to the need
+of document in the journal pages.
+
+\section{ \textit{List of the Changes}}
+
+[1]. We added the equation $E(A_{i},B_{j},C_{k})=\langle
+A_{i}B_{j}C_{k}\rangle_{avg}$ above the original Eq.(2) in section
+II.
+
+[2]. We replaced the sentence below Eq.(8) `` We took several sets
+of observers to do..." as `` We took the observers mentioned above
+($\bm{\sigma_{n_{1}}}$, $\bm{\sigma_{n_{2}}}$) to do... ".
+
+[3]. In the beginning of Section III, the sentence `` Recently,
+sorts of unexpected properties about non-maximal entangled states
+have been shown " has replaced as `` Recently, much work about
+non-maximal entangled states have been done ".
+
+[4]. In the second paragraph of Section V, the sentence `` That is
+to say, our results are also consistent with the classical theory,
+depending on whether we have considered the mixed part $I_{2^n}$"
+was deleted.
+
+[5] . In the end of second paragraph of Section II, we added such
+sentence `` In other words, the two dichotomic observables allowed
+to be chosen for A,B,C are $\bm{\sigma_{n_{1}}}$ and
+$\bm{\sigma_{n_{2}}}$. ".
+
+[6] . We have also changed a lot of typos, the style of writing in
+many sentences and words to conform to the need of document in the
+journal pages.
+
+We sincerely hope that the revised version will now be acceptable
+for publication in Physics Letters A.
+
+\bigskip
+Sincerely yours,
+
+Ren Changliang
+
+
+
+
+
+
+
+
+
+\end{document}
+
+%==========================================================================
+
+
+定义一个带颜色的盒子, 为empheq所用
+%--------------------------------------------------------------------------
+\definecolor{myblue}{rgb}{.8, .8, 1}
+\newcommand*\mybluebox[1]{%
+\colorbox{myblue}{\hspace{1em}#1\hspace{1em}}}
+%--------------------------------------------------------------------------
+\begin{empheq}[box=\mybluebox]{align}
+Equation
+\end{empheq}
