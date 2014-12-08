@@ -1,0 +1,30 @@
+http://www.cap.ca/en/article/quantum-information-processing-using-nuclear-and-electron-magnetic-resonance-review-and-pros
+
+Dear Dawei,
+
+Where do the 10 lines come from? (maybe they increased the size of one figure).   
+
+Anyway, I quickly read through.  I suggest the following to win the 10 lines (very difficult) for you to consider.  You might have better ideas:
+
+(i) In the beginning of "theory",  cut "Previously, we were able to ... of a Hydrogen molecule. Here,".  Change "to" --> "To".    This saves 1 line. 
+
+(ii) On page 3, please change "Readers may again refer to the supplementary material.." to "See supplementary material...".  This saves 1 line.
+
+(iii) Under Eq. (7): Cut the whole setentence "Such a loop of operations is m dependent because....".  This saves 2 lines.
+
+(iv) In Conclusion, in the beginning, cut "A quantum simulator attacking....in the very near future. The realization of".   Change "quantum simulations..." to "Quantum simulations..."   This saves 2 lines
+
+(v) In Conclusion, change "our work reported here is the first experimental study of the quantum simulation of a prototype laser-driven chemical reaction, this is made possible by" to  "Our simulation of a prototype chemical reaction is made possible by"  This saves 2 lines.
+
+(vi) Last paragraph in Introduction, cut the sentence "to our knowledge, this is the first explicit implementation of the quantum simulation of a chemical reaction process".  This is because we already said this in the first paragraph. This saves 2 lines.  
+
+Total saved: 10 or 11 lines.
+
+Please use more accurate descriptions to describe where the changes are.
+
+For Ref. [26]: please just say "for technical and experimental details".
+
+Please check everything super-carefully.
+
+Regards,
+Jiangbin   

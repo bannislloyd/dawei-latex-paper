@@ -1,0 +1,45 @@
+----------------------------------------------------------------------
+Report of Referee A -- LE13229/Lu
+----------------------------------------------------------------------
+
+The authors present a novel quantum simulation of a chemical
+isomerization reaction by applying an NMR quantum simulator. The paper
+describes the first simulation of this basic and important chemical
+process by employing just three different nuclear spins. Although the
+quantum simulation is performed with an ensemble of nuclear spins at
+room temperature it nevertheless reflects all the required unitary
+transformations inherent in such a quantum simulation process. The
+importance of this paper is derives from the sophisticated
+construction of the complex unitary transformation used to perform
+this simulation. I evaluate this as an excellent seminal example of
+the application of an NMR quantum simulator to an important chemical
+process.
+
+The presentation of the material is very clear and detailed and is
+accompanied by very well written supplementary information. The paper
+could be published as is.
+
+----------------------------------------------------------------------
+Report of Referee B -- LE13229/Lu
+----------------------------------------------------------------------
+
+This very well written paper by Lu et al. reports on the first
+experimental demonstration of a quantum computing simulation of laser
+driven chemical reaction dynamics. The NMR experiment is carried out
+using a 3-qubit molecule. An important aspect of this work is the use
+of GRAPE to encode the entire circuit into one long shaped pulse. This
+dramatically reduces the accumulated error due to gate imperfections.
+The authors claim that this method is scalable due to its iterative
+implementation as a coherent quantum process. In my opinion this is in
+fact the most important aspect of this work, as it can open the door
+to further efficient encoding of longer quantum circuits. I encourage
+the authors to give this aspect of their work stronger emphasis in the
+main text.
+
+As a proof of principle demonstration of the power of quantum
+computing I think this is first rate work. Some will object that NMR
+simulation is not scalable, but this is beside the point in this case,
+since the techniques developed here seem to have wider applicability
+and portability beyond NMR. I recommend that the paper be accepted for
+publication.
+
