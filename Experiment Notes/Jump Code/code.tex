@@ -1,0 +1,97 @@
+
+
+%\documentclass[pra,twocolumn,epsfig,rotate,superscriptaddress,showpacs]{revtex4}
+
+
+% \mathcal{u}se only LaTeX2e, calling the article.cls class and 12-point type.
+
+\documentclass[prl,onecolumn]{revtex4-1}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epsf}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+\usepackage[framed,numbered]{matlab-prettifier}
+\let\ph\snippetPlaceholder
+\lstset
+{
+  style = Matlab-editor,
+  escapechar      = ",
+}
+
+\renewcommand{\familydefault}{\sfdefault}  %% arial font
+% \usepackage{times} %% times new roman font
+
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\dir}{$\backslash$}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\Fig}[1]{Fig.\,\ref{#1}}
+\newcommand{\Eq}[1]{Eq.\,(\ref{#1})}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\nl}{\nonumber \\}
+%\usepackage[usenames]{color}
+%\definecolor{Red}{rgb}{1,0,0}
+%\definecolor{Blue}{rgb}{0,0,1}
+
+
+
+
+\setlength{\parindent}{0pt} % no incident
+%\renewcommand{\baselinestretch}{1.2} % space between two lines
+\setlength{\parskip}{6\lineskip} % space between two paragraphs
+
+%%%%%%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+% Include your paper's title here
+\title{Code updating history of Jump Code Experiment}
+\author{Dawei Lu}
+
+\begin{abstract}
+Notes about the Matlab code used in the Jump Code Experiments.
+\end{abstract}
+\today
+
+\maketitle
+
+\section{Dec 15, 2014}
+
+All the codes are available in SVN 'https:\dir \dir dawei-qip-matlab.googlecode.com\dir svn\dir trunk\dir Jump Code'
+
+First consider the classical case. Without correction, one needs one bit with the two states $\ket{+}$ and $\ket{-}$.
+The channels and the related unitary are  
+
+\begin{lstlisting}
+% detected jump channel
+A0 = [1,0;0,sqrt(1-r)]; A1 = [0,0;0,sqrt(r)];
+
+% unitary operator
+U = [1,0,0,0; 0, sqrt(1-r),0,sqrt(r);0,0,-1,0;0,sqrt(r),0,-sqrt(1-r)];
+\end{lstlisting}
+
+
+
+\newpage
+
+
+
+
+\begin{thebibliography}{99}
+%\bibitem{Moussa2012} O. Moussa, M. da Silva, C. Ryan, and R. Laflamme, Phys. Rev. Lett. \textbf{109}, 070504 (2012).
+
+\end{thebibliography}
+
+
+\end{document}
