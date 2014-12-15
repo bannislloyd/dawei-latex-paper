@@ -28,7 +28,7 @@
 
 \newcommand{\bra}[1]{\langle #1|}
 \newcommand{\ket}[1]{|#1\rangle}
-
+\newcommand{\dir}{$\backslash$}
 \newcommand{\be}{\begin{equation}}
 \newcommand{\ee}{\end{equation}}
 \newcommand{\bea}{\begin{eqnarray}}
@@ -70,7 +70,7 @@ Notes about the problems in the 12 qubit PPS preparation, including Matlab codes
 
 Calculating the state to state GRAPE on Ordi2. In pulsefinder folder. paramsfile is 'twqubit\_subS2S.m', and the output file is 'twqubit\_7zto12z'.
 
-The GRAPE is to evolve ZZZZZZZIIIII to ZZZZZZZZZZZZ. As the couplings between nearest-neighbored C and H are about 150Hz. I set the GRAPE 
+The GRAPE is to evolve ZZZZZZZIIIII to ZZZZZZZZZZZZ. As the couplings between nearest-neighbored C and H are about 150Hz. I set the GRAPE
 
 \begin{lstlisting}
 % Number of timesteps
@@ -116,18 +116,86 @@ params.rhogoal = mkstate('+1IIIIIIIZIIII+1IIIIIIIIZIII+1IIIIIIIIIZII+1IIIIIIIIII
 params.Zfreedomflag = 0;
 \end{lstlisting}
 
-The outputfile is 'twqubit\_SWAPC7H5'. And the fidelity is already over 98\%.
+The outputfile is 'twqubit\_SWAPC7H5'. And the fidelity is already over 98\%. Then I changed 'params.Zfreedomflag = 1;', and the fidelity is over 95\% after 30 iterations. Much slower than the no Zfreedom case. Maybe due to different initial guesses.
+
+\newpage
+
+\section{Dec 15, 2014}
+
+Generate all $\pi/2$ and $\pi$ pulses for the 7 Carbons, with the Calibration = 25KHz. $\pi/2$ pulses are 1ms length and 100 steps, and $\pi$ pulses are 2ms length and 200 steps. Generating Code in 'twqubit\_shape.m'
+
+\begin{lstlisting}
+for ii = 1:7
+loadfile = ['twqubit_C', num2str(ii), '180', '.mat'];
+eval(['load ', loadfile]);
+filename1 = ['twqubit_C', num2str(ii), '180_C_25000.txt'];
+filename2 = ['twqubit_C', num2str(ii), '180_H_25000.txt'];
+make_bruker_shape(pulses{1}, 25000, filename1,1);
+make_bruker_shape(pulses{1}, 25000, filename2,2);
+end
+\end{lstlisting}
+
+The pulses are saved in Ordi2 '\dir pulsefinder\dir 12 Qubit\dir' with the names such as\\
+'twqubit\_C590\_C\_25000.txt'.
+
+I checked all the fidelities of the $\pi/2$ pulses in the folder '\dir pulseexam\_12qubit\dir C\_rotations\dir check\_grape.m'. The code is
+
+\begin{lstlisting}
+load Para.mat
+load twpauliX_full.mat
+load twpauliY_full.mat
+
+%% Check all 90 rotations
+%% Parameters for the GRAPE pulse
+for spin_number = 1:7
+Name1 = ['twqubit_C', num2str(spin_number), '90_C_25000.txt'];
+Name2 = ['twqubit_C', num2str(spin_number), '90_H_25000.txt'];
+Amplitude = 25000;
+Time = 1e-3;
+Length = 100;
+dt = Time/Length;
+FirstLine = 19; % the first line which contains the information of power and phase
+
+Output1 = 'test1';
+Output2 = 'test2';
+
+[power1,phase1]=dataout(Name1,Output1,FirstLine,Length);
+[power2,phase2]=dataout(Name2,Output2,FirstLine,Length);
+%% Check
+X_C = 0; Y_C = 0;
+for jj = 1:7
+    X_C = X_C + KIx{jj};
+    Y_C = Y_C + KIy{jj};
+end
+
+X_H = 0; Y_H = 0;
+for jj = 8:12
+    X_H = X_H + KIx{jj};
+    Y_H = Y_H + KIy{jj};
+end
 
 
+U = eye(2^12);
+U = U*expm(-i*H*4e-6);
+for ii = 1:Length
+    Hext = 2*pi*(Amplitude*power1(ii)/100)*(X_C*cos(phase1(ii)/360*2*pi)-Y_C*sin(phase1(ii)/360*2*pi))+2*pi*(Amplitude*power2(ii)/100)*(X_H*cos(phase2(ii)/360*2*pi)-Y_H*sin(phase2(ii)/360*2*pi));
+    U = expm(-i*(Hext+H)*dt)*U;
+end
+U = U*expm(-i*H*4e-6);
 
-%\begin{figure}[htb]
-%\begin{center}
-%\includegraphics[width=\columnwidth]{circuit.pdf}
-%\end{center}
-%\setlength{\abovecaptionskip}{-0.35cm}
-%\caption{\footnotesize{(color online). Circuit for twirling procedure based on the Clifford group $\mathcal{C}$. $\tilde{\mathcal{U}} = \Lambda \circ \mathcal{U}$ is the superoperator to describe the desired unitary $\mathcal{U}$ associated with some noise $\Lambda$. $M_\psi$ and $M_{\psi, \mathcal{C}_i, \mathcal{U}}$ are the original and modified measurement operators, respectively. In this protocol $\text{P}_1, \text{P}_2$ and $\text{P}_3$ are all Pauli operators and can be computed efficiently.}}\label{circuit}
-%\end{figure}
+Utar = expm(-i*KIx{spin_number}*pi/2);
 
+% Fidelity = ['Fidelity_C', num2str(spin_number), '90'];
+% eval(['Fidelity_C', num2str(spin_number), '90 = abs(trace(U*Utar'))/2^12']);
+Fidelity = abs(trace(U*Utar'))/2^12
+
+savefile = ['twqubit_C', num2str(spin_number), '90_Ufid.mat'];
+save (savefile, 'U', 'Fidelity');
+
+end
+\end{lstlisting}
+
+Unitaries and Fidelities of the pulses will both be saved in 'twqubit\_C590\_Ufid.mat', so they can be called for further calculations in the PPS simulation. Wait for the results.
 
 
 
