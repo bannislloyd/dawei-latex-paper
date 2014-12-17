@@ -15,6 +15,8 @@
 \usepackage{multirow}
 \usepackage{hyperref}
 
+\usepackage{tabu} % table macro
+
 \usepackage[framed,numbered]{matlab-prettifier}
 \let\ph\snippetPlaceholder
 \lstset
@@ -308,6 +310,30 @@ end
 \end{lstlisting}
 
 The two output files are 'twqubit\_encoding1\_C' and 'twqubit\_encoding1\_H'. The calibrations are 25000Hz.
+
+\newpage
+\section{Dec 17, 2014}
+
+All fidelities of $\pi/2$ pulses are done! The folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. Use 'check\_power.m' to check the maximal powers for C and H channel.
+
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c}
+  \hline
+  Rotation & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^1(\pi/2)$ & 0.9838 & twqubit\_C190\_Ufid.mat & 56.0\%, 14000Hz & 22.3\%, 5557Hz\\
+  $R_x^2(\pi/2)$ & 0.9758 & twqubit\_C290\_Ufid.mat & 41.7\%, 10422Hz & 23.5\%, 5878Hz\\
+  $R_x^3(\pi/2)$ & 0.9647 & twqubit\_C390\_Ufid.mat & 31.9\%, 79790Hz & 22.3\%, 5568Hz\\
+  $R_x^4(\pi/2)$ & 0.9801 & twqubit\_C490\_Ufid.mat & 31.6\%, 78920Hz & 23.8\%, 5954Hz\\
+  $R_x^5(\pi/2)$ & 0.9936 & twqubit\_C590\_Ufid.mat & 56.1\%, 14033Hz & 30.7\%, 7678Hz\\
+  $R_x^6(\pi/2)$ & 0.9683 & twqubit\_C690\_Ufid.mat & 57.3\%, 14333Hz & 34.4\%, 8595Hz\\
+  $R_x^7(\pi/2)$ & 0.9857 & twqubit\_C790\_Ufid.mat & 43.7\%, 10925Hz & 24.8\%, 6207Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+For $\pi$ pulses, the maximal power of C5 exceeds 100\% so it cannot be used. Check if we can generate $\pi$ pulses by combining two $\pi/2$ pulses. A potential problem is when calculating the GRAPE, we have considered the 4us free evolutions in the beginning and in the end. If we combine, we will have an unwanted 8us free evolution in the middle of the new $\pi$ pulse.
 
 \begin{thebibliography}{99}
 %\bibitem{Moussa2012} O. Moussa, M. da Silva, C. Ryan, and R. Laflamme, Phys. Rev. Lett. \textbf{109}, 070504 (2012).
