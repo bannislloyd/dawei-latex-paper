@@ -335,6 +335,9 @@ All fidelities of $\pi/2$ pulses are done! The folder is '\dir pulseexam\_12qubi
 
 For $\pi$ pulses, the maximal power of C5 exceeds 100\% so it cannot be used. Check if we can generate $\pi$ pulses by combining two $\pi/2$ pulses. A potential problem is when calculating the GRAPE, we have considered the 4us free evolutions in the beginning and in the end. If we combine, we will have an unwanted 8us free evolution in the middle of the new $\pi$ pulse.
 
+Use 'combine90to180' to check the $\pi$ pulse fidelity. They are very bad actually. All of them are just 0.75~0.76 in fidelity.
+
+So I run 'check\_grape.m' to check the fidelities of the $\pi$ pulses. Only from C1 to C4, as C5 has exceeds the power limit 25000Hz. 
 \begin{thebibliography}{99}
 %\bibitem{Moussa2012} O. Moussa, M. da Silva, C. Ryan, and R. Laflamme, Phys. Rev. Lett. \textbf{109}, 070504 (2012).
 
