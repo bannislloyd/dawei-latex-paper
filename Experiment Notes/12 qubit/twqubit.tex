@@ -324,11 +324,18 @@ All fidelities of $\pi/2$ pulses are done! The folder is '\dir pulseexam\_12qubi
   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
   $R_x^1(\pi/2)$ & 0.9838 & twqubit\_C190\_Ufid.mat & 56.0\%, 14000Hz & 22.3\%, 5557Hz\\
   $R_x^2(\pi/2)$ & 0.9758 & twqubit\_C290\_Ufid.mat & 41.7\%, 10422Hz & 23.5\%, 5878Hz\\
-  $R_x^3(\pi/2)$ & 0.9647 & twqubit\_C390\_Ufid.mat & 31.9\%, 79790Hz & 22.3\%, 5568Hz\\
-  $R_x^4(\pi/2)$ & 0.9801 & twqubit\_C490\_Ufid.mat & 31.6\%, 78920Hz & 23.8\%, 5954Hz\\
+  $R_x^3(\pi/2)$ & 0.9647 & twqubit\_C390\_Ufid.mat & 31.9\%, 7979.0Hz & 22.3\%, 5568Hz\\
+  $R_x^4(\pi/2)$ & 0.9801 & twqubit\_C490\_Ufid.mat & 31.6\%, 7892.0Hz & 23.8\%, 5954Hz\\
   $R_x^5(\pi/2)$ & 0.9936 & twqubit\_C590\_Ufid.mat & 56.1\%, 14033Hz & 30.7\%, 7678Hz\\
   $R_x^6(\pi/2)$ & 0.9683 & twqubit\_C690\_Ufid.mat & 57.3\%, 14333Hz & 34.4\%, 8595Hz\\
   $R_x^7(\pi/2)$ & 0.9857 & twqubit\_C790\_Ufid.mat & 43.7\%, 10925Hz & 24.8\%, 6207Hz\\
+  \hline
+  \hline
+  $R_x^1(\pi)$ & 0.9699 & twqubit\_C1180\_Ufid.mat & 62.6\%, 15655Hz & 34.9\%, 8726Hz\\
+  $R_x^2(\pi)$ & 0.1080 & twqubit\_C2180\_Ufid.mat & 56.0\%, 14000Hz & 22.3\%, 5557Hz\\
+  $R_x^3(\pi)$ & 0.4995 & twqubit\_C3180\_Ufid.mat & 56.0\%, 14000Hz & 22.3\%, 5557Hz\\
+  $R_x^4(\pi)$ & 0.9639 & twqubit\_C4180\_Ufid.mat & 45.1\%, 11268Hz & 20.4\%, 5108Hz\\
+  $R_x^6(\pi)$ & NAN & twqubit\_C6180\_Ufid.mat & 45.1\%, 11268Hz & 20.4\%, 5108Hz\\
   \hline
 \end{tabular}
 \end{table}
@@ -337,7 +344,41 @@ For $\pi$ pulses, the maximal power of C5 exceeds 100\% so it cannot be used. Ch
 
 Use 'combine90to180' to check the $\pi$ pulse fidelity. They are very bad actually. All of them are just 0.75~0.76 in fidelity.
 
-So I run 'check\_grape.m' to check the fidelities of the $\pi$ pulses. Only from C1 to C4, as C5 has exceeds the power limit 25000Hz. 
+So I run 'check\_grape.m' to check the fidelities of the $\pi$ pulses. Only from C1 to C4, as C5 has exceeds the power limit 25000Hz.
+
+\newpage
+\section{Dec 22, 2014}  
+
+Got 4 GRAPE pulses for encoding. The folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. The fidelities are in calculation on Ordi2.
+
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c}
+  \hline
+  Rotation & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{5,7}(\pi)$ & N/A & twqubit\_C190\_Ufid.mat & 32.3\%, 8072.5Hz & 24.2\%, 6049Hz\\
+  $R_x^{2,3}(\pi)$ & 0.8908 & twqubit\_C23180\_Ufid.mat & 32.4\%, 8101.5Hz & 22.8\%, 5701Hz\\
+  $R_x^{2,3,4,7}(\pi/2)$ & 0.9156 & twqubit\_C234790\_Ufid.mat & 37.4\%, 9358.3Hz & 28.9\%, 7213Hz\\
+  $R_x^{1,5,6}(\pi)$ & 0.9055 & twqubit\_C156180\_Ufid.mat & 32.2\%, 8039.7Hz & 20.3\%, 5086Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+Have to recalculate many $\pi$ pulses.
+
+\newpage
+\section{Dec 23, 2014}  
+
+Got $\pi$ pulse on C6. Combine two $\pi/2$ pulses as the initial guess, with the fidelity 0.75, and then search the optimal $\pi$ pulse. The convergence speed is very fast, which means initial guess is indeed very important in 12 qubits.
+
+Now C2, C3, C5, C7 $\pi$ pulses are in calculation, with the initial guess.
+
+
+
+
+
+
 \begin{thebibliography}{99}
 %\bibitem{Moussa2012} O. Moussa, M. da Silva, C. Ryan, and R. Laflamme, Phys. Rev. Lett. \textbf{109}, 070504 (2012).
 
