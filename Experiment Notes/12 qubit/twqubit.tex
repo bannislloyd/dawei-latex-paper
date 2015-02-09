@@ -332,10 +332,12 @@ All fidelities of $\pi/2$ pulses are done! The folder is '\dir pulseexam\_12qubi
   \hline
   \hline
   $R_x^1(\pi)$ & 0.9699 & twqubit\_C1180\_Ufid.mat & 62.6\%, 15655Hz & 34.9\%, 8726Hz\\
-  $R_x^2(\pi)$ & 0.1080 & twqubit\_C2180\_Ufid.mat & 56.0\%, 14000Hz & 22.3\%, 5557Hz\\
-  $R_x^3(\pi)$ & 0.4995 & twqubit\_C3180\_Ufid.mat & 56.0\%, 14000Hz & 22.3\%, 5557Hz\\
+  $R_x^2(\pi)$ & 0.9537 & twqubit\_C2180\_Ufid.mat & 51.1\%, 12783Hz & 32.4\%, 8094Hz\\
+  $R_x^3(\pi)$ & 0.9330 & twqubit\_C3180\_Ufid.mat & 37.4\%, 9350.0Hz & 24.0\%, 5997Hz\\
   $R_x^4(\pi)$ & 0.9639 & twqubit\_C4180\_Ufid.mat & 45.1\%, 11268Hz & 20.4\%, 5108Hz\\
-  $R_x^6(\pi)$ & NAN & twqubit\_C6180\_Ufid.mat & 45.1\%, 11268Hz & 20.4\%, 5108Hz\\
+  $R_x^5(\pi)$ & xx & xx & 67.6\%, 16895Hz & 31.1\%, 7782Hz\\
+  $R_x^6(\pi)$ & xx & xx & 71.8\%, 17948Hz & 33.6\%, 8396Hz\\
+  $R_x^7(\pi)$ & xx & xx & 51.0\%, 12759Hz & 32.1\%, 8022Hz\\
   \hline
 \end{tabular}
 \end{table}
@@ -347,7 +349,7 @@ Use 'combine90to180' to check the $\pi$ pulse fidelity. They are very bad actual
 So I run 'check\_grape.m' to check the fidelities of the $\pi$ pulses. Only from C1 to C4, as C5 has exceeds the power limit 25000Hz.
 
 \newpage
-\section{Dec 22, 2014}  
+\section{Dec 22, 2014}
 
 Got 4 GRAPE pulses for encoding. The folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. The fidelities are in calculation on Ordi2.
 
@@ -357,7 +359,7 @@ Got 4 GRAPE pulses for encoding. The folder is '\dir pulseexam\_12qubit\dir C\_r
   Rotation & Fidelity & File & MaxPower C & MaxPower H\\
   \hline
   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-  $R_x^{5,7}(\pi)$ & N/A & twqubit\_C190\_Ufid.mat & 32.3\%, 8072.5Hz & 24.2\%, 6049Hz\\
+  $R_x^{5,7}(\pi)$ & 0.9667 & twqubit\_C57180\_Ufid.mat & 32.3\%, 8072.5Hz & 24.2\%, 6049Hz\\
   $R_x^{2,3}(\pi)$ & 0.8908 & twqubit\_C23180\_Ufid.mat & 32.4\%, 8101.5Hz & 22.8\%, 5701Hz\\
   $R_x^{2,3,4,7}(\pi/2)$ & 0.9156 & twqubit\_C234790\_Ufid.mat & 37.4\%, 9358.3Hz & 28.9\%, 7213Hz\\
   $R_x^{1,5,6}(\pi)$ & 0.9055 & twqubit\_C156180\_Ufid.mat & 32.2\%, 8039.7Hz & 20.3\%, 5086Hz\\
@@ -368,15 +370,92 @@ Got 4 GRAPE pulses for encoding. The folder is '\dir pulseexam\_12qubit\dir C\_r
 Have to recalculate many $\pi$ pulses.
 
 \newpage
-\section{Dec 23, 2014}  
+\section{Dec 23, 2014}
 
 Got $\pi$ pulse on C6. Combine two $\pi/2$ pulses as the initial guess, with the fidelity 0.75, and then search the optimal $\pi$ pulse. The convergence speed is very fast, which means initial guess is indeed very important in 12 qubits.
 
 Now C2, C3, C5, C7 $\pi$ pulses are in calculation, with the initial guess.
 
+\newpage
+\section{Feb 05, 2015}
+
+C2, C3, C5, C7 $\pi$ pulses are all finished, and the update is in the Section Dec 17, 2014. 
+
+Also submitted the last pulse for the Encoding. From the PPS.m file in folder 'Twqubit'
+\begin{lstlisting}
+%Phase Correction
+U7 = R(gop(2,X),90)*R(gop(2,-Z),360*(Para(2,2)-20696)*1/2/148.5)*...
+R(gop(3,-Y),90)*R(gop(3,-Z),360*(Para(3,3)-20696)*1/2/148.5)*...
+R(gop(4,X),90)*R(gop(4,-Z),360*(Para(4,4)-20696)*1/2/148.5)*...
+R(gop(7,X),90)*R(gop(7,-Z),360*(Para(7,7)-20696)*1/2/148.5);
+\end{lstlisting}
+
+And the operator is in 'twqubit\_sub\_234790\_and\_phasecorrection.m' 
+\begin{lstlisting}
+params.Uwant = expm(-1i*(90*pi/180)/2*full(mkstate('+1IXIIIIIIIIII-1IIYIIIIIIIII+1IIIXIIIIIIII+1IIIIIIXIIIII',0)))*...
+expm(-1i*((8778.95-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IZIIIIIIIIII',0)))*...
+expm(-1i*((6245.16675-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIZIIIIIIIII',0)))*...
+expm(-1i*((10333.55-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIIZIIIIIIII',0)))*...
+expm(-1i*((11928.21998-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIIIIIZIIIII',0))); 
+\end{lstlisting}
+
+\newpage
+\section{Feb 06, 2015}
+
+The pulse 'twqubit\_sub\_234790\_and\_phasecorrection.m' which is the last piece of the encoding was found!
 
 
 
+
+
+
+\newpage
+\section{All Pulses for 12 qubits}
+
+The saving folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. 
+
+$\pi/2$ and $\pi$ rotations on every single spin.
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^1(\pi/2)$ & 1ms & 0.9838 & twqubit\_C190\_Ufid.mat & 56.0\%, 14000Hz & 22.3\%, 5557Hz\\
+  $R_x^2(\pi/2)$ & 1ms & 0.9758 & twqubit\_C290\_Ufid.mat & 41.7\%, 10422Hz & 23.5\%, 5878Hz\\
+  $R_x^3(\pi/2)$ & 1ms & 0.9647 & twqubit\_C390\_Ufid.mat & 31.9\%, 7979.0Hz & 22.3\%, 5568Hz\\
+  $R_x^4(\pi/2)$ & 1ms & 0.9801 & twqubit\_C490\_Ufid.mat & 31.6\%, 7892.0Hz & 23.8\%, 5954Hz\\
+  $R_x^5(\pi/2)$ & 1ms & 0.9936 & twqubit\_C590\_Ufid.mat & 56.1\%, 14033Hz & 30.7\%, 7678Hz\\
+  $R_x^6(\pi/2)$ & 1ms & 0.9683 & twqubit\_C690\_Ufid.mat & 57.3\%, 14333Hz & 34.4\%, 8595Hz\\
+  $R_x^7(\pi/2)$ & 1ms & 0.9857 & twqubit\_C790\_Ufid.mat & 43.7\%, 10925Hz & 24.8\%, 6207Hz\\
+  \hline
+  \hline
+  $R_x^1(\pi)$ & 2ms & 0.9699 & twqubit\_C1180\_Ufid.mat & 62.6\%, 15655Hz & 34.9\%, 8726Hz\\
+  $R_x^2(\pi)$ & 2ms & 0.9537 & twqubit\_C2180\_Ufid.mat & 51.1\%, 12783Hz & 32.4\%, 8094Hz\\
+  $R_x^3(\pi)$ & 2ms & 0.9330 & twqubit\_C3180\_Ufid.mat & 37.4\%, 9350.0Hz & 24.0\%, 5997Hz\\
+  $R_x^4(\pi)$ & 2ms & 0.9639 & twqubit\_C4180\_Ufid.mat & 45.1\%, 11268Hz & 20.4\%, 5108Hz\\
+  $R_x^5(\pi)$ & 2ms & xx & xx & 67.6\%, 16895Hz & 31.1\%, 7782Hz\\
+  $R_x^6(\pi)$ & 2ms & xx & xx & 71.8\%, 17948Hz & 33.6\%, 8396Hz\\
+  $R_x^7(\pi)$ & 2ms & xx & xx & 51.0\%, 12759Hz & 32.1\%, 8022Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+Pulses for the encoding part of PPS preparation. 
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{5,7}(\pi)$ & 2ms & 0.9667 & twqubit\_C57180\_Ufid.mat & 32.3\%, 8072.5Hz & 24.2\%, 6049Hz\\
+  $R_x^{2,3}(\pi)$ & 2ms & 0.8908 & twqubit\_C23180\_Ufid.mat & 32.4\%, 8101.5Hz & 22.8\%, 5701Hz\\
+  $R_x^{2,3,4,7}(\pi/2)$ & 1ms & 0.9156 & twqubit\_C234790\_Ufid.mat & 37.4\%, 9358.3Hz & 28.9\%, 7213Hz\\
+  $R_x^{1,5,6}(\pi)$ & 2ms & 0.9055 & twqubit\_C156180\_Ufid.mat & 32.2\%, 8039.7Hz & 20.3\%, 5086Hz\\
+  $R_x^{2,4,7}(\pi/2)R_{-y}^{3}(\pi/2)R_{-z}^{i=2,3,4,7}((w_i-O_1)*1/2J_{CH})$ & 1ms & xx & xx & xx & xx\\
+  \hline
+\end{tabular}
+\end{table}
 
 
 \begin{thebibliography}{99}
