@@ -335,9 +335,9 @@ All fidelities of $\pi/2$ pulses are done! The folder is '\dir pulseexam\_12qubi
   $R_x^2(\pi)$ & 0.9537 & twqubit\_C2180\_Ufid.mat & 51.1\%, 12783Hz & 32.4\%, 8094Hz\\
   $R_x^3(\pi)$ & 0.9330 & twqubit\_C3180\_Ufid.mat & 37.4\%, 9350.0Hz & 24.0\%, 5997Hz\\
   $R_x^4(\pi)$ & 0.9639 & twqubit\_C4180\_Ufid.mat & 45.1\%, 11268Hz & 20.4\%, 5108Hz\\
-  $R_x^5(\pi)$ & xx & xx & 67.6\%, 16895Hz & 31.1\%, 7782Hz\\
-  $R_x^6(\pi)$ & xx & xx & 71.8\%, 17948Hz & 33.6\%, 8396Hz\\
-  $R_x^7(\pi)$ & xx & xx & 51.0\%, 12759Hz & 32.1\%, 8022Hz\\
+  $R_x^5(\pi)$ & 0.9904 & twqubit\_C5180\_Ufid.mat & 67.6\%, 16895Hz & 31.1\%, 7782Hz\\
+  $R_x^6(\pi)$ & 0.9393 & twqubit\_C6180\_Ufid.mat & 71.8\%, 17948Hz & 33.6\%, 8396Hz\\
+  $R_x^7(\pi)$ & 0.9743 & twqubit\_C7180\_Ufid.mat & 51.0\%, 12759Hz & 32.1\%, 8022Hz\\
   \hline
 \end{tabular}
 \end{table}
@@ -379,7 +379,7 @@ Now C2, C3, C5, C7 $\pi$ pulses are in calculation, with the initial guess.
 \newpage
 \section{Feb 05, 2015}
 
-C2, C3, C5, C7 $\pi$ pulses are all finished, and the update is in the Section Dec 17, 2014. 
+C2, C3, C5, C7 $\pi$ pulses are all finished, and the update is in the Section Dec 17, 2014.
 
 Also submitted the last pulse for the Encoding. From the PPS.m file in folder 'Twqubit'
 \begin{lstlisting}
@@ -390,19 +390,25 @@ R(gop(4,X),90)*R(gop(4,-Z),360*(Para(4,4)-20696)*1/2/148.5)*...
 R(gop(7,X),90)*R(gop(7,-Z),360*(Para(7,7)-20696)*1/2/148.5);
 \end{lstlisting}
 
-And the operator is in 'twqubit\_sub\_234790\_and\_phasecorrection.m' 
+And the operator is in 'twqubit\_sub\_234790\_and\_phasecorrection.m'
 \begin{lstlisting}
 params.Uwant = expm(-1i*(90*pi/180)/2*full(mkstate('+1IXIIIIIIIIII-1IIYIIIIIIIII+1IIIXIIIIIIII+1IIIIIIXIIIII',0)))*...
 expm(-1i*((8778.95-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IZIIIIIIIIII',0)))*...
 expm(-1i*((6245.16675-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIZIIIIIIIII',0)))*...
 expm(-1i*((10333.55-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIIZIIIIIIII',0)))*...
-expm(-1i*((11928.21998-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIIIIIZIIIII',0))); 
+expm(-1i*((11928.21998-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIIIIIZIIIII',0)));
 \end{lstlisting}
 
 \newpage
 \section{Feb 06, 2015}
 
 The pulse 'twqubit\_sub\_234790\_and\_phasecorrection.m' which is the last piece of the encoding was found!
+
+\newpage
+\section{Feb 09, 2015}
+
+All $\pi$ pulses are found. The lowest is 0.9330 for C3 and the highest is 0.9904 for C5. Now is calculating the fidelity of the last piece in Encoding 
+'twqubit\_C234790withPC\_Ufid.mat'. Will combine all of the pulses in Encoding and check again after this calculation.
 
 
 
@@ -412,7 +418,7 @@ The pulse 'twqubit\_sub\_234790\_and\_phasecorrection.m' which is the last piece
 \newpage
 \section{All Pulses for 12 qubits}
 
-The saving folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. 
+The saving folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'.
 
 $\pi/2$ and $\pi$ rotations on every single spin.
 \begin{table}[hbtp]
@@ -434,14 +440,14 @@ $\pi/2$ and $\pi$ rotations on every single spin.
   $R_x^2(\pi)$ & 2ms & 0.9537 & twqubit\_C2180\_Ufid.mat & 51.1\%, 12783Hz & 32.4\%, 8094Hz\\
   $R_x^3(\pi)$ & 2ms & 0.9330 & twqubit\_C3180\_Ufid.mat & 37.4\%, 9350.0Hz & 24.0\%, 5997Hz\\
   $R_x^4(\pi)$ & 2ms & 0.9639 & twqubit\_C4180\_Ufid.mat & 45.1\%, 11268Hz & 20.4\%, 5108Hz\\
-  $R_x^5(\pi)$ & 2ms & xx & xx & 67.6\%, 16895Hz & 31.1\%, 7782Hz\\
-  $R_x^6(\pi)$ & 2ms & xx & xx & 71.8\%, 17948Hz & 33.6\%, 8396Hz\\
-  $R_x^7(\pi)$ & 2ms & xx & xx & 51.0\%, 12759Hz & 32.1\%, 8022Hz\\
+  $R_x^5(\pi)$ & 2ms & 0.9904 & twqubit\_C5180\_Ufid.mat & 67.6\%, 16895Hz & 31.1\%, 7782Hz\\
+  $R_x^6(\pi)$ & 2ms & 0.9393 & twqubit\_C6180\_Ufid.mat & 71.8\%, 17948Hz & 33.6\%, 8396Hz\\
+  $R_x^7(\pi)$ & 2ms & 0.9743 & twqubit\_C7180\_Ufid.mat & 51.0\%, 12759Hz & 32.1\%, 8022Hz\\
   \hline
 \end{tabular}
 \end{table}
 
-Pulses for the encoding part of PPS preparation. 
+Pulses for the encoding part of PPS preparation.
 \begin{table}[hbtp]
 \begin{tabular} {c||c|c|c|c|c}
   \hline
@@ -452,7 +458,7 @@ Pulses for the encoding part of PPS preparation.
   $R_x^{2,3}(\pi)$ & 2ms & 0.8908 & twqubit\_C23180\_Ufid.mat & 32.4\%, 8101.5Hz & 22.8\%, 5701Hz\\
   $R_x^{2,3,4,7}(\pi/2)$ & 1ms & 0.9156 & twqubit\_C234790\_Ufid.mat & 37.4\%, 9358.3Hz & 28.9\%, 7213Hz\\
   $R_x^{1,5,6}(\pi)$ & 2ms & 0.9055 & twqubit\_C156180\_Ufid.mat & 32.2\%, 8039.7Hz & 20.3\%, 5086Hz\\
-  $R_x^{2,4,7}(\pi/2)R_{-y}^{3}(\pi/2)R_{-z}^{i=2,3,4,7}((w_i-O_1)*1/2J_{CH})$ & 1ms & xx & xx & xx & xx\\
+  $R_x^{2,4,7}(\pi/2)R_{-y}^{3}(\pi/2)R_{-z}^{i=2,3,4,7}((w_i-O_1)*1/2J_{CH})$ & 1ms & xx & xx & 47.4\%, 11841Hz & 25.3\%, 6336Hz\\
   \hline
 \end{tabular}
 \end{table}
