@@ -404,11 +404,41 @@ expm(-1i*((11928.21998-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIIIIIZIII
 
 The pulse 'twqubit\_sub\_234790\_and\_phasecorrection.m' which is the last piece of the encoding was found!
 
-\newpage
-\section{Feb 09, 2015}
-
-All $\pi$ pulses are found. The lowest is 0.9330 for C3 and the highest is 0.9904 for C5. Now is calculating the fidelity of the last piece in Encoding 
+All $\pi$ pulses are found. The lowest is 0.9330 for C3 and the highest is 0.9904 for C5. Now is calculating the fidelity of the last piece in Encoding
 'twqubit\_C234790withPC\_Ufid.mat'. Will combine all of the pulses in Encoding and check again after this calculation.
+
+The last piece 'twqubit\_C234790withPC\_Ufid.mat' has been checked. The fidelity is 0.9164.
+
+\newpage
+\section{Feb 12, 2015}
+
+When combining all pulses into a large shape file, one has to know how to change a shape for X rotation to Y rotation. It should be a $\pi/2$ phase difference for every segment in the shape. I am going to check it.
+
+The checking uses 4-qubit Crotonic in the folder 'F:\dir matlab\dir pulseexam\_7qubit\dir 4 qubit pulse check'. The target unitary is $R_x^1(\pi/2)$, and the pulse is 'Croton\_90x1.txt' with length 1ms, 500 segments and amplitude 6000Hz.
+
+When compared with $R_x^1(\pi/2)$, the fidelity is 0.9996. Then I changed the target to $R_y^1(\pi/2)$ with the GRAPE pulse unchanged. The fidelity goes to 0.4998 which is reasonable.
+
+In order to produce a $R_y^1(\pi/2)$ from the original X rotation pulse, I added 90 to all phases in all segments. However, the fidelity goes to almost 0. Again all phases are reduced by 90, and this time the fidelity is 0.9996, which is what we want!
+
+Conclusion: If you want to realize a Y rotation based on a X rotation pulse, just change the phase to phase-90 in each segment, and mod by 360 for the spectrometer. 
+\begin{lstlisting}
+phase = phase - 90;
+phase = mod(phase, 360);
+\end{lstlisting}
+I wrote a program 'grape\_phase' to generate the new phase in the folder 'F:\dir matlab\dir pulseexam\_7qubit\dir'. Used in this manner  'phase\_new = grape\_phase( phase, initial\_phase, end\_phase)', where the initial\_phase and end\_phase can be X, Y, -X, or -Y. 
+
+The way to get the new operator is through the equation $R_z(\theta) = XR_y(\theta)\bar{X}$. If you know the unitary $U_x$ of the X rotation pulse, and when you are realizing Y pulse from that one, the new unitary $U_y$ is thus
+\be
+U_y = R_z(\pi/2)U_xR_z(-\pi/2);
+\ee
+
+Generated the first encoding part, which will evolve Z7 to Z24567. The files 'twqubit\_encoding1\_C' and 'twqubit\_encoding1\_H' are in Ordi2 '\dir pulseexam\_12qubit'. The total length is 32.98ms. Next I have to check whether the final state after this pulse will be Z24567 or not. So 'check\_encoding.m' is written. The directory is Ordi2 '\dir pulseexam\_12qubit'. This function will load all necessary .mat files to get the unitaries and calculate the final state based on these unitaries from Z7.
+
+The final fidelity is 0.9832 (the same for with or without gradient) for Z24567. Two files 'U\_encoding1.mat' and 'rho\_encoding1.mat'. Now go on to the second Encoding part.
+
+The fidelity for the second Encoding part is -0.9692 (the same for with or without gradient) for Z1234567. Two files 'twqubit\_encoding2\_C' and 'twqubit\_encoding2\_H' are in Ordi2 '\dir pulseexam\_12qubit'. The total length is 21.29ms. Then the last piece in Encoding!
+
+The fidelity for the third Encoding part is -0.9160 (the same for with or without gradient) for Z123456789101112. Two files 'twqubit\_encoding3\_C' and 'twqubit\_encoding3\_H' are in Ordi2 '\dir pulseexam\_12qubit'. The total length is 7.36ms.
 
 
 
@@ -463,6 +493,19 @@ Pulses for the encoding part of PPS preparation.
 \end{tabular}
 \end{table}
 
+All 3 Encoding pulses in the saving folder '\dir pulseexam\_12qubit\dir'. The fidelities in the following table are state fidelities
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c}
+  \hline
+  Files & Length & Target State & State Fidelity\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  twqubit\_encoding1\_C, H & 32.98ms & IZIZZZZIIIII & 0.9832\\
+  twqubit\_encoding2\_C, H & 21.29ms & ZZZZZZZIIIII & -0.9692\\
+  twqubit\_encoding3\_C, H & 7.36ms & ZZZZZZZZZZZZ & -0.9160\\
+  \hline
+\end{tabular}
+\end{table}
 
 \begin{thebibliography}{99}
 %\bibitem{Moussa2012} O. Moussa, M. da Silva, C. Ryan, and R. Laflamme, Phys. Rev. Lett. \textbf{109}, 070504 (2012).
