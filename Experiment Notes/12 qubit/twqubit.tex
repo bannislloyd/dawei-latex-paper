@@ -420,12 +420,12 @@ When compared with $R_x^1(\pi/2)$, the fidelity is 0.9996. Then I changed the ta
 
 In order to produce a $R_y^1(\pi/2)$ from the original X rotation pulse, I added 90 to all phases in all segments. However, the fidelity goes to almost 0. Again all phases are reduced by 90, and this time the fidelity is 0.9996, which is what we want!
 
-Conclusion: If you want to realize a Y rotation based on a X rotation pulse, just change the phase to phase-90 in each segment, and mod by 360 for the spectrometer. 
+Conclusion: If you want to realize a Y rotation based on a X rotation pulse, just change the phase to phase-90 in each segment, and mod by 360 for the spectrometer.
 \begin{lstlisting}
 phase = phase - 90;
 phase = mod(phase, 360);
 \end{lstlisting}
-I wrote a program 'grape\_phase' to generate the new phase in the folder 'F:\dir matlab\dir pulseexam\_7qubit\dir'. Used in this manner  'phase\_new = grape\_phase( phase, initial\_phase, end\_phase)', where the initial\_phase and end\_phase can be X, Y, -X, or -Y. 
+I wrote a program 'grape\_phase' to generate the new phase in the folder 'F:\dir matlab\dir pulseexam\_7qubit\dir'. Used in this manner  'phase\_new = grape\_phase( phase, initial\_phase, end\_phase)', where the initial\_phase and end\_phase can be X, Y, -X, or -Y.
 
 The way to get the new operator is through the equation $R_z(\theta) = XR_y(\theta)\bar{X}$. If you know the unitary $U_x$ of the X rotation pulse, and when you are realizing Y pulse from that one, the new unitary $U_y$ is thus
 \be
@@ -440,7 +440,10 @@ The fidelity for the second Encoding part is -0.9692 (the same for with or witho
 
 The fidelity for the third Encoding part is -0.9160 (the same for with or without gradient) for Z123456789101112. Two files 'twqubit\_encoding3\_C' and 'twqubit\_encoding3\_H' are in Ordi2 '\dir pulseexam\_12qubit'. The total length is 7.36ms.
 
+\newpage
+\section{Feb 18, 2015}
 
+Running the two pulses. One is 'twqubit\_all90.m' which is used for phase cycling, and the other one is 'twqubit\_all90butC7.m' used for the polarization crush in the beginning.
 
 
 
