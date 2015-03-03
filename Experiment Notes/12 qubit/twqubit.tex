@@ -444,7 +444,46 @@ The fidelity for the third Encoding part is -0.9160 (the same for with or withou
 \section{Feb 18, 2015}
 
 Running the two pulses. One is 'twqubit\_all90.m' which is used for phase cycling, and the other one is 'twqubit\_all90butC7.m' used for the polarization crush in the beginning.
+The fidelities are obtained!
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{1-12}(\pi/2)$ & 1ms & 0.8738 & twqubit\_all90\_Ufid.mat & 27.8\%, 6956.6Hz & 30.4\%, 7594Hz\\
+  $R_x^{1-6,8-12}(\pi/2)$ & 1ms & 0.8849 & twqubit\_all90butC7\_Ufid.mat & 24.5\%, 6134.9Hz & 25.0\%, 6239Hz\\
+  \hline
+\end{tabular}
+\end{table}
 
+\newpage
+\section{Feb 23, 2015}
+
+Running all 6 pulses for the decoding part. Got 2, 3, 5 and6! But the first pulse 'twqubit\_C2347andH180.m' has to be recalculated.
+
+Then check all the fidelities for pulse 2, 3, 5 and 6 first.
+
+\newpage
+\section{Mar 3, 2015}
+
+All 6 pulses in decoding have been checked. To my surprise some fidelities are pretty, such as the fidelity of $R_x^{2,3,4,5,6}(\pi)$ is only 0.8058. Anyway, it is better to check the state fidelity right away.
+
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{2,3,4,7-12}(\pi)$ & 2ms & 0.8424 & twqubit\_C2347andH180\_Ufid.mat & 61.6\%, 15400Hz & 52.2\%, 13039Hz\\
+  $R_x^{1,3,4,6}(\pi/2)R_{-y}^{8-12}(\pi/2)$ & 1ms & 0.9080 & twqubit\_C134690andH90\_Ufid.mat & 24.8\%, 6203.2Hz & 22.1\%, 5529Hz\\
+  $R_x^{2,3,4,5,6}(\pi)$ & 2ms & 0.8058 & twqubit\_C23456180\_Ufid.mat & 37.8\%, 9438.2Hz & 23.0\%, 5746Hz\\
+  $R_{-y}^{1,3,4,6}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}((w_1-O_1)*(1/2J23-1/2J12))$ & 1ms & 0.8881 & twqubit\_C1234690withPC\_Ufid.mat & 21.2\%, 5310.9Hz & 22.9\%, 5724Hz\\
+  $R_x^{2,7}(\pi)$ & 2ms & 0.9306 & twqubit\_C27180\_Ufid.mat & 29.1\%, 7285.3Hz & 21.7\%, 5414Hz\\
+  $R_{-y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & 0.9728 & twqubit\_C2Y5X90\_Ufid.mat & 59.2\%, 14795Hz & 40.9\%, 10232Hz\\
+  \hline
+\end{tabular}
+\end{table}
 
 
 
@@ -506,6 +545,37 @@ All 3 Encoding pulses in the saving folder '\dir pulseexam\_12qubit\dir'. The fi
   twqubit\_encoding1\_C, H & 32.98ms & IZIZZZZIIIII & 0.9832\\
   twqubit\_encoding2\_C, H & 21.29ms & ZZZZZZZIIIII & -0.9692\\
   twqubit\_encoding3\_C, H & 7.36ms & ZZZZZZZZZZZZ & -0.9160\\
+  \hline
+\end{tabular}
+\end{table}
+
+\newpage
+Pulses for polarization crush and phase cycling.
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{1-12}(\pi/2)$ & 1ms & 0.8738 & twqubit\_all90\_Ufid.mat & 27.8\%, 6956.6Hz & 30.4\%, 7594Hz\\
+  $R_x^{1-6,8-12}(\pi/2)$ & 1ms & 0.8849 & twqubit\_all90butC7\_Ufid.mat & 24.5\%, 6134.9Hz & 25.0\%, 6239Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+Pulses for the decoding part of PPS preparation.
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{2,3,4,7-12}(\pi)$ & 2ms & 0.8424 & twqubit\_C2347andH180\_Ufid.mat & 61.6\%, 15400Hz & 52.2\%, 13039Hz\\
+  $R_x^{1,3,4,6}(\pi/2)R_{-y}^{8-12}(\pi/2)$ & 1ms & 0.9080 & twqubit\_C134690andH90\_Ufid.mat & 24.8\%, 6203.2Hz & 22.1\%, 5529Hz\\
+  $R_x^{2,3,4,5,6}(\pi)$ & 2ms & 0.8058 & twqubit\_C23456180\_Ufid.mat & 37.8\%, 9438.2Hz & 23.0\%, 5746Hz\\
+  $R_{-y}^{1,3,4,6}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}((w_1-O_1)*(1/2J23-1/2J12))$ & 1ms & 0.8881 & twqubit\_C1234690withPC\_Ufid.mat & 21.2\%, 5310.9Hz & 22.9\%, 5724Hz\\
+  $R_x^{2,7}(\pi)$ & 2ms & 0.9306 & twqubit\_C27180\_Ufid.mat & 29.1\%, 7285.3Hz & 21.7\%, 5414Hz\\
+  $R_{-y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & 0.9728 & twqubit\_C2Y5X90\_Ufid.mat & 59.2\%, 14795Hz & 40.9\%, 10232Hz\\
   \hline
 \end{tabular}
 \end{table}
