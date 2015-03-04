@@ -440,6 +440,13 @@ The fidelity for the second Encoding part is -0.9692 (the same for with or witho
 
 The fidelity for the third Encoding part is -0.9160 (the same for with or without gradient) for Z123456789101112. Two files 'twqubit\_encoding3\_C' and 'twqubit\_encoding3\_H' are in Ordi2 '\dir pulseexam\_12qubit'. The total length is 7.36ms.
 
+\textbf{Update on Mar 04}: In the last code, the free evolution time is not the integer times of 10us, but it should be. So the function 'F.m' is modified as
+\begin{lstlisting}
+function F=F(Hamiltonian, time)
+F=diag(exp(diag(-i*Hamiltonian*10e-6*round(time/10e-6))),0);
+\end{lstlisting}
+And all the fidelities are recalculated. They are 0.9831 for Encoding 1,  -0.7096 for Encoding 2,
+
 \newpage
 \section{Feb 18, 2015}
 
@@ -460,7 +467,7 @@ The fidelities are obtained!
 \newpage
 \section{Feb 23, 2015}
 
-Running all 6 pulses for the decoding part. Got 2, 3, 5 and6! But the first pulse 'twqubit\_C2347andH180.m' has to be recalculated.
+Running all 6 pulses for the decoding part. Got 2, 3, 5 and 6! But the first pulse 'twqubit\_C2347andH180.m' has to be recalculated.
 
 Then check all the fidelities for pulse 2, 3, 5 and 6 first.
 
@@ -478,14 +485,62 @@ All 6 pulses in decoding have been checked. To my surprise some fidelities are p
   $R_x^{2,3,4,7-12}(\pi)$ & 2ms & 0.8424 & twqubit\_C2347andH180\_Ufid.mat & 61.6\%, 15400Hz & 52.2\%, 13039Hz\\
   $R_x^{1,3,4,6}(\pi/2)R_{-y}^{8-12}(\pi/2)$ & 1ms & 0.9080 & twqubit\_C134690andH90\_Ufid.mat & 24.8\%, 6203.2Hz & 22.1\%, 5529Hz\\
   $R_x^{2,3,4,5,6}(\pi)$ & 2ms & 0.8058 & twqubit\_C23456180\_Ufid.mat & 37.8\%, 9438.2Hz & 23.0\%, 5746Hz\\
-  $R_{-y}^{1,3,4,6}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}((w_1-O_1)*(1/2J23-1/2J12))$ & 1ms & 0.8881 & twqubit\_C1234690withPC\_Ufid.mat & 21.2\%, 5310.9Hz & 22.9\%, 5724Hz\\
+  $R_{-y}^{1,3,4,6}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}(\frac{1}{2J23}-\frac{1}{2J12})$ & 1ms & 0.8881 & twqubit\_C1234690withPC\_Ufid.mat & 21.2\%, 5310.9Hz & 22.9\%, 5724Hz\\
   $R_x^{2,7}(\pi)$ & 2ms & 0.9306 & twqubit\_C27180\_Ufid.mat & 29.1\%, 7285.3Hz & 21.7\%, 5414Hz\\
   $R_{-y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & 0.9728 & twqubit\_C2Y5X90\_Ufid.mat & 59.2\%, 14795Hz & 40.9\%, 10232Hz\\
   \hline
 \end{tabular}
 \end{table}
 
+\newpage
+\section{Mar 4, 2015: Re-Check the PPS Circuit in Simulation}
 
+I found the decoding part can be simplified. Check it in Matlab.
+
+All the files are saved in Ordi2 '\dir twqubit\dir'. For the encoding which consists of three parts, the fidelities have been checked before.
+\begin{table}[hbtp]
+\caption{Encoding in 12-qubit PPS}
+\begin{tabular} {c||c|c|c}
+  \hline
+  Target State & State Fidelity & Density Matrix & Unitary Operator\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  IZIZZZXIIIII & 1.0000 & rho\_encoding1.mat & U\_encoding1.mat\\
+  ZXZZZZZIIIII & -1.0000 & rho\_encoding2.mat & U\_encoding2.mat\\
+  ZZZZZZZZZZZZ & -0.9500 & rho\_encoding3.mat & U\_encoding3.mat\\
+  \hline
+\end{tabular}
+\end{table}
+
+For the phase cycling it has been done too.
+\begin{table}[hbtp]
+\caption{Phase Cycling in 12-qubit PPS}
+\begin{tabular} {c||c|c|c}
+  \hline
+  Target State & State Fidelity & Density Matrix & Unitary Operator\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $\ket{00...0}\bra{00...0} + \ket{11...1}\bra{11...1}$ & 0.9511 & rho\_phasecycling.mat & NAN\\
+  \hline
+\end{tabular}
+\end{table}
+
+For the decoding part, 
+\begin{table}[hbtp]
+\caption{Decoding in 12-qubit PPS}
+\begin{tabular} {c||c|c|c}
+  \hline
+  Target State & State Fidelity & Density Matrix & Unitary Operator\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $\begin{array}{c}
+     A_1A_5A_6 \ket{+---++-00000}+ \\
+     A_1'A_5'A_6' \ket{-+++--+00000}
+   \end{array}
+  $ & 0.8717 & rho\_decoding1.mat & U\_decoding1.mat\\
+  \hline
+\end{tabular}
+\end{table}
 
 \newpage
 \section{All Pulses for 12 qubits}
@@ -573,7 +628,7 @@ Pulses for the decoding part of PPS preparation.
   $R_x^{2,3,4,7-12}(\pi)$ & 2ms & 0.8424 & twqubit\_C2347andH180\_Ufid.mat & 61.6\%, 15400Hz & 52.2\%, 13039Hz\\
   $R_x^{1,3,4,6}(\pi/2)R_{-y}^{8-12}(\pi/2)$ & 1ms & 0.9080 & twqubit\_C134690andH90\_Ufid.mat & 24.8\%, 6203.2Hz & 22.1\%, 5529Hz\\
   $R_x^{2,3,4,5,6}(\pi)$ & 2ms & 0.8058 & twqubit\_C23456180\_Ufid.mat & 37.8\%, 9438.2Hz & 23.0\%, 5746Hz\\
-  $R_{-y}^{1,3,4,6}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}((w_1-O_1)*(1/2J23-1/2J12))$ & 1ms & 0.8881 & twqubit\_C1234690withPC\_Ufid.mat & 21.2\%, 5310.9Hz & 22.9\%, 5724Hz\\
+  $R_{-y}^{1,3,4,6}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}(\frac{1}{2J23}-\frac{1}{2J12})$ & 1ms & 0.8881 & twqubit\_C1234690withPC\_Ufid.mat & 21.2\%, 5310.9Hz & 22.9\%, 5724Hz\\
   $R_x^{2,7}(\pi)$ & 2ms & 0.9306 & twqubit\_C27180\_Ufid.mat & 29.1\%, 7285.3Hz & 21.7\%, 5414Hz\\
   $R_{-y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & 0.9728 & twqubit\_C2Y5X90\_Ufid.mat & 59.2\%, 14795Hz & 40.9\%, 10232Hz\\
   \hline
