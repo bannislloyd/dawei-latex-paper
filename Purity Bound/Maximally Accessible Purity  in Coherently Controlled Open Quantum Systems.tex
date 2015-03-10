@@ -1,0 +1,338 @@
+\documentclass[prl,aps,twocolumn, reprint, amsmath,amssymb,showpacs,superscriptaddress]{revtex4}
+
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epsf}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{cases}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,pdfauthor={ },pdftitle={ },pdfsubject={ },pdfkeywords={ }]{hyperref}
+
+
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{proposition}{Proposition}
+
+
+\begin{document}
+
+
+%\title{Purity Bound Analysis: Application to Open System State Preparation with Coherent Control}
+\title{Maximally Accessible Purity  in Coherently Controlled Open Quantum Systems: Application to Quantum State Engineering}
+
+
+\author{Jun Li}
+\affiliation{Hefei National Laboratory for Physical Sciences at Microscale and Department of Modern Physics, University of Science and Technology of China, Hefei, Anhui 230026, China}
+
+\author{Dawei Lu}
+\affiliation{Institute for Quantum Computing and Department of Physics and Astronomy, University of Waterloo, Waterloo, Ontario N2L 3G1, Canada}
+
+\author{Zhihuang Luo}
+\affiliation{Hefei National Laboratory for Physical Sciences at Microscale and Department of Modern Physics, University of Science and Technology of China, Hefei, Anhui 230026, China}
+
+\author{Raymond Laflamme}
+\affiliation{Institute for Quantum Computing and Department of Physics and Astronomy, University of Waterloo, Waterloo, Ontario N2L 3G1, Canada}
+\affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario N2L 2Y5, Canada}
+
+
+\author{Xinhua Peng}
+\email{xhpeng@ustc.edu.cn}
+\affiliation{Hefei National Laboratory for Physical Sciences at Microscale and Department of Modern Physics, University of Science and Technology of China, Hefei, Anhui 230026, China}
+\affiliation{Synergetic Innovation Center of Quantum Information $\&$ Quantum Physics,
+University of Science and Technology of China, Hefei, Anhui 230026, China}
+
+\author{Jiangfeng Du}
+\email{djf@ustc.edu.cn}
+\affiliation{Hefei National Laboratory for Physical Sciences at Microscale and Department of Modern Physics, University of Science and Technology of China, Hefei, Anhui 230026,  China}
+\affiliation{Synergetic Innovation Center of Quantum Information $\&$ Quantum Physics,
+University of Science and Technology of China, Hefei, Anhui 230026, China}
+
+
+
+\begin{abstract}
+A fundamental problem in quantum control is to precisely characterize the controlled system dynamics when decoherence effects are present.
+In this work, we derive the upper bound of achievable purity for coherently driven dissipative systems, which is rather useful for assessing control performances. The theory is applied to control a two-qubit nuclear magnetic resonance spin system.
+Under hybrid effects of coherent pulses and system relaxation, we are able to implement the tasks of open system polarization transfer and pseudopure state preparation with both of them approaching near optimal performance in purity. Our work shows great applicative potential of utilizing rather than suppressing relaxation effects in open system control protocols.
+\end{abstract}
+
+
+\pacs{03.67.Lx,76.60.-k,03.65.Yz}
+
+\maketitle
+
+Recent years have seen immense advances in active and precise manipulation of a broad variety of quantum systems. The subject of quantum system control has been developed into a rapidly growing area \cite{DP} attracting substantial interests from the community of quantum information physicists. One of the fundamental tasks is to design reliable control techniques for systems that are exposed to a dissipative environment \cite{KKSS}.
+As dissipation tends to irreversibly affect the system dynamics, it is recognized as one dominant source for information loss and hence must be suppressed.
+Only recently was it realized that open system engineering may exhibit surprising advantages in some important aspects \cite{RMBL, Entanglement, SW}. For example, it was shown that the purification efficiency of heat-bath algorithmic cooling protocol can surpass the closed system limit \cite{RMBL}. In other researches \cite{Entanglement}, there emerged great interests in characteristics of environment assisted entangled state engineering. Dissipative production of entangled steady states has already been realized
+in various experimental setups like trapped ions \cite{Lin}, superconducting circuit \cite{RTJS} and double quantum dot \cite{SKVCG}.
+
+
+Although some ideas borrowed from classical control theory (eg. time optimal control) have been successfully extended to construct methods for steering closed quantum systems \cite{RKGD}, it turns out to be more challenging to follow the same spirit for open quantum systems.
+The major reason  comes from the fact proved in \cite{A} that for a finite dimensional Markovian quantum system, coherent means of control cannot fully compensate the irreversibility of the dynamics. In fact, to what extent can the system evolving tendency be changed depends upon not only the external operations but also the structure of the relaxation mechanisms. This certainly increases difficulties in understanding the system controllability, which thus hinders devising of general control methodology.
+Previous research results have been able to characterize the reachable set on the states of a single qubit both qualitatively \cite{A} and quantitatively \cite{Y, RBR}.
+However, to generalize these results to higher dimensional systems is not easy \cite{R}.
+
+An alternative approach to the problem explores the dynamical behaviours of system purity function. Purity as an important concept quantifying the incoherent impacts from the environment, is particularly suited for studying how relaxation noises impose restricts on the achievable region of states. For example, one basic result for \emph{unital} systems (where the equilibrium state is the maximally mixed state) states that the purity function must be monotonically decreasing with time regardless of the controls \cite{LSA}. For the case of non-unital dynamics the situation is more complicated since purification can occur, depending on which kind of control protocol is applied. It is thus natural to consider that, given a practical relaxation process and a realistic control protocol, what is the upper bound of purity that the system can not surpass. In this Letter, we derive the maximally obtainable  purity in coherently controlled relaxing systems. To this end we study the evolution of purity function under appropriate assumptions of system relaxation. Moreover, our ideas are implemented experimentally using techniques of nuclear magnetic resonance (NMR).
+
+
+\emph{Problem setting}---Consider a controlled $n$-qubit open system governed by the Lindblad equation \cite{Lindblad}
+\begin{equation}
+\label{Lindblad}
+\dot \rho   =  - i[H,\rho ] +  \mathcal{R}\rho ,
+\end{equation}
+where $H$ incorporates both system Hamiltonian and external control Hamiltonian and $\mathcal{R}$ is the relaxation superoperator of Lindblad type
+\begin{equation}
+\mathcal{R}\rho =  \sum\limits_\alpha  {{\gamma _\alpha }\left( {2{L_\alpha }\rho L_\alpha ^\dag  - L_\alpha ^\dag {L_\alpha }\rho  - \rho L_\alpha ^\dag {L_\alpha }} \right)} ,
+\end{equation}
+where ${{L_\alpha }}$ are called Lindblad operators representing the coupling with the environment, and $\gamma_\alpha$ are positive relaxation rates. Let $\left\{ B_m \right\}_{m=1}^{4^n-1}$ be the set of normalized Pauli matrices, then $\mathcal{B} = \left\{ {{I^{ \otimes n}}} \right\} \cup \left\{ B_m \right\}_{m=1}^{4^n-1}$ constitutes an orthonormal basis of the state space (\emph{vector of coherence representation}) \cite{K, SW}, and $\rho$ is expressed as: $\rho = {I^{ \otimes n}}/{2^n} + \sum\nolimits_{m = 1}^{{4^n-1}} {{\bm{r}_m}{B_m}} $ (${\bm{r}_m} = \text{Tr}\left( {\rho {B_m}} \right)$).
+The Lindblad equation is hence turned into a real $4^n -1$ dimensional nonhomogeneous vector differential equation
+\begin{equation}
+\label{Bloch}
+\bm{\dot  r} = \mathbf{H} \bm{r} -  \mathbf{R} ( \bm{r} - {\bm{r}_{eq}}),
+\end{equation}
+in which $\mathbf{H}$, $\mathbf{R}$  and $\bm{r}_0$ are $4^n-1$ dimensional with their entries determined by ${\mathbf{H}_{kj}}  = \text{Tr} \left( {-i{B_k}\left[H, {{B_j}} \right]} \right)$, ${\mathbf{R}_{kj}} = \text{Tr}\left(- {{B_k}\mathcal{R}{B_j}} \right)$ and $\bm{r}_{eq,k}  = \sum\nolimits_j {{\mathbf{R}}_{kj}^{ - 1}{\text{Tr}}\left( {{B_j}{\mathcal R}{I^{ \otimes n}}} \right)/{2^n}} $ respectively. It can be verified that $\mathbf{H}$ is antisymmetric and $\mathbf{R}$ (relaxation matrix) is symmetric positive semidefinite.
+
+
+
+Now we project the system dynamics into the diagonal subspace through diagonalization procedure \cite{Y, RBR}. Let $\rho = U \Lambda U^\dag$ with $\Lambda$ diagonal and $U \in SU(2^n)$. For convenience, a specific order to the diagonal elements ${\left\{ {{\Lambda _{kk}}} \right\}_{k = 1}^{2^n}}$ is assigned. In the vector of coherence representation the diagonalization relation can be written as $\bm{r} = \mathbf{U} \bm{x}$, where $\bm{x}$ ($ \in \mathbb{R}^{2^n -1}$) and $\mathbf{U}$ are the representations of $\Lambda$  and $U$ with respect to basis $\mathcal{B}$ respectively.
+And the ordering of the diagonal elements of $\Lambda$ induces an order to the coordinates $\left\{ 0 \right\} \cup {\left\{ {{\bm{x}_k}} \right\}_{k = 1}^{2^{n }- 1}}$. The chosen order thus uniquely determines a \emph{representative region} $\Sigma \subset \mathbb{R}^{2^n -1}$, in which each point is a \emph{representative point} of its unitary orbit and two points are unitarily equivalent only if they coincide.
+Consequently, any system evolution can be projected into a continuous trajectory in the representative region. Substitute the diagonalization procedure into Eq. (\ref{Bloch}), we obtain a $2^n -1$ dimensional dynamical equation \cite{Y}
+\begin{equation}
+\label{Projection}
+\bm{\dot x} = - {\left[ {{\mathbf{U}^T}\mathbf{R}\mathbf{U}} \right]_\mathbf{p}}(\bm{x} - \left[ {\mathbf{U}^T}{\bm{x}_{eq}}\right]_\mathbf{p}),
+\end{equation}
+where $\bm{x}_{eq}$ is the representative point of $\rho_{eq}$ and notation $[\cdot]_\mathbf{p}$ denotes the diagonal subspace part of its argument.
+
+
+Rewriting Lindblad equation in vector forms (Eq. (\ref{Bloch}) and Eq. (\ref{Projection})) makes the subsequent analysis more convenient from the dynamical system aspect of view. 
+We assume the considered system to be relaxing, namely there exists a unique equilibrium state $\rho_{eq}$ \cite{RH}. 
+Our theory is developed based on several further assumptions about the relaxation matrix, which are valid in many practical cases: (i) $\rho_{eq}$ is diagonal; (ii) secular approximation, i.e., $\mathbf{R}$ admits the direct sum decomposition: $\mathbf{R} = \mathbf{R_p} \oplus \mathbf{R_c}$, where $\mathbf{R_p}$ and $\mathbf{R_c}$ represent the relaxation matrix in the population and coherence subspace respectively; (iii) longitudinal relaxation rates $\lambda (\mathbf{R_p})$ are slower than transversal relaxation rates $\lambda (\mathbf{R_c})$: ${\lambda _{\max }}({\mathbf{R}_\mathbf{p}}) \le {\lambda _{\min }}({\mathbf{R}_\mathbf{c}})$; (iv) relaxation rates are comparatively slow so that arbitrary unitary operation can be implemented before relaxation effects become important. The goal is to use purity function to characterize the transfer efficiency bound between two interconvertible directions in $\Sigma$ given realistic control protocols. Clearly the problem here extends the concept of \emph{universal bound on spin dynamics} \cite{SSGGNS} (bounds on the regions of operators in Liouville space being interconvertible by unitary transformations) to the open system control regime.
+
+
+
+\emph{Maximally accessible purity}---
+Recall that purity is defined as $p=\text{Tr}\rho^2$, which in the vector of coherence representation reads $p=1/2^n + {\bm{r}^T} \bm{r}$. We can obtain the first time derivative
+\begin{equation}
+\dot p  = d ({\bm{r}^T} \bm{r}) /dt  =  - 2{\bm{r}^T} \mathbf{R} (\bm{r} - {\bm{r}_{eq}}).
+\end{equation}
+The set of states satisfying $\dot p = 0$ determines an ellipsoid in $\mathbb{R}^{4^n-1}$, which depends only upon $\mathbf{R}$ and the equilibrium state. From positive definiteness of $\mathbf{R}$ we know that for any state $\bm{r}$ outside of the ellipsoid there must be $\dot p (\bm{r}) < 0$. Let $S$ denote a sphere enclosing the ellipsoid, it is obvious that: (i) the equilibrium state $\bm{r}_{eq}$ is located inside $S$ and (ii) the evolution direction of any state on $S$ is towards the inner side of $S$. Thus starting at $\bm{r}_{eq}$, the system can not be driven outside $S$ by coherent means. One can then envisage a simple method to get an upper bound of $p$ by solving the following optimization problem
+\begin{numcases}{}
+\label{Optimization}
+\max & $p (\bm{r})= 1/2^n + {\bm{r}^T} \bm{r}$,  \nonumber \\
+\text{s.t.} & $\dot p (\bm{r}) =  - 2{\bm{r}^T} \mathbf{R} (\bm{r} - {\bm{r}_{eq}}) =0.$
+\end{numcases}
+This problem can be seen as an instance of \emph{quadratic programming over an ellipsoid constraint}, which is easy in the sense of computational complexity and can be solved with well-developed algorithms \cite{FP}. Furthermore, to find a way approaching the maximum purity, we need \cite{S1}:
+
+\begin{proposition}
+Let $\mathcal{P}_{2^n}$ denote the collection of $2^n!$ permutation operations on diagonal elements. Let $\mathcal{Q}_{2^n}$ be the corresponding set of $\mathcal{P}_{2^n}$ in the vector of coherence representation. Suppose that the relaxation matrix satisfies $\mathbf{R} =  \mathbf{R_p} \oplus \mathbf{R_c}$ and ${\lambda _{\max }}({\mathbf{R_p}}) \le {\lambda _{\min }}({\mathbf{R_c}})$, then there exists an element $\mathbf{Q}$ of $\mathcal{Q}_{2^n}$ such that for any possible unitary $\mathbf{U}$ there is
+\begin{equation}
+\dot p |_\mathbf{U} \le  - 2{(\mathbf{Q}{\bm{x}})^T}\mathbf{R}(\mathbf{Q}{\bm{x}} - {\bm{x}_{eq}}).
+\end{equation}
+\end{proposition}
+
+By the above proposition, we can determine whether it is possible to increase purity of an arbitrary state $\bm{x}$ just by checking a finite number of inequalities, i.e., whether there exists an element in $\mathcal{Q}_{2^n}$ such that $\dot p |_\mathbf{U} (\bm{x}) > 0$.
+Note that purity is a convex function, which implies that any of its extremum should be a maximum. Therefore, one can asymptotically approach the maximally accessible purity of state through repeatedly applying two steps: (i) finding out the element of $\mathcal{Q}_{2^n}$ that maximizes $\dot p$ at current state; (ii) a small duration of evolution.
+
+
+
+Now we focus on purity bound analysis for periodically modulated systems. Periodic control is practically ubiquitous in various experimental setups. In open systems, periodic control promises the capability of  driving the system asymptotically to some periodic steady state. This is due to that a controlled relaxing system leads to a strictly contractive quantum channel, i.e., the distance of any fixed pair of initial states is a strictly decreasing function of time \cite{RH}. Such a property makes it possible that the desired state can be periodically retained.
+%We here briefly explain some general features of the periodic control method and derive the upper bound of achievable purity for a class of simple periodic control protocol.
+
+In periodic control schemes, one concerns about setting the desired state to be the fixed point of the controlled dynamics. A generic periodic control sequence can be described by ${\left[ {\tau _M} - {{V_M} - \cdots -{\tau _1}} - {V_1} \right]_m}$, where $V$, $\tau$ and $m$ denotes unitary operation, free relaxation and repetition times respectively. Provided the system relaxation noises effect at a time scale much slower than coherent driving, we are then free to assume that each of $V_k$ ($k=1, 2, ..., M$) runs over the entire group $SU(2^n)$.
+Suppose a periodic sequence results in a periodically steady state $\rho_{ss}$, which in mathematical language reads: $\mathcal{E}_{\tau_M} \circ \mathcal{E}_{V_M} \circ \cdots \circ \mathcal{E}_{\tau_1} \circ \mathcal{E}_{V_1} \rho_{ss} = \rho_{ss}$ (here $\mathcal{E}$ means the associated dynamical map \cite{RH}). Then for any state unitarily equivalent to $\rho_{ss}$, say $\mathcal{E}_{W} \rho_{ss}$ ($W \in SU(2^n)$), there exists an associated preparation sequence ${\left[ W -  {\tau _M} - {{V_M} - \cdots -{\tau _1}} - {V_1} - W^\dag \right]_m}$ so that $\mathcal{E}_{W} \rho_{ss}$ will be the fixed point. Thus we only need to investigate the problem of preparing diagonal states.
+
+
+Observe that any state reachable from the equilibrium state by a control sequence $  {\tau _M} - {{V_M} - \cdots -{\tau _1}} - {V_1} $, can also be prepared by a periodic control sequence ${\left[  {\tau _M} - {{V_M} - \cdots -{\tau _1}} - {V_1} - \tau_0 \right]_m}$ with $\tau_0$ larger than the system's characteristic relaxation time. This suggests the difficulty in analyzing general periodic control schemes.
+Understanding this, we here focus our attention more specifically on a class of simple periodic control sequences of the form ${\left[{\tau } - {V} \right]_m}$. We state now \cite{S1}
+
+%\emph{Proposition.}---
+%Each element $\mathbf{Q}_k$ ($k=1,...,2^n!$) in $\mathcal{Q}_N$ is associated with two definite quadratic forms£º
+%\begin{align}
+%& E_{\mathbf{Q}_k} =  - 2{(\mathbf{Q}_k {\bm{x}})^T} \mathbf{R} (\mathbf{Q}_k {\bm{x}} - {\bm{x}_{eq}}),  \nonumber \\
+%& F_{\mathbf{Q}_k} = 4 {(\mathbf{Q}_k{\bm{x}} - {\bm{x}_{eq}}/2)^T} \mathbf{R}^2 (\mathbf{Q}_k{\bm{x}} - {\bm{x}_{eq}}).
+%\end{align}
+%There exists a constant $C$ such that for each $k$, $E_k = C$ is the smallest ellipsoid enclosing $F_k = 0$ (because of permutation symmetry).
+%In $\Sigma$, it's impossible to steer system from $\bm{x}_{eq}$ to any state that locates outside the ellipsoid ${\left\{ {{E_k = C}} \right\}_{k = 1,...,2^n!}}$ through ${\left[ {V} - {\tau } \right]_m}$.
+
+\begin{proposition}
+Each element $\mathbf{Q}_k$ ($k=1,...,2^n!$) in $\mathcal{Q}_{2^n}$ is associated with two definite quadratic forms£º
+\begin{align}
+& E_k =  - 2{(\mathbf{Q}_k {\bm{x}})^T} \mathbf{R} (\mathbf{Q}_k {\bm{x}} - {\bm{x}_{eq}}),  \nonumber \\
+& F_k = 4 {(\mathbf{Q}_k{\bm{x}} - {\bm{x}_{eq}}/2)^T} \mathbf{R}^2 (\mathbf{Q}_k{\bm{x}} - {\bm{x}_{eq}}).
+\end{align}
+Because of permutation symmetry, there exists a constant $C$ such that for each $k$, $E_k = C$ is the smallest ellipsoid enclosing $F_k = 0$.
+Then in the representative region $\Sigma$,  it is impossible to steer system from $\bm{x}_{eq}$ to any state that locates outside the ellipsoid
+\begin{equation}
+E: - 2{{\bm{x}}^T} \mathbf{R} ( {\bm{x}} - {\bm{x}_{eq}}) = C,
+\end{equation}
+through ${\left[ {\tau } - {V}  \right]_m}$ type of control sequences.
+\end{proposition}
+
+
+\emph{Experiments on two-qubit system}.---
+We use the $^{13}C$-labeled chloroform dissolved in $d_6$-acetone as a two-qubit system to test the applicability of open system control method. Our experiments were carried out on a Bruker Avance \uppercase\expandafter{\romannumeral3} 400 MHz ($B_0$ = 9.4 T) spectrometer at room temperature. Introduce the Cartesian product operator basis
+\begin{align}
+\mathcal{B}_2 = & \{ II,ZI,IZ,ZZ,XI,YI,XZ,YZ,   \nonumber \\
+& IX,IY,ZX,ZY,XY,YX,XX,YY \},   \nonumber
+\end{align}
+where $X$, $Y$ and $Z$ are Pauli operators. The natural Hamiltonian reads: $H_S = \pi ( - \gamma_\text{C} B_0 ZI -  \gamma_\text{H} B_0 IZ+ J/2 ZZ)$,
+where $\gamma_\text{C}$ and $\gamma_\text{H}$ are the gyromagnetic ratios of nucleus $^{13}$C and $^{1}$H respectively, and $J = 214.5$Hz is the scalar coupling constant.
+The equilibrium state is $\rho_{eq} \approx II/4 + \epsilon (ZI +4 IZ)$ with $\epsilon  \sim 10 ^{-5}$.
+In the double rotating frame, the system relaxation matrix $\mathbf{R}$ would take a kite-like appearance under secular approximation \cite{KM}.
+%The underlying principle is that, the system energy level differences are much larger than the relaxation rates, so in the interaction picture, the cross relaxation parameters between the population subspace and the coherence subspace are added with fast oscillating phases. This effectively decoupled the population subspace relaxation from the coherence subspace relaxation.
+The simplified structure dramatically reduces the complexity of experimentally estimating the effective relaxation parameters. We measured $\mathbf{R}$ \cite{S2} and found that the longitudinal relaxation rates are almost an order of magnitude slower than the transversal relaxation rates.
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.75\linewidth]{Figures/Figure}
+%\caption{(a) Illustrations of the results on our chloroform system, including: (i) representative region $\Sigma: 0 \le x_3 \le x_1 \le x_2$; (ii) sphere (green) $S: \bm{x}^T \bm{x} = 18.06 \epsilon^2$; (iii) ellipsoid (red) $E: - 2{{\bm{x}}^T} \mathbf{R} ( {\bm{x}} - {\bm{x}_{eq}}) = -0.0523 \epsilon ^2$; (iv) projected trajectories (simulation) of nuclear Overhuaser and PPS preparation evolutionary dynamics. (b)-(c) The resulting PPS $\rho_{pps}$ under periodic control $\left[ \tau - \mathbf{V} \right]_m$, in which $\tau = 1.5$s; $\mathbf{V}$ is determined according to Eq. (\ref{V}) and implemented through the sequence ${R_y^{\text{H}}(90^\circ) - 1/(2J) - R_x^{\text{H}}(90^\circ) - R_y^{\text{C}}(90^\circ) - 1/(2J) - R_x^{\text{C}}(90^\circ)}$.  The data clearly display how the system converges to a pseudopure state, and numerical simulation with the master equation Eq. (\ref{Bloch}) agrees well with experimental results. (d) Simulation result: relative error of the prepared PPS due to imperfections of control fields present in the $^{13}$C channel and $^1$H channel. (e) The resulting Bell state $\rho_{Bell}$ under periodic control $\left[ \mathbf{W} - \tau - \mathbf{V} - \mathbf{W}^T \right]_m$, in which $\mathbf{W}$ is determined according to Eq. (\ref{W}).}
+\caption{(a) Illustrations of the results on our chloroform system, including: (i) representative region $\Sigma: 0 \le x_3 \le x_1 \le x_2$; (ii) sphere (green) $S: \bm{x}^T \bm{x} = 18.06 \epsilon^2$; (iii) ellipsoid (red) $E: - 2{{\bm{x}}^T} \mathbf{R_p} ( {\bm{x}} - {\bm{x}_{eq}}) = -0.0523 \epsilon ^2$; (iv) projected trajectories (simulation) of nuclear Overhuaser and PPS preparation evolutionary dynamics. (b) The resulting PPS $\rho_{pps}$ under periodic control $\left[ 1.5\text{s} - \mathbf{V} \right]_m$, in which $\mathbf{V}$ is implemented through the sequence ${R_y^{\text{H}}(90^\circ) - 1/(2J) - R_x^{\text{H}}(90^\circ) - R_y^{\text{C}}(90^\circ) - 1/(2J) - R_x^{\text{C}}(90^\circ)}$. $\theta_{\rho,\rho_{pps}} $ is the angle between the system state and the PPS direction in the vector of coherence representation.  (c) The resulting Bell state $\rho_{Bell}$ under periodic control $\left[ \mathbf{W} - 1.5\text{s} - \mathbf{V} - \mathbf{W}^T \right]_m$. $\theta_{\rho,\rho_{Bell}} $ is the angle between the system state and the Bell state direction in the vector of coherence representation. The data in (b) and (c) clearly display how the system converges to the desired state direction, and numerical simulation with the master equation Eq. (\ref{Bloch}) agrees well with experimental results.}
+\label{Figure}
+\end{figure*}
+
+
+
+In order to visualize the system evolution, we project the 15-dimensional relaxation dynamics into a 3-dimensional differential equation according to Eq. (\ref{Projection}). The representative region $\Sigma$ is illustrated in Fig. \ref{Figure}a, where we have chosen the order $0 \le x_3 \le x_1 \le x_2$.
+In the region, we derived the sphere $S$ representing the upper bound of system purity and the ellipsoid $E$ representing a bound surface for ${\left[ {\tau } - {V}  \right]_m}$ sequence based on the measured relaxation matrix.
+
+
+Our first concern is the intersection between $S$ and the $\bm{x}_2$ axis: $(0, 4.27\epsilon, 0)$. In order to approach this state, we can make use of the nuclear Overhauser effect (NOE). It is well-known that \cite{L}, for a heteronuclear two-spin system,  applying a field at the resonance frequency of one spin for a sufficiently long time, will saturate its polarization and at the meantime affect or even enhance the magnetization of the other spin. In our experimental test, an irradiation with $1000$Hz of magnitude and $10$s of duration is applied to the carbon channel, which drives the system into a steady state measured as $\bm{x}_{ss} = (0, 4.25\epsilon, 0)$. The purity of $\bm{x}_{ss}$ is fairly close to the upper bound.
+
+Our purity bound analysis thus leads  to a new view of the NOE experiment. The near optimality of Overhauser experiment in polarization transfer efficiency shows its advantages over the  closed system control approach.   Moreover, it generalizes the results of algorithmic cooling schemes. According to the purification limits derived in \cite{RMBL}, it would not be possible to cool the proton in our system through the ``reset and swap" iterative procedure. This is due to the different underlying relaxation model assumed. In heat-bath algorithmic cooling scheme, it is considered that each qubit is undergoing their own $T_1$ and $T_2$ process. But in NOE, cross-relaxation mechanisms are essential for the purification of proton \cite{L}. Thus NOE provides clear evidence of approaching even larger purification efficiency if more general relaxation mechanisms are taken into account.
+%Design or evaluation of experimental schemes for trans- fer of coherence or polarization between states in quantized systems requires a clear understanding of which regions of operators in Liouville space are interconvertible by avail- able propagators. Thi
+%Overhauser phenomenon is also interesting from the open-system algorithmic cooling aspect of view.
+
+
+Next we turn to the application of open system coherent control to state engineering  in NMR quantum computation.
+We consider creating pseudopure state (PPS) \cite{CPH, GC, KCL} from the equilibrium state, which is  an often used initialization step for subsequent computation. The task can not be done merely with unitary operations. Previous methods of PPS preparation involves different ways of realizing non-unitary operations \cite{PPS} such as exertion of gradient fields. Here, we put forward a new approach: to let the inherent system relaxation effects take the role of non-unitary resources and design a periodic sequence so that PPS is the fixed point of the dynamics. Although the current experiment is performed on two-qubit system as an example, the idea applies to general cases.
+
+%
+%Secondly, relaxation cause severe decoherence effects if PPS preparation takes relatively long time. For example, it's hard to prevent a nontrivial quantum state from relaxing to thermal equilibrium. Both of the two problems call for the study of non-unitary control methods.
+For chloroform, PPS takes the form: $\rho_{pps} = II/4 + \eta/4 (ZI + IZ + ZZ)$, in which $\eta$ is the \emph{effective purity}. The feature that its three coefficients are equal to each other specifies the \emph{PPS direction}, namely $\bm{x}_1 = \bm{x}_2 =\bm{x}_3$. Therefore, it is straightforward to conceive a simple ``coefficient-averaging process". The averaging process is governed by $\left[ \tau - \mathbf{V} \right]_m$, in which $\mathbf{V}$ is a cyclic permutation of the coordinates of $\bm{x}$ and $\tau$ represents a period of free relaxation. The joint action of $\mathbf{V}$ and $\tau$ leads the three coefficients converging to a certain common value. In experiment, we chose $\mathbf{V}$ to be
+\begin{equation}
+\mathbf{V} = \left(
+\begin{array} {lcr}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & 0 & 0
+\end{array}
+\right).
+\label{V}
+\end{equation}
+Experimental results suggest that for a wide range of $\tau$ the system was able to be driven to some states close to the PPS direction. Within tolerable range of error, we set the value of $\tau$ as 1.5s, which corresponds to the maximal effective purity ($\eta \approx 7.48 \epsilon$) of PPS obtained on trials. This can be compared to conventional spatial averaging preparation method where $\eta \approx 6.12 \epsilon $ \cite{P}. Moreover,
+Fig. \ref{Figure}(a) shows that for $\left[ \tau - \mathbf{V} \right]_m$ type of periodic controls, it is not possible to get a PPS surpassing $\eta \approx 8.20 \epsilon $. Therefore, our result  is close to the bound given by the surface $E$. The  gap can be attributed to two points: (i) the experimentally estimated relaxation matrix unavoidably involves imprecision; (ii) in deriving the bound, it is assumed that during the operation $\mathbf{V}$ relaxation can be ignored, which is not  perfectly satisfied in practice. We also demonstrate how to create a periodically steady entangled state (unitarily equivalent to a PPS) by taking the Bell state $\rho_{Bell} = (1-\eta)/4 II + \eta/2 \left( {\left| {{\rm{00}}} \right\rangle {\rm{ + }}\left| {{\rm{11}}} \right\rangle } \right) \otimes \left( {\left\langle {{\rm{00}}} \right|{\rm{ + }}\left\langle {{\rm{11}}} \right|} \right)$ as an example. According to the aforementioned method, we modify the PPS preparation periodic sequence to be $\left[ \mathbf{W} - \tau - \mathbf{V} - \mathbf{W}^T \right]_m$ where
+$\mathbf{W}$ transforms $\rho_{pps}$ to $\rho_{Bell}$:
+\begin{equation}
+\mathbf{W} = \textbf{CNOT}_{\text{CH}} \cdot \textbf{Hadamard}_{\text{C}}.
+\label{W}
+\end{equation}
+The experimental result show that the proposed theoretical framework can be implemented and gives results in excellent agreement with predictions (Fig. \ref{Figure}(c)).
+%Since purity is related to signal to noise ratio in the spectroscopy, it is thus of practical important to get a PPS with its purity to be as large as possible.
+
+
+
+
+To conclude, we derived the maximally achievable purity of coherently controlled Markovian systems.   The theory provides valuable reference for assessing open system control schemes where purity is the most concerned performance index. In addition, the theoretical purity bound can be an important guidance for developing numerical pulse searching algorithms. We further studied in detail the NOE effect and state engineering experiments in the open system framework, and showed that relaxation effects are essential for implementing some important non-unitary control tasks. The lack of full controllability in certain important control regimes \cite{XYS, L} usually calls for a bound analysis for system reachable states. Our
+present study can thus be regarded as a part of explorations in this direction. Future work will concentrate on incorporating our work here with other open system control models, such as reservoir engineering in which incoherent resources \cite{PR} are introduced to enhance the capability of controlling quantum systems.
+%However, under many experimental conditions, coherent control (tailored pulses) is still the most realistic operating approach. Also from the methodological perspective, the understanding of coherent control of open system dynamics remains to be refined.
+
+
+
+
+
+
+\section{Acknowledgments}
+This work is supported by the National Key Basic Research Program of China (Grant No. 2013CB921800 and No. 2014CB848700), the National
+Science Fund for Distinguished Young Scholars Grant No. 11425523, National Natural Science Foundation of China under Grant Nos. 11375167, 11227901, 91021005,
+the Chinese Academy of Sciences, the Strategic Priority Research Program (B) of the CAS (Grant No. XDB01030400), and Research Fund for the Doctoral Program of Higher Education of China under Grant No. 20113402110044.
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{28}
+\bibitem{DP} D. Dong and I. R. Petersen, IET Control Theory Appl. \textbf{4}, 2651 (2010).
+
+\bibitem{KKSS} N. Khaneja \emph{et al}, J. Magn. Reson. \textbf{162}, 311 (2003); N. Khaneja \emph{et al}, J. Magn. Reson. \textbf{172}, 296 (2005); B. Bonnard and D. Sugny, SIAM J. Control Optim. \textbf{48}, 1289 (2009); M. Lapert, Y. Zhang, M. Braun, S. J. Glaser, and D. Sugny, Phys. Rev. Lett. \textbf{104}, 083001 (2010).
+
+\bibitem{RMBL} L. J. Schulman, Tal Mor, and Y. Weinstein, Phys. Rev. Lett. \textbf{94}, 120501 (2005); C. A. Ryan, O. Moussa, J. Baugh, and R. Laflamme, Phys. Rev. Lett. \textbf{100}, 140501 (2008).
+
+\bibitem{SW} S. G. Schirmer and X. Wang, Phys. Rev. A \textbf{81}, 062306 (2010).
+
+\bibitem{Entanglement} S. Diehl \emph{et al}, Nature Phys. \textbf{4}, 878 (2008); F. Verstraete, M. M. Wolf and J. I. Cirac, Nature Phys. \textbf{5}, 633 (2009); A. Pechen, Phys. Rev. A \textbf{84}, 042106 (2011); F. Ticozzi and L. Viola, Quantum Inform. Compu. \textbf{14}, 0265 (2014).
+
+\bibitem{Lin} Y. Lin \emph{et al}, Nature (London) \textbf{504}, 415 (2013).
+
+\bibitem{RTJS} F. Reiter, L. Tornberg, G. Johansson, and A. S. S{\o}rensen Phys. Rev. A \textbf{88}, 032317 (2013).
+
+\bibitem{SKVCG} M. J. A. Schuetz, E. M. Kessler, L. M. K. Vandersypen, J. I. Cirac and G. Giedke, Phys. Rev. Lett. \textbf{111}, 246802 (2013).
+
+
+
+\bibitem{RKGD} S. Shi and H. Rabitz, Chem. Phys. \textbf{139}, 185 (1989); A. P. Peirce, M.A. Dahleh, and H. Rabitz, Phys. Rev. A \textbf{37}, 4950 (1988); N. Khaneja, R. W. Brockett, and S. J. Glaser, Phys. Rev. A \textbf{63}, 032308 (2001); N. Khanejaa, T. Reissb, C. Kehletb, T. Schulte-Herbr{\"{u}}ggen, and S. J. Glaser, J. Magn. Reson. \textbf{172}, 296 (2005); D. D'Alessandro, \emph{Introduction to Quantum Control and Dynamics} (Chapman $\&$ Hall, London, 2008).
+
+\bibitem{A} C. Altafini, J. Math. Phys. \textbf{44}, 2357 (2003); C. Altafini, Phys. Rev. A \textbf{70}, 062321 (2004).
+
+
+
+\bibitem{Y} H. Yuan, IEEE Trans. Autom. Control \textbf{55}, 955 (2010); H. Yuan, Syst. Control Lett. \textbf{61}, 1085 (2012).
+
+\bibitem{RBR} P. Rooney, A. Bloch and C. Rangan, arXiv:1201.0399v1, (2012).
+
+
+\bibitem{R} P. Rooney, Ph.D. thesis, University of Michigan, 2012.
+
+\bibitem{LSA} D. A. Lidar, A. Shabani, and R. Alicki, Chem. Phys. \textbf{82} 322 (2006).
+
+\bibitem{Lindblad} G. Lindblad, Commun. Math. Phys. \textbf{48}, 119 (1976); H.-P. Breuer and F. Petruccione, \emph{The Theory of Open Quantum Systems} (Oxford University Press, Oxford, 2002).
+
+\bibitem{RH} \'{A}. Rivas and S. F. Huelga, \emph{Open Quantum Systems: An Introduction} (Springer, New York, 2012).
+
+\bibitem{K} I. Kurniawan, Ph.D. thesis, Universit{\"{a}}t W{\"{u}}rzburg, 2009.
+
+\bibitem{SSGGNS} J. Stoustrup \emph{et al}, Phys. Rev. Lett. \textbf{74}, 2921 (1995).
+
+\bibitem{FP}  C. A. Floudas and P. M. Pardalos (Eds.), \emph{Encyclopedia of Optimization} (Springer, New York, p3166, 2009).
+
+\bibitem{S1} See Supplemental Material for a proof.
+
+\bibitem{KM} J. Kowalewski and L. M{\"{a}}ler, \emph{Nuclear Spin Relaxation in Liquids: Theory, Experiments, and Applications} (Taylor \& Francis, New York, 2006).
+
+\bibitem{S2} See Supplemental Material for the mearsured rates.
+
+
+\bibitem{L} M. H. Levitt, \emph{Spin Dynamics: Basics of Nuclear Magnetic Resonance} (John Wiley \& Sons Ltd, England, 2008).
+
+
+
+\bibitem{CPH} D. G. Cory, M. D. Price, and T. F. Havel, Physica D \textbf{120}, 82 (1998).
+
+\bibitem{GC} N. A. Gershenfeld and I. L. Chuang, Science \textbf{275}, 350 (1997).
+
+\bibitem{KCL} E. Knill, I. Chuang, and R. Laflamme, Phys. Rev. A \textbf{57}, 3348 (1998).
+
+\bibitem{PPS} E. Knill, R. Laflamme, R. Martinez and C.-H. Tseng, Nature (London) \textbf{404}, 368 (2000); U. Sakaguchi, H. Ozawa and T. Fukumi, Phys. Rev. A \textbf{61}, 042313 (2000); J. A. Jones, Prog. Nucl. Magn. Reson. Spectrosc. \textbf{38}, 325 (2001).
+
+\bibitem{P} M. Pravia \emph{et al}., Concept. Magn. Reson. \textbf{11}, 225 (1999).
+
+\bibitem{XYS} Fei Xue, S. X. Yu and C. P. Sun, Phy. Rev. A \textbf{73}, 013403 (2006).
+
+\bibitem{L} S. Lloyd, Nature (London) \textbf{406}, 1047 (2000).
+
+\bibitem{PR} A. Pechen and H. Rabitz, Phys. Rev. A \textbf{73}, 062102 (2006); F. Shuang, A. Pechen, T. S. HO, and H. Rabitz, J. Chem. Phys. \textbf{126}, 134303 (2007); R. Romano and D. D'Alessandro, Phys. Rev. Lett. \textbf{97}, 080402 (2006).
+\end{thebibliography}
+
+
+\end{document}
+

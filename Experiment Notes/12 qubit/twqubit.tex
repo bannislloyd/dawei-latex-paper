@@ -563,7 +563,7 @@ A_7 & = &cos(2\pi(\omega_7-O_1)/2\text{J}_{\text{23}})+isin(2\pi(\omega_7-O_1)/2
 && \prod_{k=8}^{12} (cos(\pi\text{J}_{\text{7k}}/\text{J}_{\text{23}})+isin(\pi\text{J}_{\text{7k}}/\text{J}_{\text{23}})), \\ \nonumber
 A_5^{new} & = &cos(2\pi(\omega_5-O_1)/2\text{J}_{\text{27}})+isin(2\pi(\omega_5-O_1)/2\text{J}_{\text{27}})* \\ \nonumber
 && \prod_{k\neq 2, 5, 7} (cos(\pi\text{J}_{\text{5k}}/\text{J}_{\text{27}})+isin(\pi\text{J}_{\text{5k}}/\text{J}_{\text{27}})) \\ \nonumber
-\eea 
+\eea
 
 When calculating the evolutions in the Decoding part, using the following equations (the evolution is 1/2J with two $\pi$ pulses inserted in the middle. \textbf{Note: without $\pi$ in the end})
 \bea
@@ -572,6 +572,20 @@ When calculating the evolutions in the Decoding part, using the following equati
 (X+iY)\otimes(X-iZ) \longrightarrow (X+iY)\otimes(I-Z), \\ \nonumber
 (X-iY)\otimes(X-iZ) \longrightarrow (X+iY)\otimes(I+Z).
 \eea
+
+\newpage
+\section{Mar 10, 2015: Check the simulated spectra for the 12 qubit PPS circuit}
+
+The final state 'rho\_decoding3.mat' includes a phase on C7. 'rho\_decoding3(1,33) = 0.1979 + 0.5728i', and I used a Z rotation $R_z^7(\theta)$ to rotate it into X. The rotating angle $\theta$ is 1.2381, and the element becomes 0.6060 after the rotation. Note 0.6060/0.7071 (the ideal value) = 0.8570 which is exactly the fidelity for the final state 'rho\_decoding3'. The new state is named 'rho\_12pps\_circuit', and is saved in Ordi2 '\dir twqubit\dir rho\_12pps\_circuit.mat'.
+
+The simulation is implemented in Ordi2 '\dir NMR\dir Experiments\dir twqubit'. The main file is 'sim\_twqubit.m'.
+
+Some settings:
+o1\_C = 20696, o1\_H = 2894, td = 281684, swh = 30030.
+
+The decoherence time is set in '\dir SRC\dir simulator\dir spectrumfast.m' and the value for C7 is chosen as 450ms.
+
+1) For thermal, the spectrum file is save in 'F:\dir matlab_full\dir IQC_simulation\dir PPS 12 qubit\dir sim\_thermal\_450ms.mat'.
 
 \newpage
 \section{All Pulses for 12 qubits}
@@ -659,9 +673,9 @@ Pulses for the decoding part of PPS preparation.
   $R_x^{2,3,4,7-12}(\pi)$ & 2ms & 0.8424 & twqubit\_C2347andH180\_Ufid.mat & 61.6\%, 15400Hz & 52.2\%, 13039Hz\\
   $R_x^{1,3,4,6}(\pi/2)R_{-y}^{8-12}(\pi/2)$ & 1ms & 0.9080 & twqubit\_C134690andH90\_Ufid.mat & 24.8\%, 6203.2Hz & 22.1\%, 5529Hz\\
   $R_x^{2,3,4,5,6}(\pi)$ & 2ms & 0.8058 & twqubit\_C23456180\_Ufid.mat & 37.8\%, 9438.2Hz & 23.0\%, 5746Hz\\
-  $R_{-y}^{4,6}R_{y}^{1,3}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}(\frac{1}{2J23}-\frac{1}{2J12})$ & 1ms & xx & xxx twqubit\_C1234690withPC\_Ufid.mat & 26.4\%, 6595.5Hz & 24.4\%, 6110Hz\\
+  $R_{-y}^{4,6}R_{y}^{1,3}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}(\frac{1}{2J23}-\frac{1}{2J12})$ & 1ms & 0.8884 &  twqubit\_C1234690withPC\_Ufid.mat & 26.4\%, 6596.0Hz & 24.4\%, 6110Hz\\
   $R_x^{2,7}(\pi)$ & 2ms & 0.9306 & twqubit\_C27180\_Ufid.mat & 29.1\%, 7285.3Hz & 21.7\%, 5414Hz\\
-  $R_{y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & xx &xx twqubit\_C2Y5X90\_Ufid.mat & 59.2\%, 14795Hz & 40.9\%, 10232Hz\\
+  $R_{y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & 0.9715 & twqubit\_C2Y5X90\_Ufid.mat & 28.9\%, 7233.9Hz & 29.2\%, 7292Hz\\
   \hline
 \end{tabular}
 \end{table}
