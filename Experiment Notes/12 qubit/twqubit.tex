@@ -640,15 +640,66 @@ Encoding3:
 \end{table}
 
 Decoding1:
-\begin{table}[hbtp]
+\begin{table}[!h]
 \begin{tabular} {c||c|c|c}
   \hline
    Name & Total & $1/4\text{J}_{\text{CH}}$ & $1/4\text{J}_{\text{CH}}$\\
   \hline
-  Decoding1 & 7.36ms & 1680us & 1680us\\
+  Decoding1 & 6.36ms & 1680us & 1680us\\
   \hline
 \end{tabular}
 \end{table}
+
+Decoding2:
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c|c}
+  \hline
+   Name & Total & $1/4\text{J}_{12}$ & $1/4\text{J}_{23}-1/4\text{J}_{12}$ & $1/4\text{J}_{23}$\\
+  \hline
+ Decoding2 & 20.28ms & 4340us & 3300us & 7640us\\
+  \hline
+\end{tabular}
+\end{table}
+
+Decoding3:
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+   Name & Total & $1/4\text{J}_{27}$ & $1/4\text{J}_{27}$ & $1/4\text{J}_{57}$ & $1/4\text{J}_{57}$\\
+  \hline
+ Decoding3 & 42.32ms & 6670us & 6670us & 11490us & 11490us\\
+  \hline
+\end{tabular}
+\end{table}
+
+It is surprising that after applying phase cycling, the state will introduce a phase. The ideal state after phase cycling will have two elements 0.7071 at the top off-diagonal positions, but these two numbers change to 0.5018-0.4057i and  0.5018+0.4057i after GRAPE phase cycling pulse. The absolute value is 0.6453, which is reasonable. Moreover, the state in the decoding part will also involve an unexpected phase in every step. I guess the reason is the imperfections of the GRAPE pulses (some of them are pretty low like 80\% fidelity), and the 90 or 180 pulse cannot rotate or refocus the state to the desired axis completely. Anyway, in the following table, I will write both fidelities, with and without this phase correction.
+
+All fidelities $\text{tr}(\rho_\text{{ideal}}\rho_\text{real})$ calculated by the circuit itself and by the GRAPE pulses.
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c|c}
+  \hline
+   Part & Length & Circuit Fidelity & GRAPE Fidelity (Original) & GRAPE Fidelity (Phase Fixed) \\
+  \hline
+ Encoding1 & 32.98ms & 1.0000 & 0.9831 & 0.9831\\
+ Encoding2 & 21.28ms & 1.0000 & 0.9717 & 0.9717\\
+ Encoding3 & 7.36ms & 0.9500 & 0.9124 & 0.9124\\
+ Phase Cycling & 1ms & 0.9511 & 0.7097 & 0.9126\\
+ Decoding1 & 6.36ms & 0.8717 & 0.1658 & 0.8695\\
+ Decoding2 & 20.28ms & 0.8570 & 0.1916 & 0.8472\\
+ Decoding3 & 43.32ms & 0.8570 & 0.1697 & 0.8398\\
+  \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\columnwidth]{thermal_and_pps_circuit_grape.pdf}
+\end{center}
+\setlength{\abovecaptionskip}{-0.35cm}
+\caption{\footnotesize{Comparison of the thermal and PPS produced by the circuit and GRAPE. }}\label{compare_spectra}
+\end{figure}
+
 
 \newpage
 \section{All Pulses for 12 qubits}
@@ -693,26 +744,11 @@ Pulses for the encoding part of PPS preparation.
   $R_x^{2,3}(\pi)$ & 2ms & 0.8908 & twqubit\_C23180\_Ufid.mat & 32.4\%, 8101.5Hz & 22.8\%, 5701Hz\\
   $R_x^{2,3,4,7}(\pi/2)$ & 1ms & 0.9156 & twqubit\_C234790\_Ufid.mat & 37.4\%, 9358.3Hz & 28.9\%, 7213Hz\\
   $R_x^{1,5,6}(\pi)$ & 2ms & 0.9055 & twqubit\_C156180\_Ufid.mat & 32.2\%, 8039.7Hz & 20.3\%, 5086Hz\\
-  $R_x^{2,4,7}(\pi/2)R_{-y}^{3}(\pi/2)R_{-z}^{i=2,3,4,7}((w_i-O_1)*1/2J_{CH})$ & 1ms & 0.9153 & twqubit\_C234790withPC\_Ufid.mat & 26.1\%, 6514.5Hz & 20.2\%, 5048Hz\\
+  $R_x^{2,4,7}(\pi/2)R_{-y}^{3}(\pi/2)R_{-z}^{i=2,3,4,7}((w_i-O_1)*3.36\text{ms})$ & 1ms & 0.9153 & twqubit\_C234790withPC\_Ufid.mat & 26.1\%, 6514.5Hz & 20.2\%, 5048Hz\\
   \hline
 \end{tabular}
 \end{table}
 
-All 3 Encoding pulses in the saving folder '\dir pulseexam\_12qubit\dir'. The fidelities in the following table are state fidelities
-\begin{table}[hbtp]
-\begin{tabular} {c||c|c|c}
-  \hline
-  Files & Length & Target State & State Fidelity\\
-  \hline
-  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-  twqubit\_encoding1\_C, H & 32.98ms & IZIZZZZIIIII & 0.9831\\
-  twqubit\_encoding2\_C, H & 21.28ms & ZZZZZZZIIIII & -0.9717\\
-  twqubit\_encoding3\_C, H & 7.36 ms & ZZZZZZZZZZZZ & -0.9124\\
-  \hline
-\end{tabular}
-\end{table}
-
-\newpage
 Pulses for polarization crush and phase cycling.
 \begin{table}[hbtp]
 \begin{tabular} {c||c|c|c|c|c}
@@ -727,7 +763,7 @@ Pulses for polarization crush and phase cycling.
 \end{table}
 
 Pulses for the decoding part of PPS preparation.
-\begin{table}[hbtp]
+\begin{table}[!h]
 \begin{tabular} {c||c|c|c|c|c}
   \hline
   Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
@@ -736,9 +772,26 @@ Pulses for the decoding part of PPS preparation.
   $R_x^{2,3,4,7-12}(\pi)$ & 2ms & 0.8424 & twqubit\_C2347andH180\_Ufid.mat & 61.6\%, 15400Hz & 52.2\%, 13039Hz\\
   $R_x^{1,3,4,6}(\pi/2)R_{-y}^{8-12}(\pi/2)$ & 1ms & 0.9080 & twqubit\_C134690andH90\_Ufid.mat & 24.8\%, 6203.2Hz & 22.1\%, 5529Hz\\
   $R_x^{2,3,4,5,6}(\pi)$ & 2ms & 0.8058 & twqubit\_C23456180\_Ufid.mat & 37.8\%, 9438.2Hz & 23.0\%, 5746Hz\\
-  $R_{-y}^{4,6}R_{y}^{1,3}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}(\frac{1}{2J23}-\frac{1}{2J12})$ & 1ms & 0.8887 &  twqubit\_C1234690withPC\_Ufid.mat & 28.3\%, 7070.8Hz & 26.9\%, 6717Hz\\
+  $R_{-y}^{4,6}R_{y}^{1,3}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}(6.6\text{ms})$ & 1ms & 0.8887 &  twqubit\_C1234690withPC\_Ufid.mat & 28.3\%, 7070.8Hz & 26.9\%, 6717Hz\\
   $R_x^{2,7}(\pi)$ & 2ms & 0.9306 & twqubit\_C27180\_Ufid.mat & 29.1\%, 7285.3Hz & 21.7\%, 5414Hz\\
   $R_{y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & 0.9715 & twqubit\_C2Y5X90\_Ufid.mat & 28.9\%, 7233.9Hz & 29.2\%, 7292Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+\newpage
+All pulses in the saving folder '\dir pulseexam\_12qubit\dir'. The fidelities in the following table are state fidelities
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c}
+  \hline
+  Files & Length & Target State & State Fidelity\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  twqubit\_encoding1\_C, H & 32.98ms & IZIZZZZIIIII & 0.9831\\
+  twqubit\_encoding2\_C, H & 21.28ms & ZZZZZZZIIIII & 0.9717\\
+  twqubit\_encoding3\_C, H & 7.36 ms & ZZZZZZZZZZZZ & 0.9124\\
+  twqubit\_phasecycling\_C, H & 1 ms & ZZZZZZZZZZZZ & 0.9126\\
+  twqubit\_decoding\_C, H & 68.96 ms & Z$_7\otimes\ket{00000000000}$ & 0.8398\\
   \hline
 \end{tabular}
 \end{table}
