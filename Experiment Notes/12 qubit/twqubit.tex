@@ -767,9 +767,45 @@ Exp 1006: PPS, without gradient and observe C7, no signal either... \\
 
 There is a problem when I calculated the GRAPE. There is a default 4us pre-delay and post-delay on the target unitary, as in experiment when applying the GRAPE pulse these two delays are required (not the minimal value but since GRAPE has considered that it has no effect). However, we do not have enough slots (only SP0 to SP31) for GRAPE pulses so we have to combine them to a big shape. The problem is the time step in the big shape is chosen as 10us, which cannot absorb the 4us delay. If we get rid of the 4us delays during the big shape, the experimental result is totally different.
 
-I tried to use 2us time step size in the big shape instead of 10us, so I can write the 4us delay. Then for every 5 steps (2us*5=10us) the amplitude and the phase should be the same. In principal it is fine, but when I am fixing the pulse on the H channel, the random noise is so serious that we have to use a low-pass filter to remove the noise. As in the big shape the shape is not smooth any more, some wanted points will be removed by the filter too. I guess no way to solve this except the pulse is smooth. 
+I tried to use 2us time step size in the big shape instead of 10us, so I can write the 4us delay. Then for every 5 steps (2us*5=10us) the amplitude and the phase should be the same. In principal it is fine, but when I am fixing the pulse on the H channel, the random noise is so serious that we have to use a low-pass filter to remove the noise. As in the big shape the shape is not smooth any more, some wanted points will be removed by the filter too. I guess no way to solve this except the pulse is smooth.
 
-So maybe need recalculation with 5us pre-delay and post-delay.
+So maybe need recalculation with 0us pre-delay and post-delay.
+
+\newpage
+\section{May 9, 2015: Recalculation of GRAPE pulses with 0us Buffer}
+
+According to the fact that 4us cannot be absorbed into a 10us shape pulse, I decided to delete the buffer delay in the GRAPE calculation. An AU program called 'GRAPE\_recal\_nobuffer.m' was written to do it. The directory in Ordi2 is '\dir pulseexam\_12qubit\dir C\_rotations\dir GRAPE\_nobuffer\dir' or in the SVN '\dir Matlab\dir Twqubit\dir Pulse\_NoBuffer\dir'.
+
+There are 18 pulses required for recalculation with 8 $\pi/2$ rotations and 10 $\pi$ rotations. In the program, I first regenerate Bx and By from the shaped pulses, and use them as the initial guess, saved in files titled like 'twqubit\_C190\_InitialGuess.mat'. Then generate the params setting file with 0us buffer. \textbf{Note the power limit of C channel is set as 12.5KHz instead of 25KHz. }Both the initial guess file and params setting file are transferred to Feynman and Ordi2 by the scp command. A cluster sample is also written and saved in Ordi2 pulsefinder folder.
+
+In calculation on Feynman in the weekend. All the 18 pulses
+\begin{lstlisting}
+Pulse_Name{1} = 'twqubit_C790';
+Pulse_Name{2} = 'twqubit_C290';
+Pulse_Name{3} = 'twqubit_C234790';
+Pulse_Name{4} = 'twqubit_C234790withPC';
+Pulse_Name{5} = 'twqubit_C134690andH90';
+Pulse_Name{6} = 'twqubit_C1234690withPC';
+Pulse_Name{7} = 'twqubit_C2Y5X90';
+Pulse_Name{8} = 'twqubit_C590';
+Pulse_Name{9} = 'twqubit_C2180';
+Pulse_Name{10} = 'twqubit_C6180';
+Pulse_Name{11} = 'twqubit_C4180';
+Pulse_Name{12} = 'twqubit_C57180';
+Pulse_Name{13} = 'twqubit_C1180';
+Pulse_Name{14} = 'twqubit_C23180';
+Pulse_Name{15} = 'twqubit_C156180';
+Pulse_Name{16} = 'twqubit_C2347andH180';
+Pulse_Name{17} = 'twqubit_C23456180';
+Pulse_Name{18} = 'twqubit_C27180';
+\end{lstlisting}
+
+\newpage
+\section{May 11, 2015: No buffer GRAPE pulses}
+Got almost all pulses with fidelity over 0.995. The exception is pulse Number 10, C6180. The reason should be the power limit 12.5KHz is not enough. So change it to 25KHz again and recalculate this GRAPE. All the GRAPE .mat files are transferred to '\dir Matlab\dir Twqubit\dir Pulse\_NoBuffer\dir'.
+
+An AU program 'make\_shape\_12qubit.m' for making the Bruker shape is used to generate all Burker files. Then the maximal power is checked using 'check\_power\_NoBuffer.m'. The powers are almost the same as the ones from the initial guess, and are updated in the Appendix. 
+
 
 \newpage
 \section{All Pulses for 12 qubits}
@@ -862,6 +898,37 @@ All pulses in the saving folder '\dir pulseexam\_12qubit\dir'. The fidelities in
   twqubit\_encoding3\_C, H & 7.36 ms & ZZZZZZZZZZZZ & 0.9124\\
   twqubit\_phasecycling\_C, H & 1 ms & I$_{+}^{\otimes 12}$ + I$_{-}^{\otimes 12}$ & 0.9125\\
   twqubit\_decoding\_C, H & 68.96 ms & Z$_7\otimes\ket{00000000000}$ & 0.8234\\
+  \hline
+\end{tabular}
+\end{table}
+
+\subsection{New Pulses with 0us Buffer Delay}
+
+Recalculated 18 pulses with 0us buffer. Here is the information.
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c}
+  \hline
+  Name & Length & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  C790 & 1ms & 46.8\%, 11697Hz & 27.9\%, 6965Hz\\
+  C290 & 1ms & 37.8\%, 9456Hz & 25.8\%, 6453Hz\\
+  C234790 & 1ms & 39.1\%, 9781Hz & 29.1\%, 7287Hz\\
+  C234790withPC & 1ms & 25.1\%, 6286Hz & 20.5\%, 5130Hz\\
+  C134690andH90 & 1ms & 27.2\%, 6803Hz & 30.3\%, 7574Hz\\
+  C1234690withPC & 1ms & 28.9\%, 7226Hz & 27.3\%, 6819Hz\\
+  C2Y5X90 & 1ms & 30.5\%, 7632Hz & 28.8\%, 7212Hz\\
+  C590 & 1ms & 61.4\%, 15348Hz & 32.7\%, 8171Hz\\
+  C2180 & 2ms & 50.9\%, 12722Hz & 31.4\%, 7859Hz\\
+  C6180 & 2ms & 75.2\%, 18790Hz & 33.6\%, 8392Hz\\
+  C4180 & 2ms & 47.0\%, 11760Hz & 20.7\%, 5173Hz\\
+  C57180 & 2ms & 32.4\%, 8093Hz & 25.4\%, 6361Hz\\
+  C1180 & 2ms & 63.0\%, 15747Hz & 35.0\%, 8744Hz\\
+  C23180 & 2ms & 34.2\%, 8540Hz & 23.3\%, 5827Hz\\
+  C156180 & 2ms & 31.6\%, 7899Hz & 20.7\%, 5183Hz\\
+  C2347180andH180 & 2ms & 62.2\%, 15555Hz & 52.0\%, 13011Hz\\
+  C23456180 & 2ms & 38.0\%, 9497Hz & 23.2\%, 5791Hz\\
+  C27180 & 2ms & 28.7\%, 7176Hz & 21.5\%, 5380Hz\\
   \hline
 \end{tabular}
 \end{table}
