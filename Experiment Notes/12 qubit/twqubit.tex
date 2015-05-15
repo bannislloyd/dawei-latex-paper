@@ -804,8 +804,23 @@ Pulse_Name{18} = 'twqubit_C27180';
 \section{May 11, 2015: No buffer GRAPE pulses}
 Got almost all pulses with fidelity over 0.995. The exception is pulse Number 10, C6180. The reason should be the power limit 12.5KHz is not enough. So change it to 25KHz again and recalculate this GRAPE. All the GRAPE .mat files are transferred to '\dir Matlab\dir Twqubit\dir Pulse\_NoBuffer\dir'.
 
-An AU program 'make\_shape\_12qubit.m' for making the Bruker shape is used to generate all Burker files. Then the maximal power is checked using 'check\_power\_NoBuffer.m'. The powers are almost the same as the ones from the initial guess, and are updated in the Appendix. 
+An AU program 'make\_shape\_12qubit.m' for making the Bruker shape is used to generate all Burker files. Then the maximal power is checked using 'check\_power\_NoBuffer.m'. The powers are almost the same as the ones from the initial guess, and are updated in the Appendix.
 
+\newpage
+\section{May 13, 2015: Experiments with No Buffer Pulses}
+
+Tested in experiment with the new no-buffer GRAPE pulses. I can still get the 7 coherence by decoupling H channel. To my surprise, if I fixed all the pulses, the performance with the fixed ones is even worse. I guess the reason is when pulse fixing, the baseline is a little bit below 0 for the free evolution. It does not make sense to fix them but the fixing program is indeed trying to fix it. The solution might be fixing each pulse one by one, and then combine all of them with the 0 points for free evolution. It will be done soon.
+
+Exp 1103: Ob Z24567 with H decoupling and non-fixed No Buffer pulses. Look good. \\
+Exp 1104: Ob Z1234567 with H decoupling and non-fixed No Buffer pulses. Look good. \\
+Exp 2103: Ob Z24567 with H decoupling and fixed No Buffer pulses. Worse than 1103, which is surprising. \\
+Exp 2104: Ob Z1234567 with H decoupling and fixed No Buffer pulses. Worse than 1104, which is surprising. \\
+
+For PPS, there is still no signal. See Exp 1999 and 2000. 
+Exp 1999: PPS by non-fixed No Buffer pulses. No signal. \\
+Exp 2000: PPS by fixed No Buffer pulses. No signal. \\
+
+I tried 'fp' with about 200 scans to get a signal after one phase cycling step, and 80 scans with 'efp' and 'LB=0.3Hz'. So I divided the PPS into 24 experiments, and 80 scans for each experiment. D1 = 60s, so the total time for trying a PPS now is 34 hours...
 
 \newpage
 \section{All Pulses for 12 qubits}
