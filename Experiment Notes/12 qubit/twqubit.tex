@@ -816,11 +816,16 @@ Exp 1104: Ob Z1234567 with H decoupling and non-fixed No Buffer pulses. Look goo
 Exp 2103: Ob Z24567 with H decoupling and fixed No Buffer pulses. Worse than 1103, which is surprising. \\
 Exp 2104: Ob Z1234567 with H decoupling and fixed No Buffer pulses. Worse than 1104, which is surprising. \\
 
-For PPS, there is still no signal. See Exp 1999 and 2000. 
+For PPS, there is still no signal. See Exp 1999 and 2000.
 Exp 1999: PPS by non-fixed No Buffer pulses. No signal. \\
 Exp 2000: PPS by fixed No Buffer pulses. No signal. \\
 
 I tried 'fp' with about 200 scans to get a signal after one phase cycling step, and 80 scans with 'efp' and 'LB=0.3Hz'. So I divided the PPS into 24 experiments, and 80 scans for each experiment. D1 = 60s, so the total time for trying a PPS now is 34 hours...
+
+\textbf{Note}: Explanations to Exp 2103 and 2104. The No Buffer pulses after fixing are even worse because the fixing program has a problem. The pulses itself is a big shape, with tons of 0 points inside to realize free evolutions. However, the pickup coil will detect slight signals for those 0 points (slightly over or below 0). The fixing program tries to correct these points by modifying these 0 to non-zero, which is not reasonable. One way to solve this problem is by fixing all pulses individually and combine them at last. So I fixed all the 18 pulses either 1ms or 2ms, and then used programs called 'pulse\_combine\_encoding\_nobuffer\_fixed.m' and 'pulse\_combine\_decoding\_nobuffer\_fixed.m' in '\dir Twqubit\dir Pulses\_NoBuffer\dir' to combine all of them with 0 points.
+
+\newpage
+\section{May 22, 2015: Scan 200}
 
 \newpage
 \section{All Pulses for 12 qubits}
