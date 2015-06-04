@@ -822,10 +822,16 @@ Exp 2000: PPS by fixed No Buffer pulses. No signal. \\
 
 I tried 'fp' with about 200 scans to get a signal after one phase cycling step, and 80 scans with 'efp' and 'LB=0.3Hz'. So I divided the PPS into 24 experiments, and 80 scans for each experiment. D1 = 60s, so the total time for trying a PPS now is 34 hours...
 
-\textbf{Note}: Explanations to Exp 2103 and 2104. The No Buffer pulses after fixing are even worse because the fixing program has a problem. The pulses itself is a big shape, with tons of 0 points inside to realize free evolutions. However, the pickup coil will detect slight signals for those 0 points (slightly over or below 0). The fixing program tries to correct these points by modifying these 0 to non-zero, which is not reasonable. One way to solve this problem is by fixing all pulses individually and combine them at last. So I fixed all the 18 pulses either 1ms or 2ms, and then used programs called 'pulse\_combine\_encoding\_nobuffer\_fixed.m' and 'pulse\_combine\_decoding\_nobuffer\_fixed.m' in '\dir Twqubit\dir Pulses\_NoBuffer\dir' to combine all of them with 0 points.
+\textbf{Note: Explanations to Exp 2103 and 2104.} The No Buffer pulses after fixing are even worse because the fixing program has a problem. The pulses itself is a big shape, with tons of 0 points inside to realize free evolutions. However, the pickup coil will detect slight signals for those 0 points (slightly over or below 0). The fixing program tries to correct these points by modifying these 0 to non-zero, which is not reasonable. One way to solve this problem is by fixing all pulses individually and combine them at last. So I fixed all the 18 pulses either 1ms or 2ms, and then used programs called 'pulse\_combine\_encoding\_nobuffer\_fixed.m' and 'pulse\_combine\_decoding\_nobuffer\_fixed.m' in '\dir Twqubit\dir Pulses\_NoBuffer\dir' to combine all of them with 0 points.
+
+Unfortunately the result is not good. It turns out that the signal is still very low with 80 scans. So maybe improve the number of scans can help a little bit.
 
 \newpage
-\section{May 22, 2015: Scan 200}
+\section{May 22, 2015: Re-run PPS with Scan=200}
+
+As there are three days that we will go to Ray's cottage, I set 200 scans for each phase cycling and the total length is thus 3d10hrs. I used a MAC program to automatically set all 24 experimental parameters. The Matlab program to generate this MAC file is 'Genmultizg.m' in '\dir Twqubit\dir'. Put the generated file to '\dir lists\dir mac\dir'. The 24 experiments are from Exp 2001 to Exp 2024.
+
+Unfortunately there is no FID after the multizg. I tried some of the 24 experiments and they cannot do fp or efp. Need to figure out why. Another problem is during a long multizg, the sample will unlock at some time. Xinhua said the reason is gradient field. Because the gradient field is applied in z direction, it will affect the locking signal. But we cannot avoid the many gradient fields in between. Try experiment one by one? Anyway, do simulation now. That is, getting the simulated spectrum of each phase cycling, and then compare.
 
 \newpage
 \section{All Pulses for 12 qubits}
