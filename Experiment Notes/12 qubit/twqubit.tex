@@ -833,6 +833,8 @@ As there are three days that we will go to Ray's cottage, I set 200 scans for ea
 
 Unfortunately there is no FID after the multizg. I tried some of the 24 experiments and they cannot do fp or efp. Need to figure out why. Another problem is during a long multizg, the sample will unlock at some time. Xinhua said the reason is gradient field. Because the gradient field is applied in z direction, it will affect the locking signal. But we cannot avoid the many gradient fields in between. Try experiment one by one? Anyway, do simulation now. That is, getting the simulated spectrum of each phase cycling, and then compare.
 
+Re-run the 24 experiments again and now they have spectrum. Almost all 0. The sum is not a single peak. Meanwhile, the simulation is done. The folder is '\dir Twqubit\_Circuit\_PPS\dir'. First I ran 'rho\_phasecycling\_24steps.m' to get all MAT files of the 24 states, with each one corresponding to a phase cycling step. Then upload all the 24 MAT files to Ordi2 where the 'mkstate.m' function is. Run 'sim\_12pps\_step.m' in '\dir NMR\dir EXPERIMENTS\dir twqubit' to get all the simulated results and transfer them to my laptop. Plot all the 24 figures with the name such as '24\_step\_7.fig' for each one. Every spectrum out of the 24 figures is oscillating seriously which means if the T2* is not long enough (the case in experiment), we cannot resolve it. 
+
 \newpage
 \section{All Pulses for 12 qubits}
 
