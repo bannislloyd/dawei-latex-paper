@@ -15,10 +15,6 @@
 \usepackage{multirow}
 \usepackage{hyperref}
 
-\usepackage{graphicx}
-\usepackage{subfigure}
-
-
 \usepackage{tabu} % table macro
 
 \usepackage[framed,numbered]{matlab-prettifier}
@@ -840,60 +836,9 @@ Unfortunately there is no FID after the multizg. I tried some of the 24 experime
 Re-run the 24 experiments again and now they have spectrum. Almost all 0. The sum is not a single peak. Meanwhile, the simulation is done. The folder is '\dir Twqubit\_Circuit\_PPS\dir'. First I ran 'rho\_phasecycling\_24steps.m' to get all MAT files of the 24 states, with each one corresponding to a phase cycling step. Then upload all the 24 MAT files to Ordi2 where the 'mkstate.m' function is. Run 'sim\_12pps\_step.m' in '\dir NMR\dir EXPERIMENTS\dir twqubit' to get all the simulated results and transfer them to my laptop. Plot all the 24 figures with the name such as '24\_step\_7.fig' for each one. Every spectrum out of the 24 figures is oscillating seriously which means if the T2* is not long enough (the case in experiment), we cannot resolve it.
 
 \newpage
-\section{June 09, 2015: Write a universal program for spectrum simulation}
+\section{May 22, 2015: Re-run PPS with Scan=200}
 
-\textbf{Fast spectrum generating code spec\_plot.m in \dir subfunction}
-
-The previous way to simulate the NMR spectrum by giving the density matrix, Hamiltonian, T2* is via Fourier transform. The code is written by Colm Ryan and it is powerful. However, for 12 qubits it takes more than 40 minutes to get a spectrum. So I write another program to simulate the spectrum. It is universal, and only takes less than 1 minute for a 12-qubit simulation.
-
-The function is 'spec\_plot.m' saved in the '\dir subfunction' folder. There are four input parameters: Hamiltonian, density matrix, observed spins and T2*. By giving the Hamiltonian, we can know the frequencies of all possible peaks. For example, in the 12-qubit sample we would like to observe C7. There should be $2^{11}$ peaks as 11 spins have interactions with C7. The central frequency is $\omega(7)$, which is the chemical shift of C7. So the frequency of all peaks would be
-\be
-\omega(7)+\sum_{i=1,i\neq 7}^{12} \pm J_{i7}/2.
-\ee
-By the signs of J, we can also know the state of the other qubits. I define +J/2 is $\ket{0}$ and -J/2 is $\ket{1}$ to make the $\ket{00..0}$ appear at  the leftmost side in Bruker (highest frequency). After confirming the state of the other qubits, we can convert this state to decimal number, and then know the locations of it in the density matrix, because the density matrix can be understood through states (row 1 is $\ket{00..0}$, row 2 is $\ket{00..1}$ etc.). The element in that position gives the real part and imaginary part of the related peak. Then a Lorentzian shape is plotted with this element as the amplitude and phase, and T2* as the half-height width. Sum over all the $2^{11}$ peaks will give the spectrum of C7. And if you want to save the figure and data points, just input a name after running the code. If you input 0, no data will be saved but the spectrum will be shown in a separate window.
-
-\textbf{C2 fitting code fitting\_C2.m in \dir Twqubit\_Circuit\_PPS\dir simulation}
-
-When I compared the thermal spectrum of C2 and experimental thermal, they do not match at the small J-couplings. This program is written to fit the small J-couplings of C2 by brutal force. I only need to fit the frequency 8900 to 8920 region as all small couplings are involved in it. There are 7 of them: C2C4, C2C5, C2C6, C2H1, C2H2, C2H3, and C2H5. Moreover, C2C4, C2C5, and C2C6 are fixed by the H-decoupled C spectrum. The second assumption is C2H2 and C2H3 have the same couplings to save time. The constraint is the width of this regions equals to the sum over all couplings, that is, only two variables then. C2H2 and C2H1.
-
-The experimental spectrum is saved in 'thermal\_exp\_C\_200.mat' and the scaled factor is defined as the integral (sum) of the region [8900 8920]. There are 13 peaks in total and each peak corresponds to an intensity. In the fitting, we consider the 13 peak frequencies as the target function f, defined as the sum over square error of each peak. If this f is small then 1Hz which means the peak locations are pretty close, go to check the intensities of every peak. The definition of this value g is the same as f. When g is small, it means the peak intensities have the best fit as well as the locations are close too. The T2*=310ms gives the best match. Refer to the original code for details and the output spectrum is shown below (plotted by 'compared\_C2.m').
-
-\begin{figure}
-\begin{minipage}[hbtp]{0.5\linewidth}
-\centering
-\includegraphics[width=0.8\columnwidth]{comparison_C2.pdf}
-\caption{Comparison of simulated and experimental C2 thermal.}
-\label{fig:side:a}
-\end{minipage}%
-\begin{minipage}[hbtp]{0.5\linewidth}
-\centering
-\includegraphics[width=0.8\columnwidth]{comparison_C2_zoomin.pdf}
-\caption{Detailed comparison.}
-\label{fig:side:b}
-\end{minipage}
-\end{figure}
-
-Besides, C7 is also compared with T2*=420ms. The figure plotted by 'compared\_C7.m' is shown below.
-
-\begin{figure}
-\begin{minipage}[hbtp]{0.5\linewidth}
-\centering
-\includegraphics[width=0.8\columnwidth]{comparison_C7.pdf}
-\caption{Comparison of simulated and experimental C7 thermal.}
-\label{fig:side:a}
-\end{minipage}%
-\begin{minipage}[hbtp]{0.5\linewidth}
-\centering
-\includegraphics[width=0.8\columnwidth]{comparison_C7_zoomin.pdf}
-\caption{Detailed comparison.}
-\label{fig:side:b}
-\end{minipage}
-\end{figure}
-
-Now it is ready to go to check every experimental spectrum of C2 and C7. Indeed, we will just observe these two.
-
-
-\clearpage
+\newpage
 \section{All Pulses for 12 qubits}
 
 The saving folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'.
