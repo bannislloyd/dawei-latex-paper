@@ -22,6 +22,7 @@
 \BOOKMARK [1][-]{section*.22}{May 13, 2015: Experiments with No Buffer Pulses}{section*.2}% 22
 \BOOKMARK [1][-]{section*.23}{May 22, 2015: Re-run PPS with Scan=200}{section*.2}% 23
 \BOOKMARK [1][-]{section*.24}{June 09, 2015: Write a universal program for spectrum simulation}{section*.2}% 24
-\BOOKMARK [1][-]{section*.25}{All Pulses for 12 qubits}{section*.2}% 25
-\BOOKMARK [2][-]{section*.26}{New Pulses with 0us Buffer Delay}{section*.25}% 26
-\BOOKMARK [1][-]{section*.27}{References}{section*.2}% 27
+\BOOKMARK [1][-]{section*.25}{June 11, 2015: Implement every encoding and decoding part and compare with simulation}{section*.2}% 25
+\BOOKMARK [1][-]{section*.26}{All Pulses for 12 qubits}{section*.2}% 26
+\BOOKMARK [2][-]{section*.27}{New Pulses with 0us Buffer Delay}{section*.26}% 27
+\BOOKMARK [1][-]{section*.28}{References}{section*.2}% 28
