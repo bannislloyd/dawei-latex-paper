@@ -898,7 +898,7 @@ Now it is ready to go to check every experimental spectrum of C2 and C7. Indeed,
 Before experiments, I want to find the best setting for 12 qubits.
 
 \textbf{SWH = 30030Hz. DW = 16.65us. }\\
-SWH is a fixed value. DW is related to the sampling rate, and reciprocal (inversely proportional) to SWH. 
+SWH is a fixed value. DW is related to the sampling rate, and reciprocal (inversely proportional) to SWH.
 
 \textbf{TD = 65536 and SI = 262144(max).} \\
 The real spectrum will have SI points. So if SI<TD, it will cut the first SI points from TD when doing FFT. Otherwise, it will add the number of SI-TD points to the tail when doing FFT. Because SWH is very big, we need many many points to keep a high resolution. That is why SI is so big. Meanwhile, if TD is much smaller, we will use a lot of zero points added to the tail of TD, which means the noise is canceled a lot. Small TD gives us a good SNR, but it loses the resolution of small couplings.
@@ -907,7 +907,7 @@ The real spectrum will have SI points. So if SI<TD, it will cut the first SI poi
 \textbf{AQ = 1.09s.}\\
 AQ is fixed as AQ = DW*TD.
 
-Then the experiments are 
+Then the experiments are
 
 Exp 1398: Observe C7 by Gaussian with H decoupled. NS = 1. TD=281684. \\
 Exp 1399: Observe C2 by Gaussian with H decoupled. NS = 1. TD=281684. \\
@@ -917,6 +917,10 @@ Exp 1403: Observe C7 after encoding1. NS=10.\\
 Exp 1404: Observe C2 after encoding1. NS=10.\\
 Exp 1405: Observe C7 after encoding1 and decouple H. NS=1.\\
 Exp 1406: Observe C2 after encoding1 and decouple H. NS=1.\\
+Exp 1407: Observe C7 after encoding2. NS=10.\\
+Exp 1408: Observe C2 after encoding2. NS=10.\\
+Exp 1409: Observe C7 after encoding2 and decouple H. NS=1.\\
+Exp 1410: Observe C2 after encoding2 and decouple H. NS=1.\\
 
 \clearpage
 \section{All Pulses for 12 qubits}

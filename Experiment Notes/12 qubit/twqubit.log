@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.5)  11 JUN 2015 16:54
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.5)  12 JUN 2015 10:38
 entering extended mode
 **H:/Latex/Experiment*Notes/12*qubit/twqubit.tex
 ("H:/Latex/Experiment Notes/12 qubit/twqubit.tex"
@@ -718,24 +718,24 @@ File: comparison_C7_zoomin.pdf Graphic file (type pdf)
 parison_C2.pdf> <H:/Latex/Experiment Notes/12 qubit/comparison_C2_zoomin.pdf> <
 H:/Latex/Experiment Notes/12 qubit/comparison_C7.pdf> <H:/Latex/Experiment Note
 s/12 qubit/comparison_C7_zoomin.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 911--913
+Underfull \hbox (badness 10000) in paragraph at lines 912--924
 
  []
 
 [29]
-Overfull \hbox (34.68916pt too wide) in paragraph at lines 948--960
+Overfull \hbox (34.68916pt too wide) in paragraph at lines 959--971
  []$[]$ 
  []
 
 [30] ("H:\Latex\Experiment Notes\12 qubit\twqubit.bbl")
 
-Package natbib Warning: Empty `thebibliography' environment on input line 1043.
+Package natbib Warning: Empty `thebibliography' environment on input line 1054.
 
 
 [31]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1046.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1057.
  ("H:\Latex\Experiment Notes\12 qubit\twqubit.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1046.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1057.
 Package rerunfilecheck Info: File `twqubit.out' has not changed.
 (rerunfilecheck)             Checksum: 43D1668DCA75331FB3C62DAB46485E2F;2233.
 
@@ -768,7 +768,7 @@ y5.pfb><F:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><F:/CTEX/MiKTeX
 /fonts/type1/public/amsfonts/cm/cmsy7.pfb><F:/CTEX/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmsy9.pfb><F:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><
 F:/CTEX/MiKTeX/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on twqubit.pdf (31 pages, 800997 bytes).
+Output written on twqubit.pdf (31 pages, 801229 bytes).
 PDF statistics:
  755 PDF objects out of 1000 (max. 8388607)
  302 named destinations out of 1000 (max. 500000)
