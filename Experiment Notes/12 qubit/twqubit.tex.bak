@@ -708,15 +708,15 @@ The calibration folder is 'twqubit\_calib'. Then select the experiment you want 
 
 The experiments for calibrating C is titled 'twqubit\_calib\_C', and for calibrating H is 'twqubit\_calib\_H'. For H, I calibrated through the C channel as in experiment we only observe the C channel. The way is to transfer the H signal to C via XZ terms, so I can only calibrate the $\pi/2$ and $3\pi/2$ pulses. The results are summarized in the following table
 \begin{table}[hbtp]
-\begin{tabular} {c||c|c|c|c|c}
+\begin{tabular} {c||c|c|c|c|c|c}
   \hline
-  Rotation & Length & Frequency & Exp. No & dB (Apr 16) & dB (Apr 17)\\
+  Rotation & Length & Frequency & Exp. No & dB (Apr 16) & dB (Apr 17) & dB (June 25)\\
   \hline
   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-  C360 & 40us & 25000Hz & 11-23 (-3.5dB to -5.9dB) & -4.51dB & -4.38dB\\
-  C360 & 80us & 12500Hz & 51-63 (3.0dB to 0.6dB) & 1.82dB & 1.74dB\\
+  C360 & 40us & 25000Hz & 11-23 (-3.5dB to -5.9dB) & -4.51dB & -4.38dB & -1.18dB\\
+  C360 & 80us & 12500Hz & 51-63 (3.0dB to 0.6dB) & 1.82dB & 1.74dB & ---\\
   C90 & 20us & 12500Hz & 101-113 (3.0dB to 0.6dB) & --- & 1.00dB\\
-  H270 (by C) & 30us & 25000Hz & XXXX & --- & 6.20dB\\
+  H270 (by C) & 30us & 25000Hz & XXXX & --- & 6.20dB & 6.20dB\\
   H360 (by H) & 40us & 25000Hz & XXXX & --- & 5.40dB\\
   \hline
 \end{tabular}
@@ -898,7 +898,7 @@ Now it is ready to go to check every experimental spectrum of C2 and C7. Indeed,
 Before experiments, I want to find the best setting for 12 qubits.
 
 \textbf{SWH = 30030Hz. DW = 16.65us. }\\
-SWH is a fixed value. DW is related to the sampling rate, and reciprocal (inversely proportional) to SWH. 
+SWH is a fixed value. DW is related to the sampling rate, and reciprocal (inversely proportional) to SWH.
 
 \textbf{TD = 65536 and SI = 262144(max).} \\
 The real spectrum will have SI points. So if SI<TD, it will cut the first SI points from TD when doing FFT. Otherwise, it will add the number of SI-TD points to the tail when doing FFT. Because SWH is very big, we need many many points to keep a high resolution. That is why SI is so big. Meanwhile, if TD is much smaller, we will use a lot of zero points added to the tail of TD, which means the noise is canceled a lot. Small TD gives us a good SNR, but it loses the resolution of small couplings.
@@ -907,7 +907,7 @@ The real spectrum will have SI points. So if SI<TD, it will cut the first SI poi
 \textbf{AQ = 1.09s.}\\
 AQ is fixed as AQ = DW*TD.
 
-Then the experiments are 
+Then the experiments are
 
 Exp 1398: Observe C7 by Gaussian with H decoupled. NS = 1. TD=281684. \\
 Exp 1399: Observe C2 by Gaussian with H decoupled. NS = 1. TD=281684. \\
@@ -917,6 +917,10 @@ Exp 1403: Observe C7 after encoding1. NS=10.\\
 Exp 1404: Observe C2 after encoding1. NS=10.\\
 Exp 1405: Observe C7 after encoding1 and decouple H. NS=1.\\
 Exp 1406: Observe C2 after encoding1 and decouple H. NS=1.\\
+Exp 1407: Observe C7 after encoding2. NS=10.\\
+Exp 1408: Observe C2 after encoding2. NS=10.\\
+Exp 1409: Observe C7 after encoding2 and decouple H. NS=1.\\
+Exp 1410: Observe C2 after encoding2 and decouple H. NS=1.\\
 
 \clearpage
 \section{All Pulses for 12 qubits}
@@ -992,6 +996,7 @@ Pulses for the decoding part of PPS preparation.
   $R_{-y}^{4,6}R_{y}^{1,3}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}(6.6\text{ms})$ & 1ms & 0.9982 &  twqubit\_C1234690withPC\_Ufid.mat & 28.3\%, 7070.8Hz & 26.9\%, 6717Hz\\
   $R_x^{2,7}(\pi)$ & 2ms & 0.9979 & twqubit\_C27180\_Ufid.mat & 29.1\%, 7285.3Hz & 21.7\%, 5414Hz\\
   $R_{y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & 0.9975 & twqubit\_C2Y5X90\_Ufid.mat & 28.9\%, 7233.9Hz & 29.2\%, 7292Hz\\
+  $R_{x}^{8,9,10,11,12}(\pi/2)$ & 1ms & 0.9982 & twqubit\_H90\_Ufid.mat & 45.6\%, 11405Hz & 27.5\%, 6876Hz\\
   \hline
 \end{tabular}
 \end{table}

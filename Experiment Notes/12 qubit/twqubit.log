@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.5)  12 JUN 2015 10:38
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.5)  12 AUG 2015 11:49
 entering extended mode
 **H:/Latex/Experiment*Notes/12*qubit/twqubit.tex
 ("H:/Latex/Experiment Notes/12 qubit/twqubit.tex"
@@ -661,7 +661,7 @@ Overfull \hbox (4.69585pt too wide) in paragraph at lines 439--440
 o Z24567. The files 'twqubit[]encoding1[]C' and 'twqubit[]encoding1[]H'
  []
 
-[13] [14] [15] [16] <thermal_and_pps_circuit.pdf, id=419, 578.16pt x 433.62pt>
+[13] [14] [15] [16] <thermal_and_pps_circuit.pdf, id=423, 578.16pt x 433.62pt>
 File: thermal_and_pps_circuit.pdf Graphic file (type pdf)
 
 <use thermal_and_pps_circuit.pdf> [17 <H:/Latex/Experiment Notes/12 qubit/therm
@@ -671,7 +671,7 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
 (Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 674.
 
 
-<thermal_and_pps_circuit_grape.pdf, id=448, 578.16pt x 433.62pt>
+<thermal_and_pps_circuit_grape.pdf, id=452, 578.16pt x 433.62pt>
 File: thermal_and_pps_circuit_grape.pdf Graphic file (type pdf)
 
 <use thermal_and_pps_circuit_grape.pdf> [18] [19 <H:/Latex/Experiment Notes/12 
@@ -700,18 +700,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 823--826
 
  []
 
-[25] [26] <comparison_C2.pdf, id=530, 520.34402pt x 433.62pt>
+[25] [26] <comparison_C2.pdf, id=534, 520.34402pt x 433.62pt>
 File: comparison_C2.pdf Graphic file (type pdf)
 
 <use comparison_C2.pdf>
-<comparison_C2_zoomin.pdf, id=531, 520.34402pt x 433.62pt>
+<comparison_C2_zoomin.pdf, id=535, 520.34402pt x 433.62pt>
 File: comparison_C2_zoomin.pdf Graphic file (type pdf)
 
 <use comparison_C2_zoomin.pdf>
-<comparison_C7.pdf, id=532, 520.34402pt x 433.62pt>
+<comparison_C7.pdf, id=536, 520.34402pt x 433.62pt>
 File: comparison_C7.pdf Graphic file (type pdf)
  <use comparison_C7.pdf>
-<comparison_C7_zoomin.pdf, id=533, 520.34402pt x 433.62pt>
+<comparison_C7_zoomin.pdf, id=537, 520.34402pt x 433.62pt>
 File: comparison_C7_zoomin.pdf Graphic file (type pdf)
 
 <use comparison_C7_zoomin.pdf> [27] [28 <H:/Latex/Experiment Notes/12 qubit/com
@@ -723,31 +723,91 @@ Underfull \hbox (badness 10000) in paragraph at lines 912--924
  []
 
 [29]
-Overfull \hbox (34.68916pt too wide) in paragraph at lines 959--971
+Underfull \hbox (badness 10000) in paragraph at lines 928--930
+
+ []
+
+
+
+pdfTeX warning: (null) (file H:/Latex/Experiment Notes/12 qubit/Thermal_C2andC7
+.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowe
+d
+<Thermal_C2andC7.pdf, id=615, 801.3153pt x 442.05132pt>
+File: Thermal_C2andC7.pdf Graphic file (type pdf)
+
+<use Thermal_C2andC7.pdf> [30 <H:/Latex/Experiment Notes/12 qubit/Thermal_C2and
+C7.pdf, page is rotated 270 degrees>]
+Underfull \hbox (badness 10000) in paragraph at lines 940--942
+
+ []
+
+
+
+pdfTeX warning: (null) (file H:/Latex/Experiment Notes/12 qubit/Encoding1_witho
+ut_decouple.pdf): PDF inclusion: found PDF version <1.6>, but at most version <
+1.5> allowed
+<Encoding1_without_decouple.pdf, id=653, 813.81078pt x 466.5227pt>
+File: Encoding1_without_decouple.pdf Graphic file (type pdf)
+
+<use Encoding1_without_decouple.pdf> [31 <H:/Latex/Experiment Notes/12 qubit/En
+coding1_without_decouple.pdf, page is rotated 270 degrees>]
+
+pdfTeX warning: (null) (file H:/Latex/Experiment Notes/12 qubit/Encoding1_with_
+decouple.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5
+> allowed
+<Encoding1_with_decouple.pdf, id=692, 812.24904pt x 467.04279pt>
+File: Encoding1_with_decouple.pdf Graphic file (type pdf)
+
+<use Encoding1_with_decouple.pdf> [32 <H:/Latex/Experiment Notes/12 qubit/Encod
+ing1_with_decouple.pdf, page is rotated 270 degrees>]
+Underfull \hbox (badness 10000) in paragraph at lines 971--973
+
+ []
+
+
+
+pdfTeX warning: (null) (file H:/Latex/Experiment Notes/12 qubit/Encoding2_witho
+ut_decouple.pdf): PDF inclusion: found PDF version <1.6>, but at most version <
+1.5> allowed
+<Encoding2_without_decouple.pdf, id=729, 821.62144pt x 470.16774pt>
+File: Encoding2_without_decouple.pdf Graphic file (type pdf)
+
+<use Encoding2_without_decouple.pdf> [33 <H:/Latex/Experiment Notes/12 qubit/En
+coding2_without_decouple.pdf, page is rotated 270 degrees>]
+
+pdfTeX warning: (null) (file H:/Latex/Experiment Notes/12 qubit/Encoding2_with_
+decouple.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5
+> allowed
+<Encoding2_with_decouple.pdf, id=767, 814.85275pt x 465.48103pt>
+File: Encoding2_with_decouple.pdf Graphic file (type pdf)
+
+<use Encoding2_with_decouple.pdf> [34 <H:/Latex/Experiment Notes/12 qubit/Encod
+ing2_with_decouple.pdf, page is rotated 270 degrees>] [35]
+Overfull \hbox (34.68916pt too wide) in paragraph at lines 1038--1050
  []$[]$ 
  []
 
-[30] ("H:\Latex\Experiment Notes\12 qubit\twqubit.bbl")
+[36] ("H:\Latex\Experiment Notes\12 qubit\twqubit.bbl")
 
-Package natbib Warning: Empty `thebibliography' environment on input line 1054.
+Package natbib Warning: Empty `thebibliography' environment on input line 1134.
 
 
-[31]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1057.
+[37]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1137.
  ("H:\Latex\Experiment Notes\12 qubit\twqubit.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1057.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1137.
 Package rerunfilecheck Info: File `twqubit.out' has not changed.
-(rerunfilecheck)             Checksum: 43D1668DCA75331FB3C62DAB46485E2F;2233.
+(rerunfilecheck)             Checksum: 5E38526459263A817C821A4528922FC6;2329.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 11227 strings out of 495362
- 157093 string characters out of 3184024
- 1120969 words of memory out of 3000000
- 13910 multiletter control sequences out of 15000+200000
+ 11270 strings out of 495362
+ 158081 string characters out of 3184024
+ 1121430 words of memory out of 3000000
+ 13936 multiletter control sequences out of 15000+200000
  12618 words of font info for 48 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  34i,16n,54p,967b,1728s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -768,9 +828,9 @@ y5.pfb><F:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><F:/CTEX/MiKTeX
 /fonts/type1/public/amsfonts/cm/cmsy7.pfb><F:/CTEX/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmsy9.pfb><F:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><
 F:/CTEX/MiKTeX/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on twqubit.pdf (31 pages, 801229 bytes).
+Output written on twqubit.pdf (37 pages, 2070987 bytes).
 PDF statistics:
- 755 PDF objects out of 1000 (max. 8388607)
- 302 named destinations out of 1000 (max. 500000)
- 255 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 956 PDF objects out of 1000 (max. 8388607)
+ 314 named destinations out of 1000 (max. 500000)
+ 288 words of extra memory for PDF output out of 10000 (max. 10000000)
 
