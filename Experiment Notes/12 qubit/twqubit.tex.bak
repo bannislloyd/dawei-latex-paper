@@ -18,6 +18,7 @@
 \usepackage{graphicx}
 \usepackage{subfigure}
 
+\graphicspath{{Figures/}}
 
 \usepackage{tabu} % table macro
 
@@ -907,22 +908,28 @@ The real spectrum will have SI points. So if SI<TD, it will cut the first SI poi
 \textbf{AQ = 1.09s.}\\
 AQ is fixed as AQ = DW*TD.
 
-Then the experiments are
+Then the experiments are (Spectra are shown too)
 
 Exp 1398: Observe C7 by Gaussian with H decoupled. NS = 1. TD=281684. \\
 Exp 1399: Observe C2 by Gaussian with H decoupled. NS = 1. TD=281684. \\
-Exp 1401: Observe C7 by GRAPE as the reference. NS=10. \ref{1401and1402}\\
+Exp 1401: Observe C7 by GRAPE as the reference. NS=10. See Fig. \ref{1401and1402}\\
 Exp 1402: Observe C2 by GRAPE as the reference. NS=10. To my surprise the phase is different with 1401.\\
-Exp 1403: Observe C7 after encoding1. NS=10.\\
+Exp 1403: Observe C7 after encoding1. NS=10. See Fig. \ref{1403and1404}\\
 Exp 1404: Observe C2 after encoding1. NS=10.\\
-Exp 1405: Observe C7 after encoding1 and decouple H. NS=1.\\
+Exp 1405: Observe C7 after encoding1 and decouple H. NS=1. See Fig. \ref{1405and1406}\\
 Exp 1406: Observe C2 after encoding1 and decouple H. NS=1.\\
-Exp 1407: Observe C7 after encoding2. NS=10.\\
+Exp 1407: Observe C7 after encoding2. NS=10. See Fig. \ref{1407and1408}\\
 Exp 1408: Observe C2 after encoding2. NS=10.\\
-Exp 1409: Observe C7 after encoding2 and decouple H. NS=1.\\
+Exp 1409: Observe C7 after encoding2 and decouple H. NS=1. See Fig. \ref{1409and1410}\\
 Exp 1410: Observe C2 after encoding2 and decouple H. NS=1.\\
 
-Show some spectra here.
+For encoding3 which generates ZZZZZZZZZZZZ, we tested that it cannot be observed. The H channel cannot be decoupled as the state of H is not I. So we directly applied encoding 3 to thermal state, and C-H couplings will evolve.
+
+Exp 1411: Observe C7 after encoding3, applied on thermal. NS=1.\\
+Exp 1412: Observe C2 after encoding3, applied on thermal. NS=1.\\
+Exp 1413: Observe C3 after encoding3, applied on thermal. NS=1.\\
+Exp 1414: Observe C4 after encoding3, applied on thermal. NS=1.\\
+
 
 \clearpage
 Exp 1401: Observe C7 by GRAPE as the reference. NS=10.\\
@@ -993,7 +1000,7 @@ For C2 and C7 they both look nice.
 \includegraphics[width=\columnwidth]{Encoding2_with_decouple.pdf}
 \end{center}
 \setlength{\abovecaptionskip}{-0.35cm}
-\caption{\footnotesize{Encoding 2 for C2 and C7 with H decoupled. 1 scan.}}\label{Encoding2_with_decouple}
+\caption{\footnotesize{Encoding 2 for C2 and C7 with H decoupled. 1 scan.}}\label{1409and1410}
 \end{figure}
 
 
