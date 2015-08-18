@@ -1,0 +1,729 @@
+\section{Dec 12, 2014}
+
+Calculating the state to state GRAPE on Ordi2. In pulsefinder folder. paramsfile is 'twqubit\_subS2S.m', and the output file is 'twqubit\_7zto12z'.
+
+The GRAPE is to evolve ZZZZZZZIIIII to ZZZZZZZZZZZZ. As the couplings between nearest-neighbored C and H are about 150Hz. I set the GRAPE
+
+\begin{lstlisting}
+% Number of timesteps
+params.plength = 400;
+
+% Length of each time step
+params.timestep = 10e-6;
+
+params.subsystem{1} = [1 2 3 9 10 11];
+params.subsystem{2} = [4 5 6 7 8 12];
+params.subsys_weight = [6 6];
+
+% Input and goal states for state to state
+params.rhoin = mkstate('+1ZZZZZZZIIIII',1);
+params.rhogoal = mkstate('+1ZZZZZZZZZZZZ',1);
+
+% Allow Zfreedom or not
+params.Zfreedomflag = 1;
+\end{lstlisting}
+
+The fidelity keeps 0 all the time. Guess the reason is 'Zfreedom'. Set 'params.Zfreedomflag = 0;'. However, still 0.
+
+Annie said maybe due to the length. Her SWAP gate requires 8ms, so I changed 'params.plength = 800;'. But for with or without Zfreedom, fidelity is still 0.
+
+Check if some of my GRAPE settings are wrong. try to repeat Annie's SWAP gate calculation.
+
+\begin{lstlisting}
+% Number of timesteps
+params.plength = 800;
+
+% Length of each time step
+params.timestep = 10e-6;
+
+params.subsystem{1} = [1 2 3 9 10 11];
+params.subsystem{2} = [4 5 6 7 8 12];
+params.subsys_weight = [6 6];
+
+% Input and goal states for state to state
+params.rhoin = mkstate('+1IIIIIIIZIIII+1IIIIIIIIZIII+1IIIIIIIIIZII+1IIIIIIIIIIZI+1IIIIIIIIIIIZ',1);
+params.rhogoal = mkstate('+1IIIIIIIZIIII+1IIIIIIIIZIII+1IIIIIIIIIZII+1IIIIIIIIIIZI+1IIIIIIZIIIIZ',1);
+
+% Allow Zfreedom or not
+params.Zfreedomflag = 0;
+\end{lstlisting}
+
+The outputfile is 'twqubit\_SWAPC7H5'. And the fidelity is already over 98\%. Then I changed 'params.Zfreedomflag = 1;', and the fidelity is over 95\% after 30 iterations. Much slower than the no Zfreedom case. Maybe due to different initial guesses.
+
+\newpage
+
+\section{Dec 15, 2014}
+
+Generate all $\pi/2$ and $\pi$ pulses for the 7 Carbons, with the Calibration = 25KHz. $\pi/2$ pulses are 1ms length and 100 steps, and $\pi$ pulses are 2ms length and 200 steps. Generating Code in 'twqubit\_shape.m'
+
+\begin{lstlisting}
+for ii = 1:7
+loadfile = ['twqubit_C', num2str(ii), '180', '.mat'];
+eval(['load ', loadfile]);
+filename1 = ['twqubit_C', num2str(ii), '180_C_25000.txt'];
+filename2 = ['twqubit_C', num2str(ii), '180_H_25000.txt'];
+make_bruker_shape(pulses{1}, 25000, filename1,1);
+make_bruker_shape(pulses{1}, 25000, filename2,2);
+end
+\end{lstlisting}
+
+The pulses are saved in Ordi2 '\dir pulsefinder\dir 12 Qubit\dir' with the names such as\\
+'twqubit\_C590\_C\_25000.txt'.
+
+I checked all the fidelities of the $\pi/2$ pulses in the folder '\dir pulseexam\_12qubit\dir C\_rotations\dir check\_grape.m'. The code is in \hyperlink{code:check_grape}{Appendix I}.
+
+Unitaries and Fidelities of the pulses will both be saved in 'twqubit\_C590\_Ufid.mat', so they can be called for further calculations in the PPS simulation. Wait for the results.
+
+\newpage
+\section{Dec 16, 2014}
+Combine pulses in the PPS preparation into big shape files, which should be easy for calibrations and pulsefixing.
+
+The code is in the SVN server for Matlab named '\dir Twqubit\dir pulse\_combine.m'.
+
+First read all the powers and phases for the $\pi/2$ and $\pi$ rotations.
+
+\begin{lstlisting}
+for spin_number = 1:7
+       Name1 = ['twqubit_C', num2str(spin_number), '90_C_25000.txt'];
+       Name2 = ['twqubit_C', num2str(spin_number), '90_H_25000.txt'];
+       [power1,phase1]=dataout(Name1,Output1,FirstLine,Length_90);
+       [power2,phase2]=dataout(Name2,Output2,FirstLine,Length_90);
+       eval(['power_C', num2str(spin_number), '90_C = power1;']); eval(['phase_C', num2str(spin_number), '90_C = phase1;']);
+       eval(['power_H', num2str(spin_number), '90_H = power2;']); eval(['phase_H', num2str(spin_number), '90_H = phase2;']);
+end
+
+for spin_number = 1:7
+       Name1 = ['twqubit_C', num2str(spin_number), '180_C_25000.txt'];
+       Name2 = ['twqubit_C', num2str(spin_number), '180_H_25000.txt'];
+       [power1,phase1]=dataout(Name1,Output1,FirstLine,Length_180);
+       [power2,phase2]=dataout(Name2,Output2,FirstLine,Length_180);
+       eval(['power_C', num2str(spin_number), '180_C = power1;']); eval(['phase_C', num2str(spin_number), '180_C = phase1;']);
+       eval(['power_H', num2str(spin_number), '180_H = power2;']); eval(['phase_H', num2str(spin_number), '180_H = phase2;']);
+end
+\end{lstlisting}
+
+Then combine them with the free evolutions. Here I set the time step dt = 10us. The code is in \hyperlink{code:combine_encoding1}{Appendix I}.
+
+The two output files are 'twqubit\_encoding1\_C' and 'twqubit\_encoding1\_H'. The calibrations are 25000Hz.
+
+\newpage
+\section{Dec 17, 2014}
+
+All fidelities of $\pi/2$ pulses are done! The folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. Use 'check\_power.m' to check the maximal powers for C and H channel.
+
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c}
+  \hline
+  Rotation & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^1(\pi/2)$ & 0.9838 & twqubit\_C190\_Ufid.mat & 56.0\%, 14000Hz & 22.3\%, 5557Hz\\
+  $R_x^2(\pi/2)$ & 0.9758 & twqubit\_C290\_Ufid.mat & 41.7\%, 10422Hz & 23.5\%, 5878Hz\\
+  $R_x^3(\pi/2)$ & 0.9647 & twqubit\_C390\_Ufid.mat & 31.9\%, 7979.0Hz & 22.3\%, 5568Hz\\
+  $R_x^4(\pi/2)$ & 0.9801 & twqubit\_C490\_Ufid.mat & 31.6\%, 7892.0Hz & 23.8\%, 5954Hz\\
+  $R_x^5(\pi/2)$ & 0.9936 & twqubit\_C590\_Ufid.mat & 56.1\%, 14033Hz & 30.7\%, 7678Hz\\
+  $R_x^6(\pi/2)$ & 0.9683 & twqubit\_C690\_Ufid.mat & 57.3\%, 14333Hz & 34.4\%, 8595Hz\\
+  $R_x^7(\pi/2)$ & 0.9857 & twqubit\_C790\_Ufid.mat & 43.7\%, 10925Hz & 24.8\%, 6207Hz\\
+  \hline
+  \hline
+  $R_x^1(\pi)$ & 0.9699 & twqubit\_C1180\_Ufid.mat & 62.6\%, 15655Hz & 34.9\%, 8726Hz\\
+  $R_x^2(\pi)$ & 0.9537 & twqubit\_C2180\_Ufid.mat & 51.1\%, 12783Hz & 32.4\%, 8094Hz\\
+  $R_x^3(\pi)$ & 0.9330 & twqubit\_C3180\_Ufid.mat & 37.4\%, 9350.0Hz & 24.0\%, 5997Hz\\
+  $R_x^4(\pi)$ & 0.9639 & twqubit\_C4180\_Ufid.mat & 45.1\%, 11268Hz & 20.4\%, 5108Hz\\
+  $R_x^5(\pi)$ & 0.9904 & twqubit\_C5180\_Ufid.mat & 67.6\%, 16895Hz & 31.1\%, 7782Hz\\
+  $R_x^6(\pi)$ & 0.9393 & twqubit\_C6180\_Ufid.mat & 71.8\%, 17948Hz & 33.6\%, 8396Hz\\
+  $R_x^7(\pi)$ & 0.9743 & twqubit\_C7180\_Ufid.mat & 51.0\%, 12759Hz & 32.1\%, 8022Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+For $\pi$ pulses, the maximal power of C5 exceeds 100\% so it cannot be used. Check if we can generate $\pi$ pulses by combining two $\pi/2$ pulses. A potential problem is when calculating the GRAPE, we have considered the 4us free evolutions in the beginning and in the end. If we combine, we will have an unwanted 8us free evolution in the middle of the new $\pi$ pulse.
+
+Use 'combine90to180' to check the $\pi$ pulse fidelity. They are very bad actually. All of them are just 0.75~0.76 in fidelity.
+
+So I run 'check\_grape.m' to check the fidelities of the $\pi$ pulses. Only from C1 to C4, as C5 has exceeds the power limit 25000Hz.
+
+\newpage
+\section{Dec 22, 2014}
+
+Got 4 GRAPE pulses for encoding. The folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. The fidelities are in calculation on Ordi2.
+
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c}
+  \hline
+  Rotation & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{5,7}(\pi)$ & 0.9667 & twqubit\_C57180\_Ufid.mat & 32.3\%, 8072.5Hz & 24.2\%, 6049Hz\\
+  $R_x^{2,3}(\pi)$ & 0.8908 & twqubit\_C23180\_Ufid.mat & 32.4\%, 8101.5Hz & 22.8\%, 5701Hz\\
+  $R_x^{2,3,4,7}(\pi/2)$ & 0.9156 & twqubit\_C234790\_Ufid.mat & 37.4\%, 9358.3Hz & 28.9\%, 7213Hz\\
+  $R_x^{1,5,6}(\pi)$ & 0.9055 & twqubit\_C156180\_Ufid.mat & 32.2\%, 8039.7Hz & 20.3\%, 5086Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+Have to recalculate many $\pi$ pulses.
+
+\newpage
+\section{Dec 23, 2014}
+
+Got $\pi$ pulse on C6. Combine two $\pi/2$ pulses as the initial guess, with the fidelity 0.75, and then search the optimal $\pi$ pulse. The convergence speed is very fast, which means initial guess is indeed very important in 12 qubits.
+
+Now C2, C3, C5, C7 $\pi$ pulses are in calculation, with the initial guess.
+
+\newpage
+\section{Feb 05, 2015}
+
+C2, C3, C5, C7 $\pi$ pulses are all finished, and the update is in the Section Dec 17, 2014.
+
+Also submitted the last pulse for the Encoding. From the PPS.m file in folder 'Twqubit'
+\begin{lstlisting}
+%Phase Correction
+U7 = R(gop(2,X),90)*R(gop(2,-Z),360*(Para(2,2)-20696)*1/2/148.5)*...
+R(gop(3,-Y),90)*R(gop(3,-Z),360*(Para(3,3)-20696)*1/2/148.5)*...
+R(gop(4,X),90)*R(gop(4,-Z),360*(Para(4,4)-20696)*1/2/148.5)*...
+R(gop(7,X),90)*R(gop(7,-Z),360*(Para(7,7)-20696)*1/2/148.5);
+\end{lstlisting}
+
+And the operator is in 'twqubit\_sub\_234790\_and\_phasecorrection.m'
+\begin{lstlisting}
+params.Uwant = expm(-1i*(90*pi/180)/2*full(mkstate('+1IXIIIIIIIIII-1IIYIIIIIIIII+1IIIXIIIIIIII+1IIIIIIXIIIII',0)))*...
+expm(-1i*((8778.95-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IZIIIIIIIIII',0)))*...
+expm(-1i*((6245.16675-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIZIIIIIIIII',0)))*...
+expm(-1i*((10333.55-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIIZIIIIIIII',0)))*...
+expm(-1i*((11928.21998-20696)*1/2/148.5*360*pi/180)/2*full(mkstate('-1IIIIIIZIIIII',0)));
+\end{lstlisting}
+
+\newpage
+\section{Feb 06, 2015}
+
+The pulse 'twqubit\_sub\_234790\_and\_phasecorrection.m' which is the last piece of the encoding was found!
+
+All $\pi$ pulses are found. The lowest is 0.9330 for C3 and the highest is 0.9904 for C5. Now is calculating the fidelity of the last piece in Encoding
+'twqubit\_C234790withPC\_Ufid.mat'. Will combine all of the pulses in Encoding and check again after this calculation.
+
+The last piece 'twqubit\_C234790withPC\_Ufid.mat' has been checked. The fidelity is 0.9164.
+
+\newpage
+\section{Feb 12, 2015}
+
+When combining all pulses into a large shape file, one has to know how to change a shape for X rotation to Y rotation. It should be a $\pi/2$ phase difference for every segment in the shape. I am going to check it.
+
+The checking uses 4-qubit Crotonic in the folder 'F:\dir matlab\dir pulseexam\_7qubit\dir 4 qubit pulse check'. The target unitary is $R_x^1(\pi/2)$, and the pulse is 'Croton\_90x1.txt' with length 1ms, 500 segments and amplitude 6000Hz.
+
+When compared with $R_x^1(\pi/2)$, the fidelity is 0.9996. Then I changed the target to $R_y^1(\pi/2)$ with the GRAPE pulse unchanged. The fidelity goes to 0.4998 which is reasonable.
+
+In order to produce a $R_y^1(\pi/2)$ from the original X rotation pulse, I added 90 to all phases in all segments. However, the fidelity goes to almost 0. Again all phases are reduced by 90, and this time the fidelity is 0.9996, which is what we want!
+
+Conclusion: If you want to realize a Y rotation based on a X rotation pulse, just change the phase to phase-90 in each segment, and mod by 360 for the spectrometer.
+\begin{lstlisting}
+phase = phase - 90;
+phase = mod(phase, 360);
+\end{lstlisting}
+I wrote a program 'grape\_phase' to generate the new phase in the folder 'F:\dir matlab\dir pulseexam\_7qubit\dir'. Used in this manner  'phase\_new = grape\_phase( phase, initial\_phase, end\_phase)', where the initial\_phase and end\_phase can be X, Y, -X, or -Y.
+
+The way to get the new operator is through the equation $R_z(\theta) = XR_y(\theta)\bar{X}$. If you know the unitary $U_x$ of the X rotation pulse, and when you are realizing Y pulse from that one, the new unitary $U_y$ is thus
+\be
+U_y = R_z(\pi/2)U_xR_z(-\pi/2);
+\ee
+
+Generated the first encoding part, which will evolve Z7 to Z24567. The files 'twqubit\_encoding1\_C' and 'twqubit\_encoding1\_H' are in Ordi2 '\dir pulseexam\_12qubit'. The total length is 32.98ms. Next I have to check whether the final state after this pulse will be Z24567 or not. So 'check\_encoding.m' is written. The directory is Ordi2 '\dir pulseexam\_12qubit'. This function will load all necessary .mat files to get the unitaries and calculate the final state based on these unitaries from Z7.
+
+The final fidelity is 0.9832 (the same for with or without gradient) for Z24567. Two files 'U\_encoding1.mat' and 'rho\_encoding1.mat'. Now go on to the second Encoding part.
+
+The fidelity for the second Encoding part is -0.9692 (the same for with or without gradient) for Z1234567. Two files 'twqubit\_encoding2\_C' and 'twqubit\_encoding2\_H' are in Ordi2 '\dir pulseexam\_12qubit'. The total length is 21.29ms. Then the last piece in Encoding!
+
+The fidelity for the third Encoding part is -0.9160 (the same for with or without gradient) for Z123456789101112. Two files 'twqubit\_encoding3\_C' and 'twqubit\_encoding3\_H' are in Ordi2 '\dir pulseexam\_12qubit'. The total length is 7.36ms.
+
+\textbf{Update on Mar 04}: In the last code, the free evolution time is not the integer times of 10us, but it should be. So the function 'F.m' is modified as
+\begin{lstlisting}
+function F=F(Hamiltonian, time)
+F=diag(exp(diag(-i*Hamiltonian*10e-6*round(time/10e-6))),0);
+\end{lstlisting}
+And all the fidelities are recalculated. They are 0.9831 for Encoding 1,  -0.9717 for Encoding 2, -0.9124 for Encoding 3.
+
+\newpage
+\section{Feb 18, 2015}
+
+Running the two pulses. One is 'twqubit\_all90.m' which is used for phase cycling, and the other one is 'twqubit\_all90butC7.m' used for the polarization crush in the beginning.
+The fidelities are obtained!
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{1-12}(\pi/2)$ & 1ms & 0.9977 & twqubit\_all90\_Ufid.mat & 27.8\%, 6956.6Hz & 30.4\%, 7594Hz\\
+  $R_x^{1-6,8-12}(\pi/2)$ & 1ms & 0.9977 & twqubit\_all90butC7\_Ufid.mat & 24.5\%, 6134.9Hz & 25.0\%, 6239Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+
+\newpage
+\section{Mar 3, 2015}
+
+All 6 pulses in decoding have been checked.
+
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Rotation & Length & Fidelity & File & MaxPower C & MaxPower H\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $R_x^{2,3,4,7-12}(\pi)$ & 2ms & 0.9988 & twqubit\_C2347andH180\_Ufid.mat & 61.6\%, 15400Hz & 52.2\%, 13039Hz\\
+  $R_x^{1,3,4,6}(\pi/2)R_{-y}^{8-12}(\pi/2)$ & 1ms & 0.9974 & twqubit\_C134690andH90\_Ufid.mat & 24.8\%, 6203.2Hz & 22.1\%, 5529Hz\\
+  $R_x^{2,3,4,5,6}(\pi)$ & 2ms & 0.9984 & twqubit\_C23456180\_Ufid.mat & 37.8\%, 9438.2Hz & 23.0\%, 5746Hz\\
+  $R_{-y}^{4,6}R_{y}^{1,3}(\pi/2)R_{x}^{2}(\pi/2)R_{-z}^{1}(6.6\text{ms})$ & 1ms & 0.9982 &  twqubit\_C1234690withPC\_Ufid.mat & 28.3\%, 7070.8Hz & 26.9\%, 6717Hz\\
+  $R_x^{2,7}(\pi)$ & 2ms & 0.9979 & twqubit\_C27180\_Ufid.mat & 29.1\%, 7285.3Hz & 21.7\%, 5414Hz\\
+  $R_{y}^{2}(\pi/2)R_{x}^{5}(\pi/2)$ & 1ms & 0.9975 & twqubit\_C2Y5X90\_Ufid.mat & 28.9\%, 7233.9Hz & 29.2\%, 7292Hz\\
+  \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\section{Mar 4, 2015: Re-Check the PPS Circuit in Simulation}
+
+I found the decoding part can be simplified. Check it in Matlab.
+
+All the files are saved in Ordi2 '\dir twqubit\dir'. For the encoding which consists of three parts, the fidelities have been checked before.
+\begin{table}[hbtp]
+\caption{Encoding in 12-qubit PPS}
+\begin{tabular} {c||c|c|c}
+  \hline
+  Target State & State Fidelity & Density Matrix & Unitary Operator\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  IZIZZZXIIIII & 1.0000 & rho\_encoding1.mat & U\_encoding1.mat\\
+  ZXZZZZZIIIII & -1.0000 & rho\_encoding2.mat & U\_encoding2.mat\\
+  ZZZZZZZZZZZZ & -0.9500 & rho\_encoding3.mat & U\_encoding3.mat\\
+  \hline
+\end{tabular}
+\end{table}
+
+For the phase cycling it has been done too.
+\begin{table}[hbtp]
+\caption{Phase Cycling in 12-qubit PPS}
+\begin{tabular} {c||c|c|c}
+  \hline
+  Target State & State Fidelity & Density Matrix & Unitary Operator\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $\ket{00...0}\bra{00...0} + \ket{11...1}\bra{11...1}$ & 0.9511 & rho\_phasecycling.mat & NAN\\
+  \hline
+\end{tabular}
+\end{table}
+
+For the decoding part, the simulation is as follows.
+\begin{table}[hbtp]
+\caption{Decoding in 12-qubit PPS}
+\begin{tabular} {c||c|c|c}
+  \hline
+  Target State & State Fidelity & Density Matrix & Unitary Operator\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $\begin{array}{c}
+     A_1A_5A_6 \ket{+---++-00000}+ \\
+     A_1'A_5'A_6' \ket{-+++--+00000}
+   \end{array}
+  $ & 0.8717 & rho\_decoding1.mat & U\_decoding1.mat\\
+  \hline
+    $\begin{array}{c}
+     A_1A_5A_6A_7 \ket{0+00-0-00000}+ \\
+     A_1'A_5'A_6'A_7' \ket{0-00+0+00000}
+   \end{array}
+  $ & 0.8570 & rho\_decoding2.mat & U\_decoding2.mat\\
+  \hline
+  $\begin{array}{c}
+     A_1A_5A_6A_7A_5^{new} \ket{000000-00000}+ \\
+     A_1'A_5'A_6'A_7'A_5^{new'} \ket{000000+00000}
+   \end{array}
+  $ & 0.8570 & rho\_decoding3.mat & U\_decoding3.mat\\
+  \hline
+\end{tabular}
+\end{table}
+
+A$_1$, A$_5$ and A$_6$ are phases produced by the chemical shift evolutions of C1, C5 and C6 during $1/2\text{J}_{\text{C7H5}}$. A$_7$ is the phase by the chemical shift evolution of C7 (\textbf{Note: C7 is x-iy so the phase is the conjugate}) during $1/2\text{J}_{\text{C2C3}}$, and the coupling evolutions between C7 and all protons. A$_5^{new}$ is the phase of C5 again in $1/2\text{J}_{\text{27}}$, including the chemical shift evolution and coupling evolutions (J25 and J57 are switched off). So the phases are
+\bea
+A_1 & = &cos(2\pi(\omega_1-O_1)/2\text{J}_{\text{C7H5}})-isin(2\pi(\omega_1-O_1)/2\text{J}_{\text{C7H5}}), \\ \nonumber
+A_5 & = &cos(2\pi(\omega_5-O_1)/2\text{J}_{\text{C7H5}})-isin(2\pi(\omega_5-O_1)/2\text{J}_{\text{C7H5}}), \\ \nonumber
+A_6 & = &cos(2\pi(\omega_6-O_1)/2\text{J}_{\text{C7H5}})-isin(2\pi(\omega_6-O_1)/2\text{J}_{\text{C7H5}}), \\ \nonumber
+A_7 & = &cos(2\pi(\omega_7-O_1)/2\text{J}_{\text{23}})+isin(2\pi(\omega_7-O_1)/2\text{J}_{\text{23}})* \\ \nonumber
+&& \prod_{k=8}^{12} (cos(\pi\text{J}_{\text{7k}}/\text{J}_{\text{23}})+isin(\pi\text{J}_{\text{7k}}/\text{J}_{\text{23}})), \\ \nonumber
+A_5^{new} & = &cos(2\pi(\omega_5-O_1)/2\text{J}_{\text{27}})+isin(2\pi(\omega_5-O_1)/2\text{J}_{\text{27}})* \\ \nonumber
+&& \prod_{k\neq 2, 5, 7} (cos(\pi\text{J}_{\text{5k}}/\text{J}_{\text{27}})+isin(\pi\text{J}_{\text{5k}}/\text{J}_{\text{27}})) \\ \nonumber
+\eea
+
+When calculating the evolutions in the Decoding part, using the following equations (the evolution is 1/2J with two $\pi$ pulses inserted in the middle. \textbf{Note: without $\pi$ in the end})
+\bea
+(X+iY)\otimes(X+iZ) \longrightarrow (X-iY)\otimes(I+Z), \\ \nonumber
+(X-iY)\otimes(X+iZ) \longrightarrow (X+iY)\otimes(I-Z), \\ \nonumber
+(X+iY)\otimes(X-iZ) \longrightarrow (X+iY)\otimes(I-Z), \\ \nonumber
+(X-iY)\otimes(X-iZ) \longrightarrow (X+iY)\otimes(I+Z).
+\eea
+
+\newpage
+\section{Mar 10, 2015: Check the simulated spectra for the 12 qubit PPS circuit}
+
+The final state 'rho\_decoding3.mat' includes a phase on C7. 'rho\_decoding3(1,33) = 0.1979 + 0.5728i', and I used a Z rotation $R_z^7(\theta)$ to rotate it into X. The rotating angle $\theta$ is 1.2381, and the element becomes 0.6060 after the rotation. Note 0.6060/0.7071 (the ideal value) = 0.8570 which is exactly the fidelity for the final state 'rho\_decoding3'. The new state is named 'rho\_12pps\_circuit', and is saved in Ordi2 '\dir twqubit\dir rho\_12pps\_circuit.mat'.
+
+The simulation is implemented in Ordi2 '\dir NMR\dir Experiments\dir twqubit'. The main file is 'sim\_twqubit.m'.
+
+Some settings:
+o1\_C = 20696, o1\_H = 2894, td = 281684, swh = 30030.
+
+The decoherence time is set in '\dir SRC\dir simulator\dir spectrumfast.m' and the value for C7 is chosen as 450ms.
+
+1) For thermal, the spectrum file is saved in 'F:\dir matlab\_full\dir IQC\_simulation\dir PPS 12 qubit\dir sim\_thermal\_450ms.mat'.
+
+2) For PPS of the circuit, copy 'rho\_12pps\_circuit.mat' to the folder '\dir SRC\dir simulator\dir' and change the function 'mkstate.m'. The spectrum file is saved in 'F:\dir matlab\_full\dir IQC\_simulation\dir PPS 12 qubit\dir sim\_pps\_obC7\_phasefixed.mat' (phase fixed means the final coherence is on X axis by applying a Z rotation).
+
+The comparison (\textbf{Note the PPS data should be divided by 24}) is shown in the following Fig. \ref{spectra}.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\columnwidth]{thermal_and_pps_circuit.pdf}
+\end{center}
+\setlength{\abovecaptionskip}{-0.35cm}
+\caption{\footnotesize{Comparison of the thermal and PPS produced by the circuit. }}\label{spectra}
+\end{figure}
+
+\newpage
+\section{Mar 10, 2015: Check the simulated spectra for the 12 qubit PPS grape}
+
+The unitaries for all rotations have been saved in Ordi2. So I only combined them with the free evolutions. \textbf{Note the time step is 10us, which means the free evolutions are integer times of 10us with the unwanted chemical shift refocusing (important!!!).}
+
+Evolution times for every part.
+
+Encoding1:
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c|c}
+  \hline
+   Name & Total & $1/4\text{J}_{27}$ & $1/4\text{J}_{67}-1/4\text{J}_{27}$ & $1/4\text{J}_{47}-1/4\text{J}_{67}$ & $1/4\text{J}_{57}-1/4\text{J}_{47}$ & $1/4\text{J}_{57}$\\
+  \hline
+  Encoding1 & 32.98ms & 6670us & 560us & 1380us & 2880us & 11490us\\
+  \hline
+\end{tabular}
+\end{table}
+
+Encoding2:
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c}
+  \hline
+   Name & Total & $1/4\text{J}_{12}$ & $1/4\text{J}_{23}-1/4\text{J}_{12}$ & $1/4\text{J}_{23}$\\
+  \hline
+  Encoding2 & 21.28ms & 4340us & 3300us & 7640us\\
+  \hline
+\end{tabular}
+\end{table}
+
+Encoding3:
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c}
+  \hline
+   Name & Total & $1/4\text{J}_{\text{CH}}$ & $1/4\text{J}_{\text{CH}}$\\
+  \hline
+  Encoding3 & 7.36ms & 1680us & 1680us\\
+  \hline
+\end{tabular}
+\end{table}
+
+Decoding1:
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c}
+  \hline
+   Name & Total & $1/4\text{J}_{\text{CH}}$ & $1/4\text{J}_{\text{CH}}$\\
+  \hline
+  Decoding1 & 6.36ms & 1680us & 1680us\\
+  \hline
+\end{tabular}
+\end{table}
+
+Decoding2:
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c|c}
+  \hline
+   Name & Total & $1/4\text{J}_{12}$ & $1/4\text{J}_{23}-1/4\text{J}_{12}$ & $1/4\text{J}_{23}$\\
+  \hline
+ Decoding2 & 20.28ms & 4340us & 3300us & 7640us\\
+  \hline
+\end{tabular}
+\end{table}
+
+Decoding3:
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+   Name & Total & $1/4\text{J}_{27}$ & $1/4\text{J}_{27}$ & $1/4\text{J}_{57}$ & $1/4\text{J}_{57}$\\
+  \hline
+ Decoding3 & 42.32ms & 6670us & 6670us & 11490us & 11490us\\
+  \hline
+\end{tabular}
+\end{table}
+
+\textbf{Updated on April 6: Please ignore the following sentences as Annie found a mistake in check\_grape.m. The unitary of the GRAPE pulse should be U(4us)*Ugrape*U(4us), but I wrote Ugrape*U(8us) by mistake! This will introduce a serious phase error and trigger the following problem. I have fixed it.}
+\emph{It is surprising that after applying phase cycling, the state will introduce a phase. The ideal state after phase cycling will have two elements 0.7071 at the top off-diagonal positions, but these two numbers change to 0.5018-0.4057i and  0.5018+0.4057i after GRAPE phase cycling pulse. The absolute value is 0.6453, which is reasonable. Moreover, the state in the decoding part will also involve an unexpected phase in every step. I guess the reason is the imperfections of the GRAPE pulses (some of them are pretty low like 80\% fidelity), and the 90 or 180 pulse cannot rotate or refocus the state to the desired axis completely. Anyway, in the following table, I will write both fidelities, with and without this phase correction.}
+
+All fidelities $\text{tr}(\rho_\text{{ideal}}\rho_\text{real})$ calculated by the circuit itself and by the GRAPE pulses.
+\begin{table}[!h]
+\begin{tabular} {c||c|c|c}
+  \hline
+   Part & Length & Circuit Fidelity & GRAPE Fidelity\\
+  \hline
+ Encoding1 & 32.98ms & 1.0000 & 0.9831\\
+ Encoding2 & 21.28ms & 1.0000 & 0.9717\\
+ Encoding3 & 7.36ms & 0.9500 & 0.9124\\
+ Phase Cycling & 1ms & 0.9511 & 0.9126\\
+ Decoding1 & 6.36ms & 0.8717 & 0.8693\\
+ Decoding2 & 20.28ms & 0.8570 & 0.8430\\
+ Decoding3 & 43.32ms & 0.8570 & 0.8234\\
+  \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\columnwidth]{thermal_and_pps_circuit_grape.pdf}
+\end{center}
+\setlength{\abovecaptionskip}{-0.35cm}
+\caption{\footnotesize{Comparison of the thermal and PPS produced by the circuit and GRAPE. }}\label{compare_spectra}
+\end{figure}
+
+\newpage
+\section{Apr 16, 2015: 12-qubit Calibration in Experiment}
+
+The calibration is used for getting the dB of $\pi/2$ and $2\pi$ pulses for a fixed length. The au program is written by Annie, including 3 files 'calib.m', 'calibrate.m' and 'getspec.m'. First upload all the three files to Ordi2. Note 'calib.m' is for redirection and it should be in the root folder when opening Matlab in Ordi2. The path is thus '\dir d29lu\dir fixpulse\dir' because Matlab will go to this folder to show the last result of pulse fixing.
+
+The calibration folder is 'twqubit\_calib'. Then select the experiment you want to calibrate, and run 'edau twqubit\_calib'. \textbf{You have to edit Line 6 'host\_resultpath', Line 24 'TIMES' which means number of loops, the following 'p1', 'd1' and 'pl3', and the starting power.  Then in 'calibrate.m', change the targetfolder, ob\_min, ob\_max and figure\_name. }
+
+The experiments for calibrating C is titled 'twqubit\_calib\_C', and for calibrating H is 'twqubit\_calib\_H'. For H, I calibrated through the C channel as in experiment we only observe the C channel. The way is to transfer the H signal to C via XZ terms, so I can only calibrate the $\pi/2$ and $3\pi/2$ pulses. The results are summarized in the following table
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c|c}
+  \hline
+  Rotation & Length & Frequency & Exp. No & dB (Apr 16) & dB (Apr 17) & dB (June 25)\\
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  C360 & 40us & 25000Hz & 11-23 (-3.5dB to -5.9dB) & -4.51dB & -4.38dB & -1.18dB\\
+  C360 & 80us & 12500Hz & 51-63 (3.0dB to 0.6dB) & 1.82dB & 1.74dB & ---\\
+  C90 & 20us & 12500Hz & 101-113 (3.0dB to 0.6dB) & --- & 1.00dB\\
+  H270 (by C) & 30us & 25000Hz & XXXX & --- & 6.20dB & 6.20dB\\
+  H360 (by H) & 40us & 25000Hz & XXXX & --- & 5.40dB\\
+  \hline
+\end{tabular}
+\end{table}
+
+Actually only C360 and H270 are usable. The two powers are -4.38dB and 6.2dB for 25KHz.
+
+\newpage
+\section{Apr 18, 2015: All pulses Test in 12-qubit PPS Experiment}
+
+The folder is 'twqubit\_pps'. Exp 1 and 2 are thermal spectra.
+
+For every pulse I have 4 observations. For C channel, for H channel, pulse-gradient-pulse for C channel, and pulse-gradient-pulse for H channel. Refer to the Appendix to see what the pulses are.
+
+Polarization Crush \\
+11-14: all90butC7
+
+Phase Cycling \\
+21-24: all90
+
+Encoding \\
+101-104: C57180 \\
+105-108: C23180 \\
+109-112: C234790 \\
+113-116: C156180 \\
+117-120: C234790withPC \\
+
+Decoding \\
+201-204: C2347andH180 \\
+205-208: C134690andH90 \\
+209-212: C23456180 \\
+213-216: C1234690withPC \\
+217-220: C27180 \\
+221-224: C2Y5X90 \\
+
+Single $\pi/2$ rotations \\
+301-314: C1 to C7 90 rotation (two experiments for one pulse)
+
+Single $\pi/2$ rotations \\
+315-342: C1 to C7 180 rotation (four experiments for one pulse)
+
+\newpage
+\section{Apr 23, 2015: 12-qubit PPS Experiment}
+
+Exp 1000: zg for the thermal without H decoupled \\
+Exp 1001: observe C7 after crushing all the other 6 carbons and a gradient \\
+Exp 1002: the same as 1001 but decoupled H before observing C7 \\
+Exp 1003: Encoding 1. observe C7 and decouple H. Almost the same as the 7-qubit experiment. \\
+Exp 1004: Encoding 2. observe C7 and decouple H. Almost the same as the 7-qubit experiment. \\
+Exp 1005: PPS, gradient and observe C7 but no signal... \\
+Exp 1006: PPS, without gradient and observe C7, no signal either... \\
+
+There is a problem when I calculated the GRAPE. There is a default 4us pre-delay and post-delay on the target unitary, as in experiment when applying the GRAPE pulse these two delays are required (not the minimal value but since GRAPE has considered that it has no effect). However, we do not have enough slots (only SP0 to SP31) for GRAPE pulses so we have to combine them to a big shape. The problem is the time step in the big shape is chosen as 10us, which cannot absorb the 4us delay. If we get rid of the 4us delays during the big shape, the experimental result is totally different.
+
+I tried to use 2us time step size in the big shape instead of 10us, so I can write the 4us delay. Then for every 5 steps (2us*5=10us) the amplitude and the phase should be the same. In principal it is fine, but when I am fixing the pulse on the H channel, the random noise is so serious that we have to use a low-pass filter to remove the noise. As in the big shape the shape is not smooth any more, some wanted points will be removed by the filter too. I guess no way to solve this except the pulse is smooth.
+
+So maybe need recalculation with 0us pre-delay and post-delay.
+
+\newpage
+\section{May 9, 2015: Recalculation of GRAPE pulses with 0us Buffer}
+
+According to the fact that 4us cannot be absorbed into a 10us shape pulse, I decided to delete the buffer delay in the GRAPE calculation. An AU program called 'GRAPE\_recal\_nobuffer.m' was written to do it. The directory in Ordi2 is '\dir pulseexam\_12qubit\dir C\_rotations\dir GRAPE\_nobuffer\dir' or in the SVN '\dir Matlab\dir Twqubit\dir Pulse\_NoBuffer\dir'.
+
+There are 18 pulses required for recalculation with 8 $\pi/2$ rotations and 10 $\pi$ rotations. In the program, I first regenerate Bx and By from the shaped pulses, and use them as the initial guess, saved in files titled like 'twqubit\_C190\_InitialGuess.mat'. Then generate the params setting file with 0us buffer. \textbf{Note the power limit of C channel is set as 12.5KHz instead of 25KHz. }Both the initial guess file and params setting file are transferred to Feynman and Ordi2 by the scp command. A cluster sample is also written and saved in Ordi2 pulsefinder folder.
+
+In calculation on Feynman in the weekend. All the 18 pulses
+\begin{lstlisting}
+Pulse_Name{1} = 'twqubit_C790';
+Pulse_Name{2} = 'twqubit_C290';
+Pulse_Name{3} = 'twqubit_C234790';
+Pulse_Name{4} = 'twqubit_C234790withPC';
+Pulse_Name{5} = 'twqubit_C134690andH90';
+Pulse_Name{6} = 'twqubit_C1234690withPC';
+Pulse_Name{7} = 'twqubit_C2Y5X90';
+Pulse_Name{8} = 'twqubit_C590';
+Pulse_Name{9} = 'twqubit_C2180';
+Pulse_Name{10} = 'twqubit_C6180';
+Pulse_Name{11} = 'twqubit_C4180';
+Pulse_Name{12} = 'twqubit_C57180';
+Pulse_Name{13} = 'twqubit_C1180';
+Pulse_Name{14} = 'twqubit_C23180';
+Pulse_Name{15} = 'twqubit_C156180';
+Pulse_Name{16} = 'twqubit_C2347andH180';
+Pulse_Name{17} = 'twqubit_C23456180';
+Pulse_Name{18} = 'twqubit_C27180';
+\end{lstlisting}
+
+\newpage
+\section{May 11, 2015: No buffer GRAPE pulses}
+Got almost all pulses with fidelity over 0.995. The exception is pulse Number 10, C6180. The reason should be the power limit 12.5KHz is not enough. So change it to 25KHz again and recalculate this GRAPE. All the GRAPE .mat files are transferred to '\dir Matlab\dir Twqubit\dir Pulse\_NoBuffer\dir'.
+
+An AU program 'make\_shape\_12qubit.m' for making the Bruker shape is used to generate all Burker files. Then the maximal power is checked using 'check\_power\_NoBuffer.m'. The powers are almost the same as the ones from the initial guess, and are updated in the Appendix.
+
+\newpage
+\section{May 13, 2015: Experiments with No Buffer Pulses}
+
+Tested in experiment with the new no-buffer GRAPE pulses. I can still get the 7 coherence by decoupling H channel. To my surprise, if I fixed all the pulses, the performance with the fixed ones is even worse. I guess the reason is when pulse fixing, the baseline is a little bit below 0 for the free evolution. It does not make sense to fix them but the fixing program is indeed trying to fix it. The solution might be fixing each pulse one by one, and then combine all of them with the 0 points for free evolution. It will be done soon.
+
+Exp 1103: Ob Z24567 with H decoupling and non-fixed No Buffer pulses. Look good. \\
+Exp 1104: Ob Z1234567 with H decoupling and non-fixed No Buffer pulses. Look good. \\
+Exp 2103: Ob Z24567 with H decoupling and fixed No Buffer pulses. Worse than 1103, which is surprising. \\
+Exp 2104: Ob Z1234567 with H decoupling and fixed No Buffer pulses. Worse than 1104, which is surprising. \\
+
+For PPS, there is still no signal. See Exp 1999 and 2000.
+Exp 1999: PPS by non-fixed No Buffer pulses. No signal. \\
+Exp 2000: PPS by fixed No Buffer pulses. No signal. \\
+
+I tried 'fp' with about 200 scans to get a signal after one phase cycling step, and 80 scans with 'efp' and 'LB=0.3Hz'. So I divided the PPS into 24 experiments, and 80 scans for each experiment. D1 = 60s, so the total time for trying a PPS now is 34 hours...
+
+\textbf{Note: Explanations to Exp 2103 and 2104.} The No Buffer pulses after fixing are even worse because the fixing program has a problem. The pulses itself is a big shape, with tons of 0 points inside to realize free evolutions. However, the pickup coil will detect slight signals for those 0 points (slightly over or below 0). The fixing program tries to correct these points by modifying these 0 to non-zero, which is not reasonable. One way to solve this problem is by fixing all pulses individually and combine them at last. So I fixed all the 18 pulses either 1ms or 2ms, and then used programs called 'pulse\_combine\_encoding\_nobuffer\_fixed.m' and 'pulse\_combine\_decoding\_nobuffer\_fixed.m' in '\dir Twqubit\dir Pulses\_NoBuffer\dir' to combine all of them with 0 points.
+
+Unfortunately the result is not good. It turns out that the signal is still very low with 80 scans. So maybe improve the number of scans can help a little bit.
+
+\newpage
+\section{May 22, 2015: Re-run PPS with Scan=200}
+
+As there are three days that we will go to Ray's cottage, I set 200 scans for each phase cycling and the total length is thus 3d10hrs. I used a MAC program to automatically set all 24 experimental parameters. The Matlab program to generate this MAC file is 'Genmultizg.m' in '\dir Twqubit\dir'. Put the generated file to '\dir lists\dir mac\dir'. The 24 experiments are from Exp 2001 to Exp 2024.
+
+Unfortunately there is no FID after the multizg. I tried some of the 24 experiments and they cannot do fp or efp. Need to figure out why. Another problem is during a long multizg, the sample will unlock at some time. Xinhua said the reason is gradient field. Because the gradient field is applied in z direction, it will affect the locking signal. But we cannot avoid the many gradient fields in between. Try experiment one by one? Anyway, do simulation now. That is, getting the simulated spectrum of each phase cycling, and then compare.
+
+Re-run the 24 experiments again and now they have spectrum. Almost all 0. The sum is not a single peak. Meanwhile, the simulation is done. The folder is '\dir Twqubit\_Circuit\_PPS\dir'. First I ran 'rho\_phasecycling\_24steps.m' to get all MAT files of the 24 states, with each one corresponding to a phase cycling step. Then upload all the 24 MAT files to Ordi2 where the 'mkstate.m' function is. Run 'sim\_12pps\_step.m' in '\dir NMR\dir EXPERIMENTS\dir twqubit' to get all the simulated results and transfer them to my laptop. Plot all the 24 figures with the name such as '24\_step\_7.fig' for each one. Every spectrum out of the 24 figures is oscillating seriously which means if the T2* is not long enough (the case in experiment), we cannot resolve it.
+
+\newpage
+\section{June 09, 2015: Write a universal program for spectrum simulation}
+
+\textbf{Fast spectrum generating code spec\_plot.m in \dir subfunction}
+
+The previous way to simulate the NMR spectrum by giving the density matrix, Hamiltonian, T2* is via Fourier transform. The code is written by Colm Ryan and it is powerful. However, for 12 qubits it takes more than 40 minutes to get a spectrum. So I write another program to simulate the spectrum. It is universal, and only takes less than 1 minute for a 12-qubit simulation.
+
+The function is 'spec\_plot.m' saved in the '\dir subfunction' folder. There are four input parameters: Hamiltonian, density matrix, observed spins and T2*. By giving the Hamiltonian, we can know the frequencies of all possible peaks. For example, in the 12-qubit sample we would like to observe C7. There should be $2^{11}$ peaks as 11 spins have interactions with C7. The central frequency is $\omega(7)$, which is the chemical shift of C7. So the frequency of all peaks would be
+\be
+\omega(7)+\sum_{i=1,i\neq 7}^{12} \pm J_{i7}/2.
+\ee
+By the signs of J, we can also know the state of the other qubits. I define +J/2 is $\ket{0}$ and -J/2 is $\ket{1}$ to make the $\ket{00..0}$ appear at  the leftmost side in Bruker (highest frequency). After confirming the state of the other qubits, we can convert this state to decimal number, and then know the locations of it in the density matrix, because the density matrix can be understood through states (row 1 is $\ket{00..0}$, row 2 is $\ket{00..1}$ etc.). The element in that position gives the real part and imaginary part of the related peak. Then a Lorentzian shape is plotted with this element as the amplitude and phase, and T2* as the half-height width. Sum over all the $2^{11}$ peaks will give the spectrum of C7. And if you want to save the figure and data points, just input a name after running the code. If you input 0, no data will be saved but the spectrum will be shown in a separate window.
+
+\textbf{C2 fitting code fitting\_C2.m in \dir Twqubit\_Circuit\_PPS\dir simulation}
+
+When I compared the thermal spectrum of C2 and experimental thermal, they do not match at the small J-couplings. This program is written to fit the small J-couplings of C2 by brutal force. I only need to fit the frequency 8900 to 8920 region as all small couplings are involved in it. There are 7 of them: C2C4, C2C5, C2C6, C2H1, C2H2, C2H3, and C2H5. Moreover, C2C4, C2C5, and C2C6 are fixed by the H-decoupled C spectrum. The second assumption is C2H2 and C2H3 have the same couplings to save time. The constraint is the width of this regions equals to the sum over all couplings, that is, only two variables then. C2H2 and C2H1.
+
+The experimental spectrum is saved in 'thermal\_exp\_C\_200.mat' and the scaled factor is defined as the integral (sum) of the region [8900 8920]. There are 13 peaks in total and each peak corresponds to an intensity. In the fitting, we consider the 13 peak frequencies as the target function f, defined as the sum over square error of each peak. If this f is small then 1Hz which means the peak locations are pretty close, go to check the intensities of every peak. The definition of this value g is the same as f. When g is small, it means the peak intensities have the best fit as well as the locations are close too. The T2*=310ms gives the best match. Refer to the original code for details and the output spectrum is shown below (plotted by 'compared\_C2.m').
+
+\begin{figure}
+\begin{minipage}[hbtp]{0.5\linewidth}
+\centering
+\includegraphics[width=0.8\columnwidth]{comparison_C2.pdf}
+\caption{Comparison of simulated and experimental C2 thermal.}
+\label{fig:side:a}
+\end{minipage}%
+\begin{minipage}[hbtp]{0.5\linewidth}
+\centering
+\includegraphics[width=0.8\columnwidth]{comparison_C2_zoomin.pdf}
+\caption{Detailed comparison.}
+\label{fig:side:b}
+\end{minipage}
+\end{figure}
+
+Besides, C7 is also compared with T2*=420ms. The figure plotted by 'compared\_C7.m' is shown below.
+
+\begin{figure}
+\begin{minipage}[hbtp]{0.5\linewidth}
+\centering
+\includegraphics[width=0.8\columnwidth]{comparison_C7.pdf}
+\caption{Comparison of simulated and experimental C7 thermal.}
+\label{fig:side:a}
+\end{minipage}%
+\begin{minipage}[hbtp]{0.5\linewidth}
+\centering
+\includegraphics[width=0.8\columnwidth]{comparison_C7_zoomin.pdf}
+\caption{Detailed comparison.}
+\label{fig:side:b}
+\end{minipage}
+\end{figure}
+
+Now it is ready to go to check every experimental spectrum of C2 and C7. Indeed, we will just observe these two.
+
+\clearpage
+\section{June 11, 2015 - August 17, 2015: Implement every encoding and decoding part and compare with simulation}
+
+Before experiments, I want to find the best setting for 12 qubits.
+
+\textbf{SWH = 30030Hz. DW = 16.65us. }\\
+SWH is a fixed value. DW is related to the sampling rate, and reciprocal (inversely proportional) to SWH.
+
+\textbf{TD = 65536 and SI = 262144(max).} \\
+The real spectrum will have SI points. So if SI<TD, it will cut the first SI points from TD when doing FFT. Otherwise, it will add the number of SI-TD points to the tail when doing FFT. Because SWH is very big, we need many many points to keep a high resolution. That is why SI is so big. Meanwhile, if TD is much smaller, we will use a lot of zero points added to the tail of TD, which means the noise is canceled a lot. Small TD gives us a good SNR, but it loses the resolution of small couplings.
+\textbf{(For H-decoupled experiments, TD = 281684 for a high resolution.)}
+
+\textbf{AQ = 1.09s.}\\
+AQ is fixed as AQ = DW*TD.
+
+Then the experiments are (Spectra are shown too)
+
+Exp 1398: Observe C7 by Gaussian with H decoupled. NS = 1. TD=281684. \\
+Exp 1399: Observe C2 by Gaussian with H decoupled. NS = 1. TD=281684. \\
+Exp 1401: Observe C7 by GRAPE as the reference. NS=10. See Fig. \ref{1401and1402}\\
+Exp 1402: Observe C2 by GRAPE as the reference. NS=10. To my surprise the phase is different with 1401.\\
+Exp 1403: Observe C7 after encoding1. NS=10. See Fig. \ref{1403and1404}\\
+Exp 1404: Observe C2 after encoding1. NS=10.\\
+Exp 1405: Observe C7 after encoding1 and decouple H. NS=1. See Fig. \ref{1405and1406}\\
+Exp 1406: Observe C2 after encoding1 and decouple H. NS=1.\\
+Exp 1407: Observe C7 after encoding2. NS=10. See Fig. \ref{1407and1408}\\
+Exp 1408: Observe C2 after encoding2. NS=10.\\
+Exp 1409: Observe C7 after encoding2 and decouple H. NS=1. See Fig. \ref{1409and1410}\\
+Exp 1410: Observe C2 after encoding2 and decouple H. NS=1.\\
+
+For encoding3 which generates ZZZZZZZZZZZZ, we tested that it cannot be observed. The H channel cannot be decoupled as the state of H is not I. So we directly applied encoding 3 to thermal state, and C-H couplings will evolve.
+
+Exp 1411: Observe C7 after encoding3, applied on thermal. NS=1.\\
+Exp 1412: Observe C2 after encoding3, applied on thermal. NS=1.\\
+Exp 1413: Observe C3 after encoding3, applied on thermal. NS=1.\\
+Exp 1414: Observe C4 after encoding3, applied on thermal. NS=1.\\
+
+
+
+
+
+
+\clearpage
+\section{August 12, 2015: Check two Things in Experiment}
