@@ -54,10 +54,10 @@ end
 
 To generate $\pi$ pulses, In the beginning, I wanted to combine two $\pi/2$ pulses. A potential problem is when calculating the GRAPE, we have considered the 4us free evolutions in the beginning and in the end. If we combine, we will have an unwanted 8us free evolution in the middle of the new $\pi$ pulse. So I used 'combine90to180' to check the $\pi$ pulse fidelity. They are very bad actually. All of them are just 0.75~0.76 in fidelity. However, we can still use them as the initial guess to search the optimal $\pi$ pulse. By using them, the convergence speed is very fast, which means the initial guess is indeed very important in 12 qubits.
 
-The pulses are saved in Ordi2 '\dir pulsefinder\dir 12 Qubit\dir' with the names such as 'twqubit\_C590\_C\_25000.txt'. After that, 
+The pulses are saved in Ordi2 '\dir pulsefinder\dir 12 Qubit\dir' with the names such as 'twqubit\_C590\_C\_25000.txt'. After that,
 I checked all the fidelities of the pulses in the folder '\dir pulseexam\_12qubit\dir C\_rotations\dir check\_grape.m'. The code is in \hyperlink{code:check_grape}{Appendix I}. To my surprise, all fidelities in the 12-qubit system are still over 0.99, which means the separation of the two sub-systems are pretty well.
 
-Unitaries and Fidelities of the pulses will both be saved in 'twqubit\_C590\_Ufid.mat', so they can be called for further calculations in the PPS simulation. The folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. Use 'check\_power.m' to check the maximal powers for C and H channel to guarantee all powers are within the power limit. For details, see the Table below\ref{all_single_pulses}. 
+Unitaries and Fidelities of the pulses will both be saved in 'twqubit\_C590\_Ufid.mat', so they can be called for further calculations in the PPS simulation. The folder is '\dir pulseexam\_12qubit\dir C\_rotations\dir'. Use 'check\_power.m' to check the maximal powers for C and H channel to guarantee all powers are within the power limit. For details, see the Table below\ref{all_single_pulses}.
 
 \begin{table}[hbtp]
 \begin{tabular} {c||c|c|c|c|c}
@@ -164,7 +164,7 @@ R(gop(7,X),90)*R(gop(7,-Z),360*(Para(7,7)-20696)*1/2/148.5);
 
 {\color{blue}{\textbf{Mar 09, 2015:}}}
 
-\hypertarget{reason:pulse_no_buffer}{The reason of this recalculation is described} 
+\hypertarget{reason:pulse_no_buffer}{The reason of this recalculation is described}
 \hyperlink{found:pulse_no_buffer}{here}.
 
 According to the fact that 4us cannot be absorbed into a 10us shape pulse, I decided to delete the buffer delay in the GRAPE calculation. An AU program called 'GRAPE\_recal\_nobuffer.m' was written to do it. The directory in Ordi2 is '\dir pulseexam\_12qubit\dir C\_rotations\dir GRAPE\_nobuffer\dir' or in the SVN '\dir Matlab\dir Twqubit\dir Pulse\_NoBuffer\dir'.
@@ -673,3 +673,10 @@ Exp 1412: Observe C2 after encoding3, applied on thermal. NS=1.\\
 Exp 1413: Observe C3 after encoding3, applied on thermal. NS=1.\\
 Exp 1414: Observe C4 after encoding3, applied on thermal. NS=1.\\
 
+Prepare the 7-qubit PPS and replace some of the pulses with the 12-qubit GRAPE. This can check the performance of these 12-qubit GRAPE pulses. All the sequences have a C-H SWAP in the very beginning to improve the C signal.
+
+Exp 1887: Observe C7 on thermal. NS=7. See Fig. \ref{1887and1888}\\
+Exp 1888: Observe C7 after C-H SWAP applied on thermal. NS=7.\\
+Exp 1889: Observe C7 of the 7-qubit PPS. NS=7. See Fig. \ref{1888and1889}\\
+Exp 1891: Observe C7 of the 7-qubit PPS, with the Encoding replaced by 12-qubit pulses. NS=7.\\
+Exp 1893: Observe C7 of the 7-qubit PPS, with the Encoding and Phase Cycling replaced by 12-qubit pulses. NS=7. See Fig. \ref{1889and1891and1893}\\
