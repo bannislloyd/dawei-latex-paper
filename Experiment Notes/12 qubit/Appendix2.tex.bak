@@ -69,4 +69,19 @@ For C2 and C7 they both look nice.
 \end{center}
 \setlength{\abovecaptionskip}{-0.35cm}
 \caption{\footnotesize{Encoding 2 for C2 and C7 with H decoupled. 1 scan.}}\label{1409and1410}
-\end{figure}a
+\end{figure}
+
+\clearpage
+Exp 1411: Observe C7 after encoding3. Encoding 3 is applied on thermal. NS=1.\\
+Exp 1410: Observe C2 after encoding3. Encoding 3 is applied on thermal. NS=1.\\
+\textbf{Note the encoding 3 operator is just applied on thermal because if it is applied consequently after encoding 2 the spectra has no signal.}
+
+They look okay as I did not adjust the experimental parameters much.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\columnwidth]{Encoding2_with_decouple.pdf}
+\end{center}
+\setlength{\abovecaptionskip}{-0.35cm}
+\caption{\footnotesize{Encoding 2 for C2 and C7 with H decoupled. 1 scan.}}\label{1409and1410}
+\end{figure}

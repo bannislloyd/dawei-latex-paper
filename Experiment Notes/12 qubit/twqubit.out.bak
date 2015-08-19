@@ -1,23 +1,14 @@
 \BOOKMARK [0][-]{section*.2}{Notes on the 12 qubit PPS}{}% 2
 \BOOKMARK [1][-]{section*.1}{Abstract}{section*.2}% 1
 \BOOKMARK [1][-]{section*.3}{Dec 12-Feb 06, 2014: GRAPE Pulse Calculations and Simulations}{section*.2}% 3
-\BOOKMARK [1][-]{section*.4}{Feb 06, 2015}{section*.2}% 4
-\BOOKMARK [1][-]{section*.5}{Feb 12, 2015}{section*.2}% 5
-\BOOKMARK [1][-]{section*.6}{Feb 18, 2015}{section*.2}% 6
-\BOOKMARK [1][-]{section*.7}{Mar 3, 2015}{section*.2}% 7
-\BOOKMARK [1][-]{section*.8}{Mar 4, 2015: Re-Check the PPS Circuit in Simulation}{section*.2}% 8
-\BOOKMARK [1][-]{section*.9}{Mar 10, 2015: Check the simulated spectra for the 12 qubit PPS circuit}{section*.2}% 9
-\BOOKMARK [1][-]{section*.10}{Mar 10, 2015: Check the simulated spectra for the 12 qubit PPS grape}{section*.2}% 10
-\BOOKMARK [1][-]{section*.11}{Apr 16, 2015: 12-qubit Calibration in Experiment}{section*.2}% 11
-\BOOKMARK [1][-]{section*.12}{Apr 18, 2015: All pulses Test in 12-qubit PPS Experiment}{section*.2}% 12
-\BOOKMARK [1][-]{section*.13}{Apr 23, 2015: 12-qubit PPS Experiment}{section*.2}% 13
-\BOOKMARK [1][-]{section*.14}{May 9, 2015: Recalculation of GRAPE pulses with 0us Buffer}{section*.2}% 14
-\BOOKMARK [1][-]{section*.15}{May 11, 2015: No buffer GRAPE pulses}{section*.2}% 15
-\BOOKMARK [1][-]{section*.16}{May 13, 2015: Experiments with No Buffer Pulses}{section*.2}% 16
-\BOOKMARK [1][-]{section*.17}{May 22, 2015: Re-run PPS with Scan=200}{section*.2}% 17
-\BOOKMARK [1][-]{section*.18}{June 09, 2015: Write a universal program for spectrum simulation}{section*.2}% 18
-\BOOKMARK [1][-]{section*.19}{June 11, 2015 - August 17, 2015: Implement every encoding and decoding part and compare with simulation}{section*.2}% 19
-\BOOKMARK [1][-]{section*.20}{August 12, 2015: Check two Things in Experiment}{section*.2}% 20
-\BOOKMARK [1][-]{section*.21}{Appendix III: All Pulses for 12 qubits}{section*.2}% 31
-\BOOKMARK [2][-]{section*.22}{New Pulses with 0us Buffer Delay}{section*.21}% 32
-\BOOKMARK [1][-]{section*.23}{References}{section*.2}% 33
+\BOOKMARK [1][-]{section*.4}{May 09, 2015 to May 10, 2015: Recalculation of GRAPE pulses with 0us Buffer}{section*.2}% 4
+\BOOKMARK [1][-]{section*.5}{Dec 16, 2014 to Feb 12, 2015: Combining GRAPE Pulses to Big Shape Files}{section*.2}% 5
+\BOOKMARK [1][-]{section*.6}{Mar 04, 2015: Re-Check and Simplified the PPS Circuit in Simulation}{section*.2}% 6
+\BOOKMARK [1][-]{section*.7}{Mar 10, 2015 to Mar 11, 2015: Simulated spectra for the 12 qubit PPS circuit and with GRAPE pulses}{section*.2}% 7
+\BOOKMARK [1][-]{section*.8}{June 09, 2015: Write a universal program for spectrum simulation}{section*.2}% 8
+\BOOKMARK [1][-]{section*.9}{Apr 16, 2015: 12-qubit Calibration in Experiment}{section*.2}% 9
+\BOOKMARK [1][-]{section*.10}{Apr 18, 2015 to Aug 18, 2015: All pulses test in experiment}{section*.2}% 10
+\BOOKMARK [1][-]{section*.11}{Appendix II: Important Figures and Experimental Spectra}{section*.2}% 12
+\BOOKMARK [1][-]{section*.12}{Appendix III: All Pulses for 12 qubits}{section*.2}% 13
+\BOOKMARK [2][-]{section*.13}{New Pulses with 0us Buffer Delay}{section*.12}% 14
+\BOOKMARK [1][-]{section*.14}{References}{section*.2}% 15
