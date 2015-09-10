@@ -713,12 +713,52 @@ Exp 2439: Observe C2 after decoding1new which generates 7 coherence, and decoupl
 Exp 2444: Observe C7 after decoding2toend which generates 7 coherence. NS=10. See Fig. \ref{2444and2445}\\
 Exp 2445: Observe C2 after decoding2toend which generates 7 coherence. NS=10.\\
 Exp 2446: Observe C7 after decoding2toend which generates 7 coherence, and decouple H. NS=1. See Fig. \ref{2446and2447}\\
-Exp 2447: Observe C2 after decoding2toend which generates 7 coherence, and decouple H. NS=1.\\ 
+Exp 2447: Observe C2 after decoding2toend which generates 7 coherence, and decouple H. NS=1.\\
 
 {\color{blue}{\textbf{Sep 10, 2015}}}
 
 \textbf{Experimental result of the entire circuit without the phase cycling part.}
 
-1) We observed C7 after C-H SWAP gate. It is 3.39 (maximum 4) times higher than the C7 result without SWAP. This experiment is used as reference. Fig. \ref{2401and2402} shows the spectra of C7 and C2. Note for C2 experiments, I cannot apply a SWAP gate first because after the SWAP, C2 is no longer at Z. \\
-2) 
- 
+1) Observed C7 after C-H SWAP gate. It is 3.39 (maximum 4) times higher than the C7 result without SWAP. This experiment is used as reference. Fig. \ref{2401and2402} shows the spectra of C7 and C2. Note for C2 experiments, I cannot apply a SWAP gate first because after the SWAP, C2 is no longer at Z.
+
+2) Apply Encoding1 and observe C7 and C2 with (Fig. \ref{2403and2404}) and without (Fig. \ref{2405and2406}) H decoupled. The length is 32.98ms and the left signal is 0.6974, 0,3313, 0.6498, 0.6090. From left to right the values are C7 with H coupled, C2 with H coupled, C2 with H decoupled, and C2 with H decoupled, respectively. The same for the following cases.
+
+3) Apply Encoding1+Encoding2 and observe C7 and C2 with (Fig. \ref{2407and2408}) and without (Fig. \ref{2409and2410}) H decoupled. The length is 54.26ms and the left signal is 0.1133, 0.1563, 0.4498, 0.4844.
+
+3) Apply Encoding1+Encoding2+Encoding3*2 and observe C7 and C2 with (Fig. \ref{2432and2433}) and without (Fig. \ref{2434and2435}) H decoupled. After Encoding3, we generated 12 coherence so it is not observable. The solution is we can double applied Encoding3 and then the state evolves to 7 coherence again which is able to observe. The length is thus 68.98ms and the left signal is 0.0864, 0.1764, 0.3148, 0.3443.
+
+4) Apply Encoding1+Encoding2+Encoding3+Decoding1new and observe C7 and C2 with (Fig. \ref{2436and2437}) and without (Fig. \ref{2438and2439}) H decoupled. Decoding1new has two replacements compared to original Decoding1. First, the H hard pulse is replaced by the last pulse (C234790withPC) of Encoding3. Second, the last pulse (C134690andH90) of Decoding1 is replaced by the first pulse (C234790) of Encoding 3. We have to do this replacement because direct application of original Decoding1 will give us no signal, but with Decoding1new we can still get 7 coherence. The length is 68.98ms which is the same as Encoding3*2 but the left signal is a bit smaller 0.0683, 0.1538, 0.2477, 0.2786.
+
+5) Apply Encoding1+Encoding2+Encoding3+Decoding1new+Decoding2toEnd and observe C7 and C2 with (Fig. \ref{2444and2445}) and without (Fig. \ref{2446and2447}) H decoupled. The final state is 7 coherence. The length 133.58ms is about equivalent to the length of the entire circuit. The final signal is 0.0280, 0.0585, 0.0805, 0.0816
+
+Here is a summarized table of the remained signal after every step. We can see the H coupled signal is much less than H decouple signal. I think the reason is the H coupled signal is too complicated and the cancelation of up and down signal is too serious. So we can use the H decoupled signal as the meter of the signal attenuation for every step.
+\begin{table}[hbtp]
+\begin{tabular} {c||c|c|c|c|c}
+  \hline
+  Case & Length & C7 Hcouple & C2 Hcouple & C7 Hdecouple & C2 Hdecouple\\
+  \hline
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  Encoding1 & 32.98ms & 69.7\% & 33.1\% & 65.0\% & 60.9\%\\
+  Encoding2 & 54.26ms & 11.3\% & 15.6\% & 45.0\% & 48.4\%\\
+  Encoding3*2 & 68.98ms & 8.6\% & 17.6\% & 31.5\% & 34.4\%\\
+  Decoding1new & 68.98ms & 6.8\% & 15.4\% & 24.8\% & 27.9\%\\
+  Decoding2toEnd & 133.58ms & 2.8\% & 5.9\% & 8.1\% & 8.2\%\\
+  \hline
+\end{tabular}
+\end{table}
+ \begin{table}[hbtp]
+\begin{tabular} {c||c|c|c}
+  \hline
+  Case & Length & C7 Hdecouple & C2 Hdecouple\\
+  \hline
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  Encoding1 & 32.98ms & 65.0\% & 60.9\%\\
+  Encoding2 & 54.26ms & 45.0\% & 48.4\%\\
+  Encoding3*2 & 68.98ms & 31.5\% & 34.4\%\\
+  Decoding1new & 68.98ms & 24.8\% & 27.9\%\\
+  Decoding2toEnd & 133.58ms & 8.1\% & 8.2\%\\
+  \hline
+\end{tabular}
+\end{table}
