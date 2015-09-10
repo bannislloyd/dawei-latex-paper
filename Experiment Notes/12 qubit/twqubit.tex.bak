@@ -15,12 +15,14 @@
 \usepackage{multirow}
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}
 
+\usepackage[font=small,labelfont=bf]{caption}
+
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{color}
 
 \graphicspath{{Figures/}}
-\includeonly{main,Appendix, Appendix2,Appendix3}
+\includeonly{main,Appendix2,Appendix3}
 % Appendix, Appendix2, Appendix3
 
 

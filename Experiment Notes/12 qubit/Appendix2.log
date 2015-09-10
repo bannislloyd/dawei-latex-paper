@@ -1,25 +1,25 @@
 This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.5)  9 SEP 2015 23:42
 entering extended mode
-**H:/Latex/Experiment*Notes/12*qubit/main.tex
-("H:/Latex/Experiment Notes/12 qubit/main.tex"
+**H:/Latex/Experiment*Notes/12*qubit/Appendix2.tex
+("H:/Latex/Experiment Notes/12 qubit/Appendix2.tex"
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for loaded.
 ! Undefined control sequence.
-l.1 \section
-            {Dec 12-Feb 06, 2014: GRAPE Pulse Calculations and Simulations}
+l.2 \section
+            {Appendix II: Important Figures and Experimental Spectra}
 ? 
 ! Emergency stop.
-l.1 \section
-            {Dec 12-Feb 06, 2014: GRAPE Pulse Calculations and Simulations}
+l.2 \section
+            {Appendix II: Important Figures and Experimental Spectra}
 End of file on the terminal!
 
  
 Here is how much of TeX's memory you used:
  7 strings out of 495362
- 177 string characters out of 3184024
+ 202 string characters out of 3184024
  44825 words of memory out of 3000000
  3272 multiletter control sequences out of 15000+200000
  3640 words of font info for 14 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 5i,0n,1p,118b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 7i,0n,2p,117b,12s stack positions out of 5000i,500n,10000p,200000b,50000s
 !  ==> Fatal error occurred, no output PDF file produced!

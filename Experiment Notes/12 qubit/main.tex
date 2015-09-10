@@ -647,7 +647,7 @@ The real spectrum will have SI points. So if SI<TD, it will cut the first SI poi
 \textbf{AQ = 1.09s.}\\
 AQ is fixed as AQ = DW*TD.
 
-{\color{blue}{\textbf{Still Keep Updating:}}}
+{\color{blue}{\textbf{Aug 10, 2015}}}
 
 \textbf{Implement every encoding and decoding part and compare with simulation.}
 
@@ -680,3 +680,45 @@ Exp 1888: Observe C7 after C-H SWAP applied on thermal. NS=7.\\
 Exp 1889: Observe C7 of the 7-qubit PPS. NS=7. See Fig. \ref{1888and1889}\\
 Exp 1891: Observe C7 of the 7-qubit PPS, with the Encoding replaced by 12-qubit pulses. NS=7.\\
 Exp 1893: Observe C7 of the 7-qubit PPS, with the Encoding and Phase Cycling replaced by 12-qubit pulses. NS=7. See Fig. \ref{1889and1891and1893}\\
+
+{\color{blue}{\textbf{Sep 09, 2015}}}
+
+\textbf{The implementations of every encoding and decoding part are repeated with C-H SWAP gate in the beginning. Just increase the Exp No by 1000, for example, 1401 to 2401.}
+
+A program 'Compare\_EveryStepWithSWAP.m' in the folder '\dir Twqubit\_Circuit\_PPS\dir simulation\dir' is written to read all spectra data and plot figures. The operators are saved in '\dir All\_Exp\_Operators' and the figures in '\dir All\_Sim\_and\_Exp\_Compare\_Figures'.
+
+All the following experiments have a C-H SWAP gate in the beginning, except Exp 2399 and 2402, as we cannot observe C2 after the SWAP gate.
+
+Exp 2398: Observe C7 by Gaussian with H decoupled. NS = 1. \\
+Exp 2399: Observe C2 by Gaussian with H decoupled. NS = 1. \\
+Exp 2401: Observe C7 by GRAPE as the reference. NS=10. See Fig. \ref{2401and2402}\\
+Exp 2402: Observe C2 by GRAPE as the reference. NS=10. \\
+Exp 2403: Observe C7 after encoding1. NS=10. See Fig. \ref{2403and2404}\\
+Exp 2404: Observe C2 after encoding1. NS=10.\\
+Exp 2405: Observe C7 after encoding1 and decouple H. NS=1. See Fig. \ref{2405and2406}\\
+Exp 2406: Observe C2 after encoding1 and decouple H. NS=1.\\
+Exp 2407: Observe C7 after encoding2. NS=10. See Fig. \ref{2407and2408}\\
+Exp 2408: Observe C2 after encoding2. NS=10.\\
+Exp 2409: Observe C7 after encoding2 and decouple H. NS=1. See Fig. \ref{2409and2410}\\
+Exp 2410: Observe C2 after encoding2 and decouple H. NS=1.\\
+
+Exp 2432: Observe C7 after encoding3 applied twice which generates 7 coherence. NS=10. See Fig. \ref{2432and2433}\\
+Exp 2433: Observe C2 after encoding3 applied twice which generates 7 coherence. NS=10.\\
+Exp 2434: Observe C7 after encoding3 applied twice which generates 7 coherence, and decouple H. NS=1. See Fig. \ref{2434and2435}\\
+Exp 2435: Observe C2 after encoding3 applied twice which generates 7 coherence, and decouple H. NS=1.\\
+Exp 2436: Observe C7 after decoding1new which generates 7 coherence. NS=10. See Fig. \ref{2436and2437}\\
+Exp 2437: Observe C2 after decoding1new which generates 7 coherence. NS=10.\\
+Exp 2438: Observe C7 after decoding1new which generates 7 coherence, and decouple H. NS=1. See Fig. \ref{2438and2439}\\
+Exp 2439: Observe C2 after decoding1new which generates 7 coherence, and decouple H. NS=1.\\
+Exp 2444: Observe C7 after decoding2toend which generates 7 coherence. NS=10. See Fig. \ref{2444and2445}\\
+Exp 2445: Observe C2 after decoding2toend which generates 7 coherence. NS=10.\\
+Exp 2446: Observe C7 after decoding2toend which generates 7 coherence, and decouple H. NS=1. See Fig. \ref{2446and2447}\\
+Exp 2447: Observe C2 after decoding2toend which generates 7 coherence, and decouple H. NS=1.\\ 
+
+{\color{blue}{\textbf{Sep 10, 2015}}}
+
+\textbf{Experimental result of the entire circuit without the phase cycling part.}
+
+1) We observed C7 after C-H SWAP gate. It is 3.39 (maximum 4) times higher than the C7 result without SWAP. This experiment is used as reference. Fig. \ref{2401and2402} shows the spectra of C7 and C2. Note for C2 experiments, I cannot apply a SWAP gate first because after the SWAP, C2 is no longer at Z. \\
+2) 
+ 
