@@ -747,18 +747,18 @@ Here is a summarized table of the remained signal after every step. We can see t
   \hline
 \end{tabular}
 \end{table}
- \begin{table}[hbtp]
-\begin{tabular} {c||c|c|c}
-  \hline
-  Case & Length & C7 Hdecouple & C2 Hdecouple\\
-  \hline
-  \hline
-  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-  Encoding1 & 32.98ms & 65.0\% & 60.9\%\\
-  Encoding2 & 54.26ms & 45.0\% & 48.4\%\\
-  Encoding3*2 & 68.98ms & 31.5\% & 34.4\%\\
-  Decoding1new & 68.98ms & 6.8\% & 15.4\% & 24.8\% & 27.9\%\\
-  Decoding2toEnd & 133.58ms & 2.8\% & 5.9\% & 8.1\% & 8.2\%\\
-  \hline
-\end{tabular}
-\end{table}
+% \begin{table}[hbtp]
+%\begin{tabular} {c||c|c|c}
+%  \hline
+%  Case & Length & C7 Hdecouple & C2 Hdecouple\\
+%  \hline
+%  \hline
+%  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+%  Encoding1 & 32.98ms & 65.0\% & 60.9\%\\
+%  Encoding2 & 54.26ms & 45.0\% & 48.4\%\\
+%  Encoding3*2 & 68.98ms & 31.5\% & 34.4\%\\
+%  Decoding1new & 68.98ms & 24.8\% & 27.9\%\\
+%  Decoding2toEnd & 133.58ms & 8.1\% & 8.2\%\\
+%  \hline
+%\end{tabular}
+%\end{table}

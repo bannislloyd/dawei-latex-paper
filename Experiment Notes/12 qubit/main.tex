@@ -522,6 +522,8 @@ Now it is ready to go to check every experimental spectrum of C2 and C7. Indeed,
 \clearpage
 \section{Apr 16, 2015: 12-qubit Calibration in Experiment}
 
+{\color{blue}{\textbf{Apr 16, 2015:}}}
+
 The calibration is used for getting the dB of $\pi/2$ and $2\pi$ pulses for a fixed length. The au program is written by Annie, including 3 files 'calib.m', 'calibrate.m' and 'getspec.m'. First upload all the three files to Ordi2. Note 'calib.m' is for redirection and it should be in the root folder when opening Matlab in Ordi2. The path is thus '\dir d29lu\dir fixpulse\dir' because Matlab will go to this folder to show the last result of pulse fixing.
 
 The calibration folder is 'twqubit\_calib'. Then select the experiment you want to calibrate, and run 'edau twqubit\_calib'. \textbf{You have to edit Line 6 'host\_resultpath', Line 24 'TIMES' which means number of loops, the following 'p1', 'd1' and 'pl3', and the starting power.  Then in 'calibrate.m', change the targetfolder, ob\_min, ob\_max and figure\_name. }
@@ -543,6 +545,34 @@ The experiments for calibrating C is titled 'twqubit\_calib\_C', and for calibra
 \end{table}
 
 Actually only C360 and H270 are usable. The two powers are -4.38dB and 6.2dB for 25KHz.
+
+{\color{blue}{\textbf{Sep 01, 2015:}}}
+
+\textbf{This part is to study the PHC0 and PHC1 parameters in Bruker. It is indeed important especially when people want to extract the phase information from NMR spectra. }
+
+PHC0 is known as the global phase. When PHC0 is changing, all the peaks in a spectrum are undergoing the same phase change. In other words, for peaks with different phases, PHC0 can never adjust them to the same phase.\\
+PHC1 is a relative phase. It means the phase of one point (a given frequency) is fixed, and the phases of the other frequencies are changing relatively. The changing amount is proportional to the distance, that is, the frequency difference from the reference point. In fact, in Bruker spectrometer, when changing PHC1, the phase of the left-most point (largest frequency) is fixed and used as the reference. When PHC1 goes to $2\pi$, the phase of the right-most point (smallest frequency) changes by $2\pi$, and all the other points in the middle change phases accordingly based on their distances to the left-most point.
+
+The formula when correcting phases by PHC0 and PHC1 is
+\bea \label{NMRphase}
+R_0(i) = R(i)cos[a(i)]-I(i)sin[a(i)], \\ \nonumber
+I_0(i) = I(i)cos[a(i)]+R(i)sin[a(i)],
+\eea
+where $a(i) = PHC0 + (i-1)PHC1$ with $i>0$. $R$ and $I$ represent the corrected values, and $R_0$ and $I_0$ are the original data. We can clearly see the relationship between the two phases.
+
+For an NMR experiment, first we need to set the reference phase. One traditional way is to tune the phase of the thermal spectrum. From Eq. \ref{NMRphase} we know a 20us hard pulse will induce the chemical shift evolutions for different spins, so there is a phase difference for different spins depending on how much angle they evolve under chemical shift evolutions. However, since this phase difference is proportional to the chemical shifts, they can be simultaneously corrected by PHC1. As PHC1 is changing, PHC0 will change accordingly because O1 (the middle point) feels a 0.5*PHC1 change and is no longer in absorption. 
+
+For a GRAPE pulse, it is totally different. GRAPE pulse has already considered the chemical shift evolution, so all the spins will feel the same rotating angles under one GRAPE pulse. In principle, PHC0 and PHC1 must be 0 to keep the phases of all spins pointing up after a $R_y(\pi/2)$ on thermal.
+
+I used the NMRsim program provided by Topspin to check the above analysis. It is proved to be correct. For a hard pulse readout, we have to use 'apk' command to tune all phases up, whereas for a GRAPE pulse readout, PHC0 = PHC1 = 0 will give all phases up.
+
+In experiment, even for GRAPE pulses, PHC0 cannot be 0 as there is a machine phase. This phase should be a constant if the spectrometer is stable. PHC1 should be 0 for a GRAPE pulse as there is no relative phase for different spins. But we can actually see by setting PHC1 = 0 we can never get all peaks up. So I guess there is a space between the end of the sequence and the start of acquisition and makes it similar to a free evolution before we read out the spectrum. We can adjust the phase of a GRAPE pulse spectrum to all peaks up and record this phase as reference. For future experiments they all follow this phase setting. 
+
+I also checked in simulation that PHC0 and PHC1 depend on TD and SWH indeed.
+
+Conclusion if we want to rotate the thermal to X and observe it. \\
+A hard pulse readout will give PHC0 and PHC1. PHC1 comes from the Hamiltonian evolution during the hard pulse, and the free evolution between the sequence tail and acquisition; PHC0 comes from PHC1 and machine phase.\\
+A GRAPE pulse readout will give PHC0 and PHC1. PHC1 comes from the free evolution between the sequence tail and acquisition; PHC0 comes from PHC1 and machine phase.
 
 \clearpage
 \section{Apr 18, 2015 to Aug 18, 2015: All pulses test in experiment}
@@ -747,18 +777,18 @@ Here is a summarized table of the remained signal after every step. We can see t
   \hline
 \end{tabular}
 \end{table}
- \begin{table}[hbtp]
-\begin{tabular} {c||c|c|c}
-  \hline
-  Case & Length & C7 Hdecouple & C2 Hdecouple\\
-  \hline
-  \hline
-  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-  Encoding1 & 32.98ms & 65.0\% & 60.9\%\\
-  Encoding2 & 54.26ms & 45.0\% & 48.4\%\\
-  Encoding3*2 & 68.98ms & 31.5\% & 34.4\%\\
-  Decoding1new & 68.98ms & 24.8\% & 27.9\%\\
-  Decoding2toEnd & 133.58ms & 8.1\% & 8.2\%\\
-  \hline
-\end{tabular}
-\end{table}
+% \begin{table}[hbtp]
+%\begin{tabular} {c||c|c|c}
+%  \hline
+%  Case & Length & C7 Hdecouple & C2 Hdecouple\\
+%  \hline
+%  \hline
+%  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+%  Encoding1 & 32.98ms & 65.0\% & 60.9\%\\
+%  Encoding2 & 54.26ms & 45.0\% & 48.4\%\\
+%  Encoding3*2 & 68.98ms & 31.5\% & 34.4\%\\
+%  Decoding1new & 68.98ms & 24.8\% & 27.9\%\\
+%  Decoding2toEnd & 133.58ms & 8.1\% & 8.2\%\\
+%  \hline
+%\end{tabular}
+%\end{table}
