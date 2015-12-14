@@ -440,27 +440,19 @@ Decoding3:
 \textbf{Updated on April 6: Please ignore the following sentences as Annie found a mistake in check\_grape.m. The unitary of the GRAPE pulse should be U(4us)*Ugrape*U(4us), but I wrote Ugrape*U(8us) by mistake! This will introduce a serious phase error and trigger the following problem. I have fixed it.}
 \emph{It is surprising that after applying phase cycling, the state will introduce a phase. The ideal state after phase cycling will have two elements 0.7071 at the top off-diagonal positions, but these two numbers change to 0.5018-0.4057i and  0.5018+0.4057i after GRAPE phase cycling pulse. The absolute value is 0.6453, which is reasonable. Moreover, the state in the decoding part will also involve an unexpected phase in every step. I guess the reason is the imperfections of the GRAPE pulses (some of them are pretty low like 80\% fidelity), and the 90 or 180 pulse cannot rotate or refocus the state to the desired axis completely. Anyway, in the following table, I will write both fidelities, with and without this phase correction.}
 
-{\color{blue}{\textbf{Oct 13, 2015:}}}
-
-\textbf{Simulated the unitaries of the fixed GRAPE pulses. Not surprisingly, the PPS looks still good.}
-
-Since we have to fix all GRAPE pulses in the real experiment, the measured pulses in the lab need to be simulated too. At the first sight, the measured pulse is very close to the ideal pulse after pulse fixing. To be more precise I still followed Ray's suggestions and simulated the circuit with the really measured pulses.
-
-First, all pulses are refixed as the environment may change. Then the main function 'pulsefixer\_grape.m' is changed slightly to save the measured pulse after every fixing step. The typical name is for example 'twqubit\_C2180\_C\_25000\_NoBufferfix5\_measured' in the folder 'H:\dir Matlab\dir Twqubit\dir Pulse\_NoBuffer\_Refix\dir'. The total number of refixed pulses is 22, and 'check\_grape\_measured.m' is used to calculate all of the measured pulses' unitaries and fidelities, with each saving in say 'twqubit\_C2180\_Ufid\_measured.mat'. The fidelity of each pulse is about 99.8\%. So it is reasonable to guess that the final PPS will be fine, and the simulation gives good result. See Fig. \ref{PPS_fixedpulse_measured}. Do not care about the minus peak as I forgot to adjust it to plus.
-
 All fidelities $\text{tr}(\rho_\text{{ideal}}\rho_\text{real})$ calculated by the circuit itself and by the GRAPE pulses.
 \begin{table}[!h]
-\begin{tabular} {c||c|c|c|c}
+\begin{tabular} {c||c|c|c}
   \hline
-   Part & Length & Circuit Fidelity & GRAPE Fidelity & Fix Fidelity\\
+   Part & Length & Circuit Fidelity & GRAPE Fidelity\\
   \hline
- Encoding1 & 32.98ms & 1.0000 & 0.9831 & 0.9833\\
- Encoding2 & 21.28ms & 1.0000 & 0.9717 & 0.9706\\
- Encoding3 & 7.36ms & 0.9500 & 0.9124 & 0.9111\\
- Phase Cycling & 1ms & 0.9511 & 0.9126 & 0.9110\\
- Decoding1 & 6.36ms & 0.8717 & 0.8693 & 0.8682\\
- Decoding2 & 20.28ms & 0.8570 & 0.8430 & 0.8387\\
- Decoding3 & 43.32ms & 0.8570 & 0.8234 & 0.8137\\
+ Encoding1 & 32.98ms & 1.0000 & 0.9831\\
+ Encoding2 & 21.28ms & 1.0000 & 0.9717\\
+ Encoding3 & 7.36ms & 0.9500 & 0.9124\\
+ Phase Cycling & 1ms & 0.9511 & 0.9126\\
+ Decoding1 & 6.36ms & 0.8717 & 0.8693\\
+ Decoding2 & 20.28ms & 0.8570 & 0.8430\\
+ Decoding3 & 43.32ms & 0.8570 & 0.8234\\
   \hline
 \end{tabular}
 \end{table}
@@ -473,14 +465,6 @@ All fidelities $\text{tr}(\rho_\text{{ideal}}\rho_\text{real})$ calculated by th
 \setlength{\abovecaptionskip}{-1cm}
 \caption{\footnotesize{Comparison of the thermal and PPS produced by the circuit and GRAPE. }}\label{compare_spectra}
 \end{figure}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[width=\columnwidth]{PPS_fixedpulse_measured.pdf}
-\end{center}
-\caption{\footnotesize{PPS spectrum of the measured pulses after fixing. The negative direction is meaningless.}}\label{PPS_fixedpulse_measured}
-\end{figure}
-
 
 \clearpage
 \section{June 09, 2015: Write a universal program for spectrum simulation}
@@ -570,25 +554,14 @@ PHC0 is known as the global phase. When PHC0 is changing, all the peaks in a spe
 PHC1 is a relative phase. It means the phase of one point (a given frequency) is fixed, and the phases of the other frequencies are changing relatively. The changing amount is proportional to the distance, that is, the frequency difference from the reference point. In fact, in Bruker spectrometer, when changing PHC1, the phase of the left-most point (largest frequency) is fixed and used as the reference. When PHC1 goes to $2\pi$, the phase of the right-most point (smallest frequency) changes by $2\pi$, and all the other points in the middle change phases accordingly based on their distances to the left-most point.
 
 The formula when correcting phases by PHC0 and PHC1 is
-\bea \label{NMRphase}
+\bea
 R_0(i) = R(i)cos[a(i)]-I(i)sin[a(i)], \\ \nonumber
-I_0(i) = I(i)cos[a(i)]+R(i)sin[a(i)],
+I_0(i) = I(i)cos[a(i)]+R(i)sin[a(i)], \\
+\label{NMRphase}
 \eea
 where $a(i) = PHC0 + (i-1)PHC1$ with $i>0$. $R$ and $I$ represent the corrected values, and $R_0$ and $I_0$ are the original data. We can clearly see the relationship between the two phases.
 
-For an NMR experiment, first we need to set the reference phase. One traditional way is to tune the phase of the thermal spectrum. From Eq. \ref{NMRphase} we know a 20us hard pulse will induce the chemical shift evolutions for different spins, so there is a phase difference for different spins depending on how much angle they evolve under chemical shift evolutions. However, since this phase difference is proportional to the chemical shifts, they can be simultaneously corrected by PHC1. As PHC1 is changing, PHC0 will change accordingly because O1 (the middle point) feels a 0.5*PHC1 change and is no longer in absorption.
-
-For a GRAPE pulse, it is totally different. GRAPE pulse has already considered the chemical shift evolution, so all the spins will feel the same rotating angles under one GRAPE pulse. In principle, PHC0 and PHC1 must be 0 to keep the phases of all spins pointing up after a $R_y(\pi/2)$ on thermal.
-
-I used the NMRsim program provided by Topspin to check the above analysis. It is proved to be correct. For a hard pulse readout, we have to use 'apk' command to tune all phases up, whereas for a GRAPE pulse readout, PHC0 = PHC1 = 0 will give all phases up.
-
-In experiment, even for GRAPE pulses, PHC0 cannot be 0 as there is a machine phase. This phase should be a constant if the spectrometer is stable. PHC1 should be 0 for a GRAPE pulse as there is no relative phase for different spins. But we can actually see by setting PHC1 = 0 we can never get all peaks up. So I guess there is a space between the end of the sequence and the start of acquisition and makes it similar to a free evolution before we read out the spectrum. We can adjust the phase of a GRAPE pulse spectrum to all peaks up and record this phase as reference. For future experiments they all follow this phase setting.
-
-I also checked in simulation that PHC0 and PHC1 depend on TD and SWH indeed.
-
-Conclusion if we want to rotate the thermal to X and observe it. \\
-A hard pulse readout will give PHC0 and PHC1. PHC1 comes from the Hamiltonian evolution during the hard pulse, and the free evolution between the sequence tail and acquisition; PHC0 comes from PHC1 and machine phase.\\
-A GRAPE pulse readout will give PHC0 and PHC1. PHC1 comes from the free evolution between the sequence tail and acquisition; PHC0 comes from PHC1 and machine phase.
+For an NMR experiment, first we need to set the reference phase. One traditional way is to tune the phase of the thermal spectrum. From Eq. \ref{NMRphase}
 
 \clearpage
 \section{Apr 18, 2015 to Aug 18, 2015: All pulses test in experiment}
@@ -793,40 +766,18 @@ Here is a summarized table of the remained signal after every step. We can see t
   \hline
 \end{tabular}
 \end{table}
-
-{\color{blue}{\textbf{Oct 09, 2015}}}
-
-\textbf{A problem of applying many gradient fields in the spectrometer. }
-
-A problem was found during the PPS preparation. In the beginning, we planned to use 9 gradient fields in the sequence and implemented each phase cycling by hundreds of times. We found that during the running, the lock will be automatically off! Just before the second run, the spectrometer cannot stay locking any more, and the spectrum will have a obvious drift of chemical shifts. It is caused by applying too many gradient fields and the reason remains unknown. Probably the spectrometer thinks you are not friendly at all as you order him to do so many gradients...
-
-\textbf{Problem: Lock will be automatically off during a multiple scan of experiments with many gradient fields. }\\
-\textbf{Solution: Reduce the number of gradients or the strengths; Reduce D1; Reduce NS.} 
-
-In the new sequence, we have reduced the gradients to 5. \\
-Gz1: After C-H SWAP gate.\\
-Gz2: After Encoding1.\\
-Gz3: After Encoding2.\\
-Gz4: After Encoding3.\\
-Gz5: Before C790 observation.
-
-Two gradients (including killing all C polarizations before C-H SWAP and killing C1-C6, H1-H5 polarizations before Encoding1) are replaced by phase cycles. So a minimum NS=4 is required. Anyway, this is not a problem as we need much much more scans than 4 in 12 qubits. 
-
-{\color{blue}{\textbf{Oct 10, 2015}}}
-
-\textbf{Two changes for the PPS experiment. }
-
-Two changes were made during the test.
-
-Change 1: 12 phase cycles are enough instead of 24. Actually Exp 1-12 are exactly the same as Exp 13-24. From now on we only use 12 different sequences.\\
-Change 2: After the circuit, a pulse to rotate C7 back to Z was added. Gz5 and C790 observation followed this pulse. The advantage is the signal might be pure with this additional gradient. 
-
-The related Matlab programs of generating all sequences and spectrometer Mac commands are in 'H:\dir Matlab\dir Twqubit\dir'.\\
-1. Gen24Sequences.m: Generate all 12 sequences and manually transfer them to the wave folder in the spectrometer computer.\\
-2. Genmultizg.m: Generate one file 'twqubit\_pps\_phasecycling' and manually transfer it to the mac folder in the spectrometer computer. It will automatically generate all parameter settings of the 12 experiments, such as NS, D1, SP etc. Meanwhile, generate 'twqubit\_pps\_zg' which can be used to run all experiments. It also runs one thermal in between any two different phase cycles to check if the spectrum drifts or not. 
-
-{\color{blue}{\textbf{Oct 20, 2015}}}
-
-\textbf{Check different pulse fixing positions.}
-
-We refixed all pulses and the error of each fixed pulse is tiny. However, when we go back to experiments, combine all fixed pulses together, and run them, the spectrum is much worse than the previous result. 
+% \begin{table}[hbtp]
+%\begin{tabular} {c||c|c|c}
+%  \hline
+%  Case & Length & C7 Hdecouple & C2 Hdecouple\\
+%  \hline
+%  \hline
+%  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+%  Encoding1 & 32.98ms & 65.0\% & 60.9\%\\
+%  Encoding2 & 54.26ms & 45.0\% & 48.4\%\\
+%  Encoding3*2 & 68.98ms & 31.5\% & 34.4\%\\
+%  Decoding1new & 68.98ms & 24.8\% & 27.9\%\\
+%  Decoding2toEnd & 133.58ms & 8.1\% & 8.2\%\\
+%  \hline
+%\end{tabular}
+%\end{table}

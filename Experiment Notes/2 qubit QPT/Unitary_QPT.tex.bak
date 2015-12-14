@@ -1,0 +1,277 @@
+\documentclass[12pt,nofootinbib,notitlepage,onecolumn,superscriptaddress]{revtex4-1}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}  % english language
+
+\usepackage{times}
+
+\usepackage{amssymb,amsmath,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{bbm}
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.5}
+
+\usepackage[caption=false]{subfig}
+
+
+\newcommand{\bydef}{\stackrel{\mathrm{def}}{=}}
+\renewcommand{\baselinestretch}{1}
+
+\usepackage{color}
+\definecolor{dred}{rgb}{.8,0.2,.2}
+\definecolor{ddred}{rgb}{.8,0.5,.5}
+\definecolor{dblue}{rgb}{.2,0.2,.8}
+\definecolor{dgreen}{rgb}{.2,0.5,.2}
+\newcommand{\add}[1]{\textcolor{dred}{*** #1 ***}}
+\newcommand{\out}[1]{\textcolor{ddred}{\textbf{[}\emph{#1}\textbf{]}}}
+\newcommand{\yo}[1]{\textcolor{dblue}{\textbf{[}#1\textbf{]}}}
+\newcommand{\que}[1]{\textcolor{dred}{#1}}
+\newcommand{\todo}[1]{\textbf{\underline{\textcolor{dblue}{\textbf{[}#1\textbf{]}}}}}
+\newcommand{\tomi}[1]{\textcolor{dgreen}{\textbf{[Tomi: }#1\textbf{]}}}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}   %[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% bra and ket:
+\newcommand{\bra}[1]{\mbox{$\langle #1|$}}
+\newcommand{\ket}[1]{\ensuremath{|#1\rangle}}
+\newcommand{\braket}[2]{\mbox{$\langle #1|#2\rangle$}}
+\newcommand{\ketbra}[2]{\mbox{$|#1\rangle\langle #2|$}}
+\newcommand{\iprod}[2]{\ensuremath{\langle #1,#2 \rangle}}
+
+\newcommand{\gate}[1]{\ensuremath{\text{\sc #1}}}
+\newcommand{\COPY}[1][]{\ensuremath{\gate{COPY}_{#1}}}
+
+\newcommand{\comm}[2]{\ensuremath{\left[#1, #2\right]}}
+
+\newcommand{\eq}{\Leftrightarrow}
+
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Aut}{Aut} % automorphism group
+\DeclareMathOperator{\End}{End} % set of endomorphisms
+
+\newcommand{\projector}[1]{\mbox{$|#1\rangle\langle #1|$}}
+
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+
+\newcommand{\hprod}{\odot}
+
+\newcommand{\I}{\openone}     % identity operator
+\newcommand{\R}{{\mathbb R}}  % real numbers
+\newcommand{\hilb}[1]{\ensuremath{\mathcal{#1}}} % Hilbert space
+\newcommand{\swap}{{\sf{SWAP}}}
+\newcommand{\ie}{i.e.}
+
+\newcommand{\hs}{\kappa}
+
+% defines logic function names, to look nice
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+
+% Quantum communication, Formalism
+
+\def\thesection{%
+\arabic{section}}%
+\def\thesubsection{%
+\arabic{subsection}}%
+\def\thesubsubsection{%
+\arabic{subsubsection}}%
+\def\theparagraph{%
+\arabic{paragraph}}%
+\def\thesubparagraph{%
+\theparagraph.\arabic{subparagraph}}%
+\setcounter{secnumdepth}{5}%
+
+% please leave these here
+
+
+% fonts
+\def\1#1{{\bf #1}}
+\def\2#1{{\cal #1}}
+\def\7#1{{\mathbb #1}}
+
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+
+
+% Fractions
+\newcommand{\half}{\mbox{$\textstyle \frac{1}{2}$}}
+\newcommand{\quarter}{\mbox{$\textstyle \frac{1}{4}$}}
+
+% Dirac notation
+%\newcommand{\ket}[1]{\left | \, #1 \right \rangle}
+\newcommand{\kets}[1]{ | \, #1 \rangle}
+%\newcommand{\bra}[1]{\left \langle #1 \, \right |}
+\newcommand{\bras}[1]{ \langle #1 \, \right}
+%\newcommand{\braket}[2]{\left\langle\, #1\,|\,#2\,\right\rangle}
+\newcommand{\brakets}[2]{\langle\, #1\,|\,#2\,\rangle}
+\newcommand{\bracket}[3]{\left\langle #1 \left| #2 \right| #3 \right\rangle}
+\newcommand{\brackets}[3]{\langle #1 | #2 | #3 \rangle}
+\newcommand{\proj}[1]{\ket{#1}\bra{#1}}
+\newcommand{\av}[1]{\langle #1\rangle}
+\newcommand{\outprod}[2]{\ket{#1}\bra{#2}}
+\newcommand{\op}[2]{|#1\rangle \langle #2|}
+% Common operators
+\newcommand{\tr}{\textrm{tr}}
+%\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\od}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dt}[1]{\frac{\partial #1}{\partial t}}
+
+% Second quantisation
+\newcommand{\an}[1]{\hat{#1}}
+\newcommand{\cre}[1]{\hat{#1}^\dag}
+\newcommand{\vac}{\ket{\textrm{vac}}}
+
+% Other quantum
+\newcommand{\cc}{\textrm{c.c.}}
+
+% Common letters
+%\newcommand{\ee}{\mathrm{e}}
+%\newcommand{\ii}{\mathrm{i}}
+%\newcommand{\dd}{\mathrm{d}}
+\newcommand{\identity}{\mathbbm{1}}
+
+% Common symbols
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+
+\renewcommand{\Re}{\mathfrak{Re}}
+\renewcommand{\Im}{\mathfrak{Im}}
+
+% Letters in different styles
+
+\newcommand{\AAA}{\mathbf{A}}
+\renewcommand{\AA}{\mathcal{A}}
+\newcommand{\aaa}{\mathbf{a}}
+\renewcommand{\aa}{\mathrm{a}}
+\newcommand{\BBB}{\mathbf{B}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\bbb}{\mathbf{b}}
+\newcommand{\bb}{\mathrm{b}}
+\newcommand{\CCC}{\mathbf{C}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\ccc}{\mathbf{c}}
+\renewcommand{\cc}{\mathrm{c}}
+\newcommand{\DDD}{\mathbf{D}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\ddd}{\mathbf{d}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\EEE}{\mathbf{E}}
+\newcommand{\EE}{\mathcal{E}}
+\newcommand{\eee}{\mathrm{e}}
+%\newcommand{\ee}{\mathrm{e}}
+\newcommand{\FFF}{\mathbf{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\fff}{\mathbf{f}}
+\newcommand{\ff}{\mathrm{f}}
+\newcommand{\GGG}{\mathbf{G}}
+\newcommand{\GG}{\mathcal{G}}
+\renewcommand{\ggg}{\mathbf{g}}
+\renewcommand{\gg}{\mathrm{g}}
+\newcommand{\HHH}{\mathbf{H}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\hhh}{\mathbf{h}}
+\newcommand{\hh}{\mathrm{h}}
+\newcommand{\III}{\mathbf{I}}
+\newcommand{\II}{\mathcal{I}}
+\newcommand{\iii}{\mathbf{i}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\JJJ}{\mathbf{J}}
+\newcommand{\JJ}{\mathcal{J}}
+\newcommand{\jjj}{\mathbf{j}}
+\newcommand{\jj}{\mathrm{j}}
+\newcommand{\KKK}{\mathbf{K}}
+\newcommand{\KK}{\mathcal{K}}
+\newcommand{\kkk}{\mathbf{k}}
+\newcommand{\kk}{\mathrm{k}}
+\newcommand{\LLL}{\mathbf{L}}
+\newcommand{\LL}{\mathcal{L}}
+\renewcommand{\lll}{\mathbf{l}}
+\renewcommand{\ll}{\mathrm{l}}
+\newcommand{\MMM}{\mathbf{M}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\mmm}{\mathbf{m}}
+\newcommand{\mm}{\mathrm{m}}
+\newcommand{\NNN}{\mathbf{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\nnn}{\mathbf{n}}
+\newcommand{\nn}{\mathrm{n}}
+\newcommand{\OOO}{\mathbf{O}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\ooo}{\mathbf{o}}
+\newcommand{\oo}{\mathrm{o}}
+\newcommand{\PPP}{\mathbf{P}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\ppp}{\mathbf{p}}
+\newcommand{\pp}{\mathrm{p}}
+\newcommand{\QQQ}{\mathbf{Q}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\qqq}{\mathbf{q}}
+\newcommand{\qq}{\mathrm{q}}
+\newcommand{\RRR}{\mathbf{R}}
+\newcommand{\RR}{\mathcal{R}}
+\newcommand{\rrr}{\mathbf{r}}
+\newcommand{\rr}{\mathrm{r}}
+\newcommand{\SSS}{\mathbf{S}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\sss}{\mathbf{s}}
+\renewcommand{\ss}{\mathrm{s}}
+\newcommand{\TTT}{\mathbf{T}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\ttt}{\mathbf{t}}
+\renewcommand{\tt}{\mathrm{t}}
+\newcommand{\UUU}{\mathbf{U}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\uuu}{\mathbf{u}}
+\newcommand{\uu}{\mathrm{u}}
+\newcommand{\VVV}{\mathbf{V}}
+\newcommand{\VV}{\mathcal{V}}
+\newcommand{\vvv}{\mathbf{v}}
+\newcommand{\vv}{\mathrm{v}}
+\newcommand{\WWW}{\mathbf{W}}
+\newcommand{\WW}{\mathcal{W}}
+\newcommand{\www}{\mathbf{w}}
+\newcommand{\ww}{\mathrm{w}}
+\newcommand{\XXX}{\mathbf{X}}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\xxx}{\mathbf{x}}
+\newcommand{\xx}{\mathrm{x}}
+\newcommand{\YYY}{\mathbf{Y}}
+\newcommand{\YY}{\mathcal{Y}}
+\newcommand{\yyy}{\mathbf{y}}
+\newcommand{\yy}{\mathrm{y}}
+\newcommand{\ZZZ}{\mathbf{ZZ}}
+\newcommand{\ZZ}{\mathcal{ZZ}}
+\newcommand{\zzz}{\mathbf{z}}
+\newcommand{\zz}{\mathrm{z}}
+
+% kill double space
+\renewcommand{\baselinestretch}{1}
+
+% Complexity classes
+\newcommand{\NP}{\mathrm{NP}}
+\renewcommand{\P}{\mathrm{P}}
+
+\begin{document}
+
+\end{document}

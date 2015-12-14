@@ -1,0 +1,431 @@
+\documentclass[12pt,nofootinbib,notitlepage,onecolumn,superscriptaddress]{revtex4-1}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}  % english language
+
+\usepackage{times}
+
+\usepackage{amssymb,amsmath,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{bbm}
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.5}
+
+\usepackage[caption=false]{subfig}
+
+
+\newcommand{\bydef}{\stackrel{\mathrm{def}}{=}}
+\renewcommand{\baselinestretch}{1}
+
+\usepackage{color}
+\definecolor{dred}{rgb}{.8,0.2,.2}
+\definecolor{ddred}{rgb}{.8,0.5,.5}
+\definecolor{dblue}{rgb}{.2,0.2,.8}
+\definecolor{dgreen}{rgb}{.2,0.5,.2}
+\newcommand{\add}[1]{\textcolor{dred}{*** #1 ***}}
+\newcommand{\out}[1]{\textcolor{ddred}{\textbf{[}\emph{#1}\textbf{]}}}
+\newcommand{\yo}[1]{\textcolor{dblue}{\textbf{[}#1\textbf{]}}}
+\newcommand{\que}[1]{\textcolor{dred}{#1}}
+\newcommand{\todo}[1]{\textbf{\underline{\textcolor{dblue}{\textbf{[}#1\textbf{]}}}}}
+\newcommand{\tomi}[1]{\textcolor{dgreen}{\textbf{[Tomi: }#1\textbf{]}}}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}   %[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% bra and ket:
+\newcommand{\bra}[1]{\mbox{$\langle #1|$}}
+\newcommand{\ket}[1]{\ensuremath{|#1\rangle}}
+\newcommand{\braket}[2]{\mbox{$\langle #1|#2\rangle$}}
+\newcommand{\ketbra}[2]{\mbox{$|#1\rangle\langle #2|$}}
+\newcommand{\iprod}[2]{\ensuremath{\langle #1,#2 \rangle}}
+
+\newcommand{\gate}[1]{\ensuremath{\text{\sc #1}}}
+\newcommand{\COPY}[1][]{\ensuremath{\gate{COPY}_{#1}}}
+
+\newcommand{\comm}[2]{\ensuremath{\left[#1, #2\right]}}
+
+\newcommand{\eq}{\Leftrightarrow}
+
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Aut}{Aut} % automorphism group
+\DeclareMathOperator{\End}{End} % set of endomorphisms
+
+\newcommand{\projector}[1]{\mbox{$|#1\rangle\langle #1|$}}
+
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+
+\newcommand{\hprod}{\odot}
+
+\newcommand{\I}{\openone}     % identity operator
+\newcommand{\R}{{\mathbb R}}  % real numbers
+\newcommand{\hilb}[1]{\ensuremath{\mathcal{#1}}} % Hilbert space
+\newcommand{\swap}{{\sf{SWAP}}}
+\newcommand{\ie}{i.e.}
+
+\newcommand{\hs}{\kappa}
+
+% defines logic function names, to look nice
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+
+% Quantum communication, Formalism
+
+\def\thesection{%
+\arabic{section}}%
+\def\thesubsection{%
+\arabic{subsection}}%
+\def\thesubsubsection{%
+\arabic{subsubsection}}%
+\def\theparagraph{%
+\arabic{paragraph}}%
+\def\thesubparagraph{%
+\theparagraph.\arabic{subparagraph}}%
+\setcounter{secnumdepth}{5}%
+
+% please leave these here
+
+
+% fonts
+\def\1#1{{\bf #1}}
+\def\2#1{{\cal #1}}
+\def\7#1{{\mathbb #1}}
+
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+
+
+% Fractions
+\newcommand{\half}{\mbox{$\textstyle \frac{1}{2}$}}
+\newcommand{\quarter}{\mbox{$\textstyle \frac{1}{4}$}}
+
+% Dirac notation
+%\newcommand{\ket}[1]{\left | \, #1 \right \rangle}
+\newcommand{\kets}[1]{ | \, #1 \rangle}
+%\newcommand{\bra}[1]{\left \langle #1 \, \right |}
+\newcommand{\bras}[1]{ \langle #1 \, \right}
+%\newcommand{\braket}[2]{\left\langle\, #1\,|\,#2\,\right\rangle}
+\newcommand{\brakets}[2]{\langle\, #1\,|\,#2\,\rangle}
+\newcommand{\bracket}[3]{\left\langle #1 \left| #2 \right| #3 \right\rangle}
+\newcommand{\brackets}[3]{\langle #1 | #2 | #3 \rangle}
+\newcommand{\proj}[1]{\ket{#1}\bra{#1}}
+\newcommand{\av}[1]{\langle #1\rangle}
+\newcommand{\outprod}[2]{\ket{#1}\bra{#2}}
+\newcommand{\op}[2]{|#1\rangle \langle #2|}
+% Common operators
+\newcommand{\tr}{\textrm{tr}}
+%\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\od}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dt}[1]{\frac{\partial #1}{\partial t}}
+
+% Second quantisation
+\newcommand{\an}[1]{\hat{#1}}
+\newcommand{\cre}[1]{\hat{#1}^\dag}
+\newcommand{\vac}{\ket{\textrm{vac}}}
+
+% Other quantum
+\newcommand{\cc}{\textrm{c.c.}}
+
+% Common letters
+%\newcommand{\ee}{\mathrm{e}}
+%\newcommand{\ii}{\mathrm{i}}
+%\newcommand{\dd}{\mathrm{d}}
+\newcommand{\identity}{\mathbbm{1}}
+
+% Common symbols
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+
+\renewcommand{\Re}{\mathfrak{Re}}
+\renewcommand{\Im}{\mathfrak{Im}}
+
+% Letters in different styles
+
+\newcommand{\AAA}{\mathbf{A}}
+\renewcommand{\AA}{\mathcal{A}}
+\newcommand{\aaa}{\mathbf{a}}
+\renewcommand{\aa}{\mathrm{a}}
+\newcommand{\BBB}{\mathbf{B}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\bbb}{\mathbf{b}}
+\newcommand{\bb}{\mathrm{b}}
+\newcommand{\CCC}{\mathbf{C}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\ccc}{\mathbf{c}}
+\renewcommand{\cc}{\mathrm{c}}
+\newcommand{\DDD}{\mathbf{D}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\ddd}{\mathbf{d}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\EEE}{\mathbf{E}}
+\newcommand{\EE}{\mathcal{E}}
+\newcommand{\eee}{\mathrm{e}}
+%\newcommand{\ee}{\mathrm{e}}
+\newcommand{\FFF}{\mathbf{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\fff}{\mathbf{f}}
+\newcommand{\ff}{\mathrm{f}}
+\newcommand{\GGG}{\mathbf{G}}
+\newcommand{\GG}{\mathcal{G}}
+\renewcommand{\ggg}{\mathbf{g}}
+\renewcommand{\gg}{\mathrm{g}}
+\newcommand{\HHH}{\mathbf{H}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\hhh}{\mathbf{h}}
+\newcommand{\hh}{\mathrm{h}}
+\newcommand{\III}{\mathbf{I}}
+\newcommand{\II}{\mathcal{I}}
+\newcommand{\iii}{\mathbf{i}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\JJJ}{\mathbf{J}}
+\newcommand{\JJ}{\mathcal{J}}
+\newcommand{\jjj}{\mathbf{j}}
+\newcommand{\jj}{\mathrm{j}}
+\newcommand{\KKK}{\mathbf{K}}
+\newcommand{\KK}{\mathcal{K}}
+\newcommand{\kkk}{\mathbf{k}}
+\newcommand{\kk}{\mathrm{k}}
+\newcommand{\LLL}{\mathbf{L}}
+\newcommand{\LL}{\mathcal{L}}
+\renewcommand{\lll}{\mathbf{l}}
+\renewcommand{\ll}{\mathrm{l}}
+\newcommand{\MMM}{\mathbf{M}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\mmm}{\mathbf{m}}
+\newcommand{\mm}{\mathrm{m}}
+\newcommand{\NNN}{\mathbf{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\nnn}{\mathbf{n}}
+\newcommand{\nn}{\mathrm{n}}
+\newcommand{\OOO}{\mathbf{O}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\ooo}{\mathbf{o}}
+\newcommand{\oo}{\mathrm{o}}
+\newcommand{\PPP}{\mathbf{P}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\ppp}{\mathbf{p}}
+\newcommand{\pp}{\mathrm{p}}
+\newcommand{\QQQ}{\mathbf{Q}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\qqq}{\mathbf{q}}
+\newcommand{\qq}{\mathrm{q}}
+\newcommand{\RRR}{\mathbf{R}}
+\newcommand{\RR}{\mathcal{R}}
+\newcommand{\rrr}{\mathbf{r}}
+\newcommand{\rr}{\mathrm{r}}
+\newcommand{\SSS}{\mathbf{S}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\sss}{\mathbf{s}}
+\renewcommand{\ss}{\mathrm{s}}
+\newcommand{\TTT}{\mathbf{T}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\ttt}{\mathbf{t}}
+\renewcommand{\tt}{\mathrm{t}}
+\newcommand{\UUU}{\mathbf{U}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\uuu}{\mathbf{u}}
+\newcommand{\uu}{\mathrm{u}}
+\newcommand{\VVV}{\mathbf{V}}
+\newcommand{\VV}{\mathcal{V}}
+\newcommand{\vvv}{\mathbf{v}}
+\newcommand{\vv}{\mathrm{v}}
+\newcommand{\WWW}{\mathbf{W}}
+\newcommand{\WW}{\mathcal{W}}
+\newcommand{\www}{\mathbf{w}}
+\newcommand{\ww}{\mathrm{w}}
+\newcommand{\XXX}{\mathbf{X}}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\xxx}{\mathbf{x}}
+\newcommand{\xx}{\mathrm{x}}
+\newcommand{\YYY}{\mathbf{Y}}
+\newcommand{\YY}{\mathcal{Y}}
+\newcommand{\yyy}{\mathbf{y}}
+\newcommand{\yy}{\mathrm{y}}
+\newcommand{\ZZZ}{\mathbf{ZZ}}
+\newcommand{\ZZ}{\mathcal{ZZ}}
+\newcommand{\zzz}{\mathbf{z}}
+\newcommand{\zz}{\mathrm{z}}
+
+% kill double space
+\renewcommand{\baselinestretch}{1}
+
+% Complexity classes
+\newcommand{\NP}{\mathrm{NP}}
+\renewcommand{\P}{\mathrm{P}}
+
+\begin{document}
+
+\title{Protocol: Quantum Process Tomography of 2-qubit Unitary Gates }
+\author{Written by Dawei Lu}
+
+\date{\today}
+
+\maketitle
+
+\section{Implementing gates and the NMR sequences for the gates}
+For a quantum channel, standard quantum process tomography requires $d^4-d^2$ measurements, where $d = 2^n$ is the dimension of the Hilbert space. However, by assuming the quantum channel is unitary, we can reduce the number of measurements greatly. This protocol is to certify how to do QPT on a unitary channel with less measurements.
+
+This is a 2-qubit experiment. We choose five gates $H_1$, $H_2$, $T_1$, $T_2$ and $CNOT_{12}$ to implement as they form a universal gate set. The Hadamard gate $H$ and $\pi/8$ gate $T$ are defined as
+\be
+H = \frac{1}{\sqrt{2}}\left(
+                         \begin{array}{cc}
+                           1 & 1 \\
+                           1 & -1 \\
+                         \end{array}
+                       \right), T = \left(
+                                      \begin{array}{cc}
+                                        1 & 0 \\
+                                        0 & e^{i\pi/4} \\
+                                      \end{array}
+                                    \right),
+\ee
+respectively. $H_1 = H\otimes I$, $H_2 = I\otimes H$, $T_1 = T\otimes I$, $T_2 = I\otimes T$.
+
+The matrix form of $CNOT_{12}$ is 
+\be
+CNOT_{12} = \left(
+              \begin{array}{cccc}
+                1 & 0 & 0 & 0 \\
+                0 & 1 & 0 & 0 \\
+                0 & 0 & 0 & 1 \\
+                0 & 0 & 1 & 0 \\
+              \end{array}
+            \right).
+\ee
+
+The NMR sequence to implement the five gates are (pulses applied from right to left, and global phase ignored)
+\bea
+H_1 &=& R_x^1(\pi)R_y^1(\pi/2) \\
+H_2 &=& R_x^2(\pi)R_y^2(\pi/2) \\
+T_1 &=& R_z^1(\pi/4) \\
+T_2 &=& R_z^2(\pi/4) \\
+CNOT_{12} &=& R_z^1(\pi/2)R_z^2(-\pi/2)R_x^2(\pi/2)U(1/2J)R_y^2(\pi/2)
+\eea
+
+Note any Z rotation can be decomposed by 
+\be
+R_z(\theta) = R_x(\pi/2)R_y(\theta)R_x(-\pi/2).
+\ee
+So all the five unitary gates can be implemented directly in NMR. For every gate, the protocol is the same. Thus we choose $H_1$ as an example to describe the experimental procedure in detail.
+
+\section{Standard QPT}
+
+When applying $H_1$ in experiment, it is no longer a unitary as the experiment has errors. Let us assume the quantum channel of applying $H_1$ is $\Lambda$, which is still a linear channel. So the map of $\Lambda$ can be written as 
+\be
+\Lambda \left(
+          \begin{array}{c}
+            XX \\
+            XY \\
+            ... \\
+            II \\
+          \end{array}
+        \right) = \left(
+                    \begin{array}{ccccc}
+                      a_1 & a_2 & ... & a_{15} & a_{16} \\
+                      b_1 & b_2 & ... & b_{15} & b_{16} \\
+                      ... & ... & ... & ... & ... \\
+                      p_1 & p_2 & ... & p_{15} & p_{16} \\
+                    \end{array}
+                  \right) \left(
+          \begin{array}{c}
+            XX \\
+            XY \\
+            ... \\
+            II \\
+          \end{array}
+        \right).
+\ee
+
+\textbf{Note that all the elements in $\Lambda$ are real. }So, when you prepare the initial state $XX$ and apply $H_1$ which is $\Lambda$ in the lab, the output state is $a_1XX+a_2XY+...+a_{16}II$. To obtain the output state, we have to do a full state tomography which needs 15 experiments ($a_{16}$ can be calculated via normalization condition). To fully characterize $\Lambda$, we need all the elements in the 16 by 16 matrix. So the procedure of standard QPT is quite simple:
+
+\medskip
+
+\noindent 1. Prepare XX in NMR. Apply $H_1$. Do full state tomography to get the first row of $\Lambda$. 15 experiments required.\\
+2. Prepare XY in NMR. Apply $H_1$. Do full state tomography to get the second row of $\Lambda$. 15 experiments required.\\
+....\\
+16. Prepare II in NMR. Apply $H_1$. Do full state tomography to get the last row of $\Lambda$. 15 experiments required.\\
+
+Note there are two ways of preparing II in NMR. One way is rotate the thermal to X1+X2 and apply a Gradient. The other way is average over two experiment, with one from thermal Z1+Z2 and the other one from -(Z1+Z2). You may choose any way you like.
+
+The total number of experiments is thus 16*15 = 240, which equals to $d^4-d^2$.
+
+\section{Unitary QPT}
+
+If we assume $H_1$ is still unitary in the lab, the task becomes much easier. Let us assume the unitary operator is $U$ which is slightly different from $H_1$ due to experimental noise. The map of $U$ can be written as
+\be
+U\left(
+   \begin{array}{c}
+     \ket{00} \\
+     \ket{01}  \\
+     \ket{10}  \\
+     \ket{11}  \\
+   \end{array}
+ \right) = \left(
+             \begin{array}{cccc}
+               \alpha_1 & \alpha_2 & \alpha_3 & \alpha_4 \\
+               \beta_1 & \beta_2 & \beta_3 & \beta_4 \\
+               \gamma_1 & \gamma_2 & \gamma_3 & \gamma_4 \\
+               \delta_1 & \delta_2 & \delta_3 & \delta_4 \\
+             \end{array}
+           \right)\left(
+   \begin{array}{c}
+     \ket{00} \\
+     \ket{01}  \\
+     \ket{10}  \\
+     \ket{11}  \\
+   \end{array}
+ \right)
+\ee
+
+\textbf{Note that the elements in U are complex numbers. } When preparing $\ket{00}$ and apply $U$, it must be
+\be
+U\ket{00} = \alpha_1\ket{00}+\alpha_2\ket{01}+\alpha_3\ket{10}+\alpha_4\ket{11}.
+\ee
+
+Now the output state is pure as $U$ is unitary. For a pure state tomography, we do not need 15 measurement. First, we can use 3 measurements with the normalization to get $|\alpha_1|$, $|\alpha_2|$, $|\alpha_3|$ and $|\alpha_4|$. Then pick out the biggest $|\alpha_i|$. Let us just assume $|\alpha_1|$ is the biggest one. Then measure the relative phase between $\alpha_1$ and $\alpha_2$. It is straightforward in NMR to get this phase, because it locates in the single coherent term. As we can always set $\alpha_1$ to be real up to a global phase, we can get the phase of $\alpha_2$, denoted as $\theta_{\alpha_2}$. Moreover, we can get $\theta_{\alpha_3}$ and $\theta_{\alpha_4}$. (For $\theta_{\alpha_4}$ it may be tricky to directly read the relative phase between $\alpha_1$ and $\alpha_4$ as they are double coherent. The solution is read the phase, say, $\alpha_2$ and $\alpha_4$ alternatively. Since we know $\theta_{\alpha_2}$, we can calculate $\theta_{\alpha_4}$)
+
+In summary, to tomography a pure state, we need 6 measurement. 3 to get the amplitudes, and 3 to get the relative phases by setting the first term is real. So to get $U$, we can do the following first (24 experiments)
+
+\medskip
+
+\noindent 1. Prepare \ket{00} in NMR. To be precise it is a PPS in NMR. Apply $H_1$. Do pure state tomography to get the first row of $U$. 6 experiments required.\\
+2. Prepare \ket{01} in NMR. To be precise it is a PPS in NMR. Apply $H_1$. Do pure state tomography to get the second row of $U$. 6 experiments required.\\
+3. Prepare \ket{10} in NMR. To be precise it is a PPS in NMR. Apply $H_1$. Do pure state tomography to get the third row of $U$. 6 experiments required.\\
+4. Prepare \ket{11} in NMR. To be precise it is a PPS in NMR. Apply $H_1$. Do pure state tomography to get the forth row of $U$. 6 experiments required.\\
+
+You may have noticed that the above 4 steps are not enough, as every time we suppose $\alpha_1$, $\beta_1$, $\gamma_1$ and $\delta_1$ are real. But they do have relatives phases. In $U$, on can only set say $\alpha_1$ to be real. Therefore, we need more steps to get the relative phases between $\alpha_1$ and $\beta_1$, $\gamma_1$, $\delta_1$. The simplest way is to prepare a superposition of $(\ket{00}+\ket{01})/\sqrt{2}$ instead. As $U(\ket{00}+\ket{01})/\sqrt{2} = (U\ket{00}+U\ket{01})/\sqrt{2}$ and we already know the density matrices of  $U\ket{00}$ and $U\ket{01}$ from step 1 and 2, we just need to implement another pure state tomography to get the phase between $U\ket{00}$ and $U\ket{01}$. So 3 more steps to go:
+
+\medskip
+
+\noindent 5. Prepare $(\ket{00}+\ket{01})/\sqrt{2}$ in NMR. To be precise it is a PPS in NMR. Apply $H_1$. Do pure state tomography to get the relative phase between $\alpha_1$ and $\beta_1$. 6 experiments required.\\
+6. Prepare $(\ket{00}+\ket{10})/\sqrt{2}$ in NMR. To be precise it is a PPS in NMR. Apply $H_1$. Do pure state tomography to get the relative phase between $\alpha_1$ and $\gamma_1$. 6 experiments required.\\
+7. Prepare $(\ket{01}+\ket{11})/\sqrt{2}$ in NMR. To be precise it is a PPS in NMR. Apply $H_1$. Do pure state tomography to get the relative phase between $\beta_1$ and $\delta_1$. 6 experiments required.\\
+
+In total, 7 steps, 42 experiments are needed to get the $U$. A tricky thing is the method is addaptive. If the reference, for example, $\alpha_1$ is 0 or very small in amplitude, it it very hard to measure the relative phase between it and the others. The best way to avoid this is picking up the largest amplitude, and measuring all other relative phases with this largest amplitude as reference.
+
+\section{Conclusion}
+
+In conclusion, the NMR experiment in 2-qubit is straightforward. For standard QPT, we have five gates and 240 experiments for every gate. In total it is 1200 experiments. An AU program can do this easily.
+
+For unitary QPT, the total number of experiments is 5*42 = 210. The addaptive part is a bit tricky, but before doing experiments we can roughly know which coefficient is the largest since we have pre-knowledge of our gates. 
+
+\end{document}

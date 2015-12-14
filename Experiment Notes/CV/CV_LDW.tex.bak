@@ -1,0 +1,264 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{cv}
+\usepackage{biblatex}
+%\usepackage[colorlinks,citecolor=blue,linkcolor=blue]{hyperref}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\usepackage[normalem]{ulem}
+\newcommand\email[1]{\href{mailto:#1}{\uline{\nolinkurl{#1}}}}
+
+\name{Dawei Lu}
+\info{\vspace{0.5mm}
+&Institute for Quantum Computing, University of Waterloo, Waterloo, ON N2L 3G1, Canada   \\
+\vspace{0.5mm}
+      & QNC 4318 \& C2-170\\
+      \vspace{0.5mm}
+      & 519-885-1211, x32941\\
+      & dawei.lu.qip@gmail.com}
+%
+\bibliography{wypubs}
+
+%
+%\addtocategory{books}{MWH3,ITSM91,ITSM94,expsmooth08}
+%\addtocategory{papers}{DD2,DJ,DD1,QAD}
+%\addtocategory{papers}{HDR96,HBG96,HF96,GHH97,HW97,LFSH97,GH98}
+
+\begin{document}
+\maketitle
+
+
+\section{Education}
+\medskip
+\begin{tabular}{lll}
+2012 & Ph.D. & Hefei National Laboratory for Physical Sciences at Microscale\\
+\medskip
+&&University of Science and Technology of China\\
+&&Supervisor: Prof. Jiangfeng Du\\
+\medskip
+\medskip
+\medskip
+&&Thesis: \emph{Quantum Simulation towards Quantum Chemistry with NMR Simulators}\\
+2007 & B.Sc. & Special Class for Gifted Young\\
+\medskip
+&&University of Science and Technology of China\\
+&&Supervisor: Prof. Jiangfeng Du\\
+&&Thesis: \emph{Application of Strongly Modulating Pulses in Liquid NMR}\\
+\end{tabular}
+
+\medskip
+\section{Experience}
+\medskip
+\begin{tabular}{lll}
+2012.09-present & Postdoctoral fellow & Institute for Quantum Computing and Department of Physics\\
+&&University of Waterloo\\
+\medskip
+\medskip
+&&Raymond Laflamme Group\\
+2007.09-2012.07 & PhD candidate & Hefei National Laboratory for Physical Sciences at Microscale\\
+&&University of Science and Technology of China\\
+&&Jiangfeng Du Group\\
+\end{tabular}
+
+\medskip
+\section{Research Interest}
+\medskip
+$\hspace{1mm}$ $\cdot$ Quantum information processing in nuclear and electron spin magnetic resonance systems.\\
+\medskip
+$\hspace{1mm}$ $\cdot$ Development of spin control techniques to achieve high-fidelity coherent control.\\
+\medskip
+$\hspace{1mm}$ $\cdot$ Benchmarks in large-scale systems.\\
+\medskip
+$\hspace{1mm}$ $\cdot$ Quantum simulation towards large-scale quantum systems.\\
+\medskip
+$\hspace{1mm}$ $\cdot$ Experimental realization of adiabatic quantum computing model.\\
+%\medskip
+%$\hspace{1mm}$ $\cdot$ Home-built electron paramagnetic resonance (EPR) spectrometer.\\
+\medskip
+
+\section{Honors and Awards}
+\medskip
+\begin{tabular}{ll}
+\medskip
+$\hspace{1mm}$2012 & CAS Presidential Scholarship\\
+\medskip
+$\hspace{1mm}$2011 & Qiu Shi Graduate Student Scholarship\\
+$\hspace{1mm}$2011 & First Prize in The Fifth Academic Forum of Hefei National Laboratory for Physical \\
+\medskip
+ $\hspace{1mm}$         & Sciences at Microscale\\
+$\hspace{1mm}$2011 & Special Award For The First Annual Conference of Doctoral Students in School of \\
+\medskip
+$\hspace{1mm}$          & Physical Sciences USTC\\
+\medskip
+$\hspace{1mm}$2010 & Guang Hua Graduate Student Scholarship\\
+\medskip
+$\hspace{1mm}$2005 & Outstanding Student Scholarship\\
+$\hspace{1mm}$2003 & Outstanding Freshman Scholarship (Grade 1) \\
+\end{tabular}
+
+\medskip
+
+
+
+%and developing more feasible NMR techniques for high-fidelity coherent control. The main tasks I have done are finding and testing available samples, designing experiments and pulse sequence, and analyzing the data. For example, towards some complicated experiments such as implementing the quantum random-walk search algorithm and implementing factoring algorithm of 143, I chose a 3-qubit and 4-qubit liquid-crystal sample with strong dipole-dipole interaction, respectively. The essential problems of the strongly coupled NMR system, including initial state preparation, precise unitary evolution using shape pulses, and
+%Previous work is essentially focused on quantum simulation of quantum chemistry, including simulation of static molecular energies and chemical reaction dynamics.
+%1.Simulation of hydrogen molecular energies\\
+%2.Simulation of chemical isomerization reaction dynamics
+%\vskip 25 true pt
+%\noindent
+%{\Large\color[rgb]{0.6,0,0}\large\sf\bfseries\ Publications}
+%
+%\vskip 10 true pt
+
+
+\section{Publications}
+\medskip
+\begin{enumerate}
+\item \textbf{D. W. Lu}, H. Li, D. Trottier, J. Li, A. Brodutch, A. P. Krismanich, A. Ghavami, G. I. Dmitrienko, G. Long, J. Baugh, and R. Laflamme, {\it Experimental Estimation of Average Fidelity of a Clifford Gate on a 7-qubit Quantum Processor}, {\bf Phys. Rev. Lett.} \textbf{114}, 140505 (2015).
+
+\item \textbf{D. W. Lu}, A. Brodutch, J. Park, H.Katiyar, T. Jochym-O'Connor, and R. Laflamme, {\it NMR quantum information processing},  {\bf arXiv:1501.01353} (2015).
+
+\item J. Li, \textbf{D. W. Lu}, Z. H. Luo, R. Laflamme, X. H. Peng, and J. F. Du, {\it Maximally Accessible Purity in Coherently Controlled Open Quantum Systems: Application to Quantum State Engineering},  {\bf arXiv:1412.4146} (2014).
+
+\item \textbf{D. W. Lu}, J. Biamonte, J. Li, H. Li, T. Johnson, V. Bergholm, M. Faccin, Z. Zimbor$\acute{a}$s, R. Laflamme, J. Baugh and S. Lloyd, {\it Chiral Quantum Walks},  {\bf arXiv:1405.6209} (2014).
+
+\item Z. K. Li, H. Zhou, C. Y. Ju, H. W. Chen, W. Q. Zheng, \textbf{D. W. Lu}, X. Rong, C. K. Duan, X. H. Peng, and J. F. Du, {\it Experimental Realization of a Compressed Quantum Simulation of a 32-Spin Ising Chain}, {\bf Phys. Rev. Lett.} \textbf{112}, 220501 (2014).
+
+\item \textbf{D. W. Lu}, A. Brodutch, J. Li, H. Li, and R. Laflamme, {\it Experimental realization of post-selected weak measurements on an NMR quantum processor}, {\bf New J. Phys.} \textbf{16}, 053015 (2014).
+
+\item \textbf{D. W. Lu}, B. R. Xu, N. Y. Xu, Z. K. Li, H. W. Chen, X. H. Peng, R. X. Xu and J. F. Du, {\it Quantum chemistry simulation on quantum computers: Theories
+and Experiments}, {\bf Phys. Chem. Chem. Phys. Perspective}, \textbf{14}, 9411 (2012).
+
+\item \textbf{D. W. Lu}, N. Y. Xu, B. R. Xu, Z. K. Li, H. W. Chen, X. H. Peng, R. X. Xu and J. F. Du, {\it Experimental study of the quantum
+simulation towards quantum chemistry with an NMR simulator},
+{\bf Phil. Trans. R. Soc. A}, \textbf{370}, 4734 (2012).
+
+\item N. Y. Xu, J. Zhu, \textbf{D. W. Lu}, X. Y. Zhou, X. H. Peng and J. F. Du, {\it Quantum factorization of 143 on a dipolar-coupling NMR system}, {\bf Phys. Rev. Lett.}, \textbf{108}, 130501 (2012).
+
+
+
+\item Z. K. Li, M. H. Yung, H. W. Chen, \textbf{D. W. Lu}, J. D. Whitfield, X. H. Peng, A. Aspuru-Guzik and J. F. Du, {\it Solving quantum ground-state problems with nuclear magnetic resonance},
+{\bf Scientific Reports} \textbf{1}, 88 (2011).
+
+\item \textbf{D. W. Lu}, N. Y. Xu, R. X. Xu, H. W. Chen, J. B. Gong, X. H. Peng, and J. F. Du,
+ {\it Simulation of chemical isomerization reaction dynamics on a NMR quantum simulator},
+{\bf Phys. Rev. Lett.} \textbf{107}, 020501 (2011).
+
+\item H. W. Chen, \textbf{D. W. Lu}, B. Chong, G. Qin, X. Y. Zhou, X. H. Peng, and J. F. Du,
+ {\it Experimental demonstration of probabilistic quantum cloning},
+{\bf Phys. Rev. Lett.} \textbf{106}, 180404 (2011).
+
+\item J. F. Du, C. Lei, G. Qin, \textbf{D. W. Lu}, and X. H. Peng, {\it Search via quantum walk}, Search Algorithms and Applications, Nashat Mansour (Ed.), InTech,  Available from: http://www.intechopen.com/articles/show/title/search-via-quantum-walk (2011)
+
+\item \textbf{D. W. Lu}, J. Zhu, P. Zhou, X. H. Peng, Y. H. Yu, S. M. Zhang, Q. Chen, and J. F. Du, {\it Experimental implementation of a quantum random-walk search algorithm using strongly dipolar coupled spins}, {\bf Phys. Rev. A} \textbf{81}, 022308 (2010).
+
+\item J. F. Du, N. Y. Xu, X. H. Peng, P. F. Wang, S. F. Wu, and \textbf{D. W. Lu},
+ {\it NMR implementation of a molecular hydrogen quantum simulation with adiabatic state preparation},
+{\bf Phys. Rev. Lett.} \textbf{104}, 030502 (2010).
+
+\item C. L. Ren, \textbf{D. W. Lu}, X. H. Peng, M. J. Shi, and J. F. Du, {\it Experimentally simulating the violation of Bell-type inequalities for generalized GHZ states}, {\bf Phys. Lett. A} \textbf{373}, 46, 4222-4226 (2009).
+
+
+\end{enumerate}
+\medskip
+\section{Invited Talks}
+\medskip
+$\hspace{1mm}$The First Annual Conference of Doctoral Students in School of  Physical Sciences USTC, 2011, USTC\\
+$\hspace{1mm}$\emph{Simulating quantum chemistry on an NMR quantum computer}\\
+\medskip
+$\hspace{1mm}$Weekly Brainstorming in International Center for Quantum Design of Functional Materials, 2011, USTC\\
+$\hspace{1mm}$\emph{Quantum simulation}\\
+\medskip
+\section{Contributed Talks}
+\medskip
+$\hspace{1mm}$Seminar Talk in Department of Modern Physics, 2015, USTC\\
+$\hspace{1mm}$\emph{Advanced techniques in NMR quantum computing and benchmarking a 7-qubit NMR system}\\
+\medskip
+$\hspace{1mm}$Joint IQC-Technion Workshop, 2014, University of Waterloo\\
+$\hspace{1mm}$\emph{Brief Introduction to NMR quantum computing: experiments and techniques}\\
+\medskip
+$\hspace{1mm}$Seminar Talk in Department of Mathematics and Statistics, 2014, University of Guelph\\
+$\hspace{1mm}$\emph{Experimental estimation of average fidelity of a Clifford gate on a 7-qubit quantum processor}\\
+\medskip
+$\hspace{1mm}$Quantum Innovators Workshop, 2014, University of Waterloo\\
+$\hspace{1mm}$\emph{Experimental estimation of average fidelity of a Clifford gate on a 7-qubit quantum processor}\\
+\medskip
+$\hspace{1mm}$IQC Seminar, 2012, University of Waterloo\\
+$\hspace{1mm}$\emph{Simulation of quantum chemistry on an NMR quantum computer}\\
+\medskip
+$\hspace{1mm}$The Chinese Physical Society Conference, 2010, Nankai University\\
+$\hspace{1mm}$\emph{Factoring 143 adiabatically using an NMR quantum computer}\\
+\medskip
+$\hspace{1mm}$Workshop on Quantum Engineering and Physics of Coherence Device, 2010, South China Normal University\\
+$\hspace{1mm}$\emph{Implementing quantum random-walk search algorithm using strongly coupled systems}
+\medskip
+\section{Poster Presentations}
+\medskip
+$\hspace{1mm}$Quantum Information Science Program Meeting, 2014, University of Waterloo\\
+$\hspace{1mm}$\emph{Experimental Estimation of Average Fidelity of a Clifford Gate on a 7-qubit Quantum Processor}\\
+\medskip
+$\hspace{1mm}$Quantum Information Science Program Meeting, 2014, University of Waterloo\\
+$\hspace{1mm}$\emph{Post selection and weak measurements with an ensemble quantum processor}\\
+\medskip
+$\hspace{1mm}$Spin-based Quantum Information Processing, 2014, University of Konstanz\\
+$\hspace{1mm}$\emph{Randomized Benchmarking on a 7-qubit NMR system}\\
+\medskip
+$\hspace{1mm}$IQC Poster Session, 2014, University of Waterloo\\
+$\hspace{1mm}$\emph{Post selection and weak measurements with an ensemble quantum processor}\\
+\medskip
+$\hspace{1mm}$IQC Poster Session, 2013, University of Waterloo\\
+$\hspace{1mm}$\emph{Benchmarking Quantum Information Processing on a 12-Qubit System}\\
+\medskip
+$\hspace{1mm}$Conference on Quantum Information and Quantum Control, 2011, University of Toronto\\
+$\hspace{1mm}$\emph{Simulation of chemical isomerization reaction dynamics on a NMR quantum simulator}
+\medskip
+\section{Teaching Experience}
+\medskip
+\begin{tabular}{ll}
+Course: &Undergraduate School on Experimental Quantum Information Processing (USEQIP),\\
+&2015, University of Waterloo\\
+Level: &Undergraduate\\
+\medskip
+Duties: &Teaching students NMR basis and supervising  them using the NMR spectrometer\\
+Course: &Prospects of Quantum Information Processing (Seminar Course), 2009, USTC\\
+Level: &Graduate\\
+\medskip
+Duties: &Preparing homework assignments, quizzes and grading\\
+Course: &Electromagnetics, 2008, USTC\\
+Level: &Undergraduate\\
+\medskip
+Duties: &Preparing homework assignments, quizzes and grading\\
+Course: &Classical Mechanics, 2007, USTC\\
+Level: &Undergraduate\\
+Duties: &Preparing homework assignments, quizzes and grading\\
+\end{tabular}
+
+\newpage
+\section{References}
+$\hspace{1mm}$\textbf{Prof. Raymond Laflamme}, Postdoctor Supervisor (2012.09-present) \\
+$\hspace{1mm}$Institute for Quantum Computing, University of Waterloo\\
+$\hspace{1mm}$200 Univ. Ave. W., Waterloo, ON N2L 3G1, Canada\\
+$\hspace{1mm}$\email{laflamme@iqc.ca}\\
+\medskip
+\medskip
+$\hspace{1mm}$\textbf{Prof. Jiangfeng Du}, PhD Supervisor (2007.09-2012.07) \\
+$\hspace{1mm}$Hefei National Laboratory for Physical Sciences at Microscale and Department of Modern Physics \\
+$\hspace{1mm}$University of Science and Technology of China \\
+$\hspace{1mm}$96 Jinzhai Road, Hefei, Anhui, 230026, P. R. China\\
+$\hspace{1mm}$\email{djf@ustc.edu.cn}\\
+\medskip
+\medskip
+$\hspace{1mm}$\textbf{Prof. Jonathan Baugh}, Collaborator (2012.09-present) \\
+$\hspace{1mm}$Institute for Quantum Computing, University of Waterloo\\
+$\hspace{1mm}$200 Univ. Ave. W., Waterloo, ON N2L 3G1, Canada \\
+$\hspace{1mm}$\email{baugh@uwaterloo.ca}\\
+\medskip
+\medskip
+$\hspace{1mm}$\textbf{Prof. Xinhua Peng}, PhD Supervisor (2007.09-2012.07) \\
+$\hspace{1mm}$Hefei National Laboratory for Physical Sciences at Microscale and Department of Modern Physics \\
+$\hspace{1mm}$University of Science and Technology of China \\
+$\hspace{1mm}$96 Jinzhai Road, Hefei, Anhui, 230026, P. R. China\\
+$\hspace{1mm}$\email{xhpeng@ustc.edu.cn}\\
+
+
+\end{document}
+

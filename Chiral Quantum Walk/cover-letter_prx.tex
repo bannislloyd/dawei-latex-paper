@@ -1,0 +1,91 @@
+\documentclass[11pt,a4paper]{letter}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage{graphicx} 
+
+%Header and Footer
+\usepackage{fancyhdr}
+\usepackage{trajan}
+%\definecolor{cu}{rgb}{0.9333,0.509804,0.141176}
+\definecolor{carmine}{rgb}{0.59, 0.0, 0.09}
+\fancyhead[C]{\color{carmine}\includegraphics[width=0.34\textwidth]{IQC_logo.png}}
+%  {\texttrjn{INSTITUTE FOR SCIENTIFIC INTERCHANGE}}}
+\fancyfoot{\color{carmine}\texttrjn{I}nstitute for \texttrjn{Q}uantum \texttrjn{C}omputing \hfill  
+200 University Avenue West \hfill \texttrjn{W}aterloo, \texttrjn{C}anada 
+}
+\pagestyle{fancy}
+
+%Resize page
+\renewcommand{\headrulewidth}{0.0pt}
+\setlength{\topmargin}{-.85in}
+\setlength{\headheight}{1 cm}
+\setlength{\headsep}{1cm}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\textwidth}{6.4in}
+\setlength{\textheight}{8 in}
+
+
+\name{Jonathan Baugh}
+\address{200 University Avenue West, \\ ON N2L 3G1 Waterloo, Canada}
+\longindentation=300pt
+
+
+
+\begin{document}
+\begin{letter}{%
+    Physical Review X Editorial Office
+    %PNAS Editorial Office\\
+    %500 Fifth Street, NW\\ 
+    %NAS 340\\
+    %Washington, DC 20001 USA
+  }
+%\renewcommand{\today}{ February 16, 2009 }
+\opening{Dear Madam/Sir,}
+
+\thispagestyle{fancy}% sets the current page style to 'fancy' -- must occur *after* \opening
+%\lipsum[1-10]% just dumps ten paragraphs of filler text
+
+
+
+We are pleased to submit for your consideration our dual
+theoretical/experimental paper,
+{\it Realizing Chiral Quantum Walks}.
+In this article, we report about our finding on how breaking
+time-reversal symmetry (so that a quantum particle traveling backwards
+in time can be discerned from one traveling forwards) provides a new
+handle to control quantum systems.
+
+
+Due to the application-centric focus of our study (contrasting this
+with a long interest regarding time-asymmetry in fundamental physics),
+we feel that our findings are of significant interest to the broader
+physics audience.  Our work puts forth a modern account of
+time-asymmetry theory using the techniques from quantum information
+and transport science. The theory we developed in our work allowed us
+to pinpoint a meaningful fundamental (and first) demonstration,
+illustrating how the effect can now be used in practice.
+
+Our manuscript also includes a precise classification of the effect's
+strong dependence on the global topology of the underlying network of
+the quantum system.  Intriguingly, we found that the effect is present
+in many but not all of the typical quantum
+circuits/algorithms/protocols used across the field of quantum
+information science.
+
+We suggest the following list of experts to serve as impartial
+referees as each of them is a leading scientist the fields that we
+expect to have strong impact in:
+\begin{itemize}
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}
+        \item Prof.~Vlatko Vedral (Oxford University and NUS Singapore ---
+quantum transport and condensed matter), vlatko.vedral@qubit.org
+       \item Prof.~XY
+	\item  Prof.~Diogo O.~Soares-Pinto (University of Sao Paulo
+--- both NMR and stochastic processes), 
+dosp@ifsc.usp.br	
+\end{itemize}
+
+\closing{With best regards\\ on behalf of all authors,}
+\end{letter}
+\end{document}
